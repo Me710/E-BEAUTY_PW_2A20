@@ -1,0 +1,78 @@
+<?php include ('../Model/user.php');
+      require ('../config.php');
+      //require("../Model/user.php"); //en cas d'erreur, require produit une erreur et arrete le script tandis que include produit l'erreur mais continue l'execution du script
+    class ServiceC {
+      function afficherServiceBDD() {
+        $pdo = Config::getConnexion();
+        try{
+         $query= $pdo->query(
+            'select * from services'
+          ); 
+          $query->execute();
+          $result = $query->fetchALL();
+          return $result;
+        } catch(PDOException $e) {
+          $e->getMessage();  
+        }
+      
+      }
+        function afficherService($user) {
+            echo "<table border='2'>
+            <tr>
+              <th>Prenom</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Password</th>
+            </tr>
+
+            <tr>
+            <td>".$user->getLibelle()."</td>
+            <td>".$user->getDescription()."</td>
+            <td>".$user->getPrix()."</td>
+            </tr>
+         </table>";
+    }
+    public function Delete($id){
+      $pdo = Config::getConnexion();
+      $query= $pdo->prepare(
+        'delete from services where id=:id'
+      );
+      $query->bindValue(':id', $id);
+    try {
+      $query->execute(); 
+    }
+    catch (PDOException $e) { 
+      echo $e->getMessage();
+    }
+  }
+  public function Update($id) {
+    $pdo = Config::getConnexion();
+    try{
+      $query= $pdo->query(
+         'select * from services where id=:id'
+       ); 	
+       $query->execute();
+       $result = $query->fetch();
+       return $result;
+     } catch(PDOException $e) {
+       $e->getMessage();  
+     }
+  }
+  public function Ajout($service) {
+    $pdo = Config::getConnexion();
+    $sql = $pdo->prepare(
+      "insert into services ('libelle','description', 'prix') values (:libelle, :description, :prix)"
+    );
+    $query->bindValue(':libelle', $service->getLibelle());
+    $query->bindValue(':prenom', $service->getDescription());
+    $query->bindValue(':email', $user->getPrix());
+    try 	
+      $sql->execute();
+    }
+    catch (PDOException $e) {
+      echo $e->getMessage();
+    }   
+  }
+	}
+?>
