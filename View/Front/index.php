@@ -106,7 +106,7 @@
             <div class="header__right">
               <ul class="header__right__widget">    
                       <li><span><a
-                        href="http://localhost/E_Beauty/View/Back/pages/samples/login.php"
+                        href="http://localhost/E_Beauty/View/Back/login.php"
                         ><input type="button" class="site-btn" value="Se Connecter"/></a
                       ></span>
                       </li>

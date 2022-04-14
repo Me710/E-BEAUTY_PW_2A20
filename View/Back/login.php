@@ -1,4 +1,31 @@
+<?php
+session_start();
 
+include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
+$mesage="";
+
+$userC= new UserC();
+
+if(isset($_POST["email"]) &&  
+   isset($_POST["password"])) {
+     $message=$userC->connexionUser($_POST["email"],$_POST["password"]);
+
+     $_SESSION['e'] = $_POST["email"]; //on stcoke dans le tableau une colonne ayant comme nom e 
+     // avec l'email à l'interieur
+
+     if($message!='pseudo ou mot de passe est incorrect'){
+       header('Location:http://localhost/E_Beauty/View/Front/index_profil.php');
+     }
+     else{
+       $message='pseudo ou le mot de passe est incorrect';
+       header('Location:login.php');
+     }
+}
+else{
+  $message='Missing information';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,11 +39,11 @@
     <!-- plugins:css -->
     <link
       rel="stylesheet"
-      href="../../assets/vendors/mdi/css/materialdesignicons.min.css"
+      href="assets/vendors/mdi/css/materialdesignicons.min.css"
     />
     <link
       rel="stylesheet"
-      href="../../assets/vendors/css/vendor.bundle.base.css"
+      href="assets/vendors/css/vendor.bundle.base.css"
     />
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -24,9 +51,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
@@ -41,11 +68,11 @@
                 <form action="" method="POST">
                   <div class="form-group">
                     <label>Username or email *</label>
-                    <input type="text" class="form-control p_input" />
+                    <input type="text" name="email" class="form-control p_input" />
                   </div>
                   <div class="form-group">
                     <label>Password *</label>
-                    <input type="text" class="form-control p_input" />
+                    <input type="text" name="password" class="form-control p_input" />
                   </div>
                   <div
                     class="form-group d-flex align-items-center justify-content-between"
@@ -76,11 +103,16 @@
                   </div>
                   <p class="sign-up">
                     Don't have an Account?<a
-                      href="http://localhost/E_Beauty/View/Back/pages/samples/register.php"
+                      href="http://localhost/E_Beauty/View/Back/register.php"
                     >
                       Sign Up</a
                     >
                   </p>
+                  <div><a
+                      href="http://localhost/E_Beauty/View/Back/index.php"
+                    >
+                      Admins</a
+                    ></div>
                 </form>
               </div>
             </div>
@@ -93,16 +125,16 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../assets/js/misc.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
     <!-- endinject -->
   </body>
 </html>

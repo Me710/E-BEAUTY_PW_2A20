@@ -89,7 +89,34 @@ class UserC {
             catch (Exception $e){
               die('Erreur: '.$e->getMessage());
             }
-          }     
+          }  
+          function connexionUser($email,$password){
+            $sql="SELECT *FROM user where Email=:email and Password=:password";
+            $db = config::getConnexion();
+            try{
+              $query=$db->prepare($sql);
+              $query->bindValue(':email',$email);
+              $query->bindValue(':password',$password);
+              $query->execute();
+              $count=$query->rowCount();
+              if($count==0){
+                $message = "pseudo ou mot de passe est incorrect";
+              }else {
+                 $x=$query->fetch();
+                 $message = "pseudo ou mot de passe correct";
+                 $_SESSION['USERID']=$x['USERID'];
+                 $_SESSION['EMAIL']=$x['EMAIL'];
+                 $_SESSION['USERNAME']=$x['USERNAME'];
+                 $_SESSION['FIRSTNAME']=$x['FIRSTNAME'];
+                 $_SESSION['LASTNAME']=$x['LASTNAME'];
+                 $_SESSION['VILLE']=$x['VILLE'];
+              }
+              return $message;
+            }
+            catch (Exception $e){
+              die('Erreur: '.$e->getMessage());
+            }
+          }   
   }
   
 ?>

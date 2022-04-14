@@ -34,7 +34,7 @@
                 $_POST['Ville']
             );
             $ClientC->ajouterUser($Client);
-            header('Location:index.php');
+            header('Location:login.php');
         }
         else
             $error = "Missing information";
@@ -45,20 +45,26 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+<script type="text/javascript" src="controle_saisie.js"></script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Corona Admin</title>
+    <title>E - Beauty Register</title>
     <!-- plugins:css -->
     <link
       rel="stylesheet"
-      href="../../assets/vendors/mdi/css/materialdesignicons.min.css"
+      href="assets/vendors/mdi/css/materialdesignicons.min.css"
     />
     <link
       rel="stylesheet"
-      href="../../assets/vendors/css/vendor.bundle.base.css"
+      href="assets/vendors/css/vendor.bundle.base.css"
     />
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -66,9 +72,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
@@ -80,7 +86,7 @@
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Register</h3>
-                <form class="forms-sample" action="" method="POST">
+                <form class="forms-sample" action="" method="POST" name="FormAjout" onsubmit="return Verif()">
                       <div class="form-group">
                         <label for="TypeUtilisateur">Type  d'Utilisateur</label>
                         <select class="form-control" id="exampleSelectGender">
@@ -97,6 +103,7 @@
                           name="FirstName"
                           placeholder="First Name"
                         />
+                        <p id="errorNR" class="error"></p>
                       </div>
                       <div class="form-group">
                         <label for="LastName">Last Name</label>
@@ -107,6 +114,7 @@
                           name="LastName"
                           placeholder="Last Name"
                         />
+                        <p id="errorPR" class="error"></p>
                       </div>
                       <div class="form-group">
                         <label for="UserName">User Name</label>
@@ -117,6 +125,7 @@
                           name="UserName"
                           placeholder="User Name"
                         />
+                        <p id="errorNU" class="error"></p>
                       </div>
                       <div class="form-group">
                         <label for="Email">EmaiL address</label>
@@ -125,8 +134,9 @@
                           class="form-control"
                           id="Email"
                           name="Email"
-                          placeholder="Email"
+                          placeholder="xxxx@esprit.tn"
                         />
+                        <p id="errorMR" class="error"></p>
                       </div>
                       <div class="form-group">
                         <label for="Password">Password</label>
@@ -137,6 +147,7 @@
                           name="Password"
                           placeholder="Password"
                         />
+                        <p id="errorPass" class="error"></p>
                       </div>
                       <div class="form-group">
                         <label for="PasswordConf">Confirm Password</label>
@@ -145,16 +156,28 @@
                           class="form-control"
                           id="PasswordConf"
                           name="PasswordConf"
-                          placeholder="Confirm Password"
+                          placeholder="Confirm Password"  
                         />
+                        <p id="errorPassC" class="error"></p>
                       </div>
                       <div class="form-group">
+                        <label for="Ville">Ville/Zone de Livraison</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Ville"
+                          name="Ville"
+                          placeholder="Location"
+                        />
+                        <p id="errorV" class="error"></p>
+                      </div>
+                      <!--<div class="form-group">
                         <label for="exampleSelectGender">Gender</label>
                         <select class="form-control" id="exampleSelectGender">
                           <option>Male</option>
                           <option>Female</option>
                         </select>
-                      </div>
+                      </div>-->
                       <div class="form-group">
                         <label>Image upload</label>
                         <input
@@ -179,23 +202,10 @@
                           </span>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="Ville">Ville/Zone de Livraison</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="Ville"
-                          name="Ville"
-                          placeholder="Location"
-                        />
-                      </div> 
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-block enter-btn"
-                    >
-                      Register
-                    </button>
-                    <button class="btn btn-dark">Cancel</button>
+                      <button type="submit" class="btn btn-primary mr-2">
+                        Register
+                      </button>
+                      <button class="btn btn-dark">Cancel</button>
                   </div>
                   <div class="d-flex">
                     <button class="btn btn-facebook col mr-2">
@@ -229,16 +239,16 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../assets/js/misc.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
     <!-- endinject -->
   </body>
 </html>

@@ -1,10 +1,45 @@
-<?php 
-include('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
+<?php
+include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
+session_start();
 
-    $userdb = new UserC();  
+    $error = "";
 
-    $Client = $userdb->afficherUserBDD();      
-    //var_dump($resultat);
+    // create User
+    $Client = null;
+
+    // create an instance of the controller
+    $ClientC = new UserC();
+    if (
+      isset($_POST["USER"]) &&
+        isset($_POST["FirstName"]) &&
+		isset($_POST["LastName"]) &&		
+        isset($_POST["UserName"]) &&
+		isset($_POST["Password"]) && 
+        isset($_POST["Email"]) && 
+        isset($_POST["Ville"])
+    ) {
+        if ( !empty($_POST["USER"]) &&
+            !empty($_POST["FirstName"]) && 
+			!empty($_POST['LastName']) &&
+            !empty($_POST["UserName"]) && 
+			!empty($_POST["Password"]) && 
+            !empty($_POST["Email"]) && 
+            !empty($_POST["Ville"])
+        ) {
+            $Client = new User(
+                $_POST['FirstName'],
+				$_POST['LastName'],
+                $_POST['UserName'], 
+				$_POST['Email'],
+                $_POST['Password'],
+                $_POST['Ville']
+            );
+            $ClientC->updateUserBDD($Client,$_POST['USER']);
+            header('Location:form_modifier.php');
+        }
+        else
+            $error = "Missing information";
+    }   
 ?>
 <link href="style_profile.css" rel="stylesheet">
 
@@ -16,17 +51,16 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">User profile</a>
         <!-- Form -->
-        
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="ballamoussa.jpg">
+                  <img alt="Image placeholder" src="image.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php Echo $Client['FIRSTNAME'];Echo $Client['LASTNAME'];?></span>
+                  <span class="mb-0 text-sm  font-weight-bold"><?php Echo $_SESSION['LASTNAME']; Echo $_SESSION['FIRSTNAME'];?></span>
                 </div>
               </div>
             </a>
@@ -43,7 +77,7 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello KEITA</h1>
+            <h1 class="display-2 text-white"><?php echo  $_SESSION['USERNAME'];?></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can view your information and post a testimonial about your experience with us.</p>
             <a href="#!" class="btn btn-info">Edit profile</a>
           </div>
@@ -59,14 +93,14 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="ballamoussa.jpg" class="rounded-circle" alt="logo">
+                    <img src="image.jpg" class="rounded-circle" alt="logo">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">LogOut</a>
+                <a href="http://localhost/E_Beauty/View/Back/deconnexion.php" class="btn btn-sm btn-info mr-4">LogOut</a>
                 <a href="#" class="btn btn-sm btn-default float-right">Message</a>
               </div>
             </div>
@@ -76,30 +110,37 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
                       <span class="heading">0</span>
-                      <span class="description">Spectacles</span>
+                      <span class="description">Commandes</span>
                     </div>
                     <div>
                       <span class="heading">0</span>
-                      <span class="description">Achats</span>
+                      <span class="description">Favoris</span>
                     </div>
                     <div>
                       <span class="heading">0</span>
-                      <span class="description">Temoignages</span>
+                      <span class="description">Panier</span>
                     </div>
+                    <div><input
+                          type="hidden"
+                          class="form-control"
+                          id="USER"
+                          name="USER"
+                          placeholder="First Name"
+                          value="<?php echo  $_SESSION['USERID']; ?> "/></div>
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <h3>
-                  Keita Balla Moussa<span class="font-weight-light">, 21</span>
+                  <?php echo $_SESSION['FIRSTNAME'];?><span class="font-weight-light">, 21</span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Ariana, Tunisia
+                  <i class="ni location_pin mr-2"></i><?php echo $_SESSION['VILLE'];?> Tunisia
                 </div>
       
                 
                 <hr class="my-4">
-                <p>Convaincu que le divertissement peut �tre un moyen efficace pour booster les performances. Passion� des spectacles, du cin�ma, et des th�atres.</p>
+                <p>La mode et la beauté ont bien évoluées depuis les temps qu’elles sont apparues dans le quotidien de la société. À présent, chacun peut faire de ce qu’il veut de son corps, de son visage, de son apparence grâce à nombreuse inventions dans le monde de l’esthétique comme la chirurgie et le maquillage. La beauté et ses artifices.</p>
      
               </div>
             </div>
@@ -110,7 +151,7 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                  <h3 class="mb-0">Mon compte</h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -118,20 +159,20 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form action="" method="POST">
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="moussa.keita">
+                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" name="UserName" value=<?php echo $_SESSION['USERNAME'];?>>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="moussa@example.com">
+                        <input type="email" id="input-email" class="form-control form-control-alternative" name="Email" placeholder="mail@example.com" value=<?php echo $_SESSION['EMAIL'];?>>
                       </div>
                     </div>
                   </div>
@@ -139,13 +180,13 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Moussa">
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" name="FirstName" value=<?php echo $_SESSION['FIRSTNAME'];?>>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Keita">
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" name="LastName"value=<?php echo $_SESSION['LASTNAME'];?>>
                       </div>
                     </div>
                   </div>
@@ -158,7 +199,7 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
                     <div class="col-md-12">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="1,2 Rue Andr� Amp�re" type="text">
+                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" name="Ville" value=<?php echo $_SESSION['VILLE'];?> type="text">
                       </div>
                     </div>
                   </div>
@@ -166,7 +207,7 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="Arina">
+                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" name="Ville2" value=<?php echo $_SESSION['VILLE'];?>>
                       </div>
                     </div>
                     <div class="col-lg-4">
@@ -183,14 +224,15 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
                     </div>
                   </div>
                 </div>
+               
                 <hr class="my-4">
                 <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">T�moignages</h6>
+                <h6 class="heading-small text-muted mb-4">Reclammations</h6>
                 <div class="pl-lg-4">
                   <div class="form-group focused">
-                    <label>Publier Un t�moignage</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">Mon exp�rience avec the goble a �t� plus que satisfaisant. Je remercie l'�quipe toute enti�re</textarea><br>
-					 <input type="submit" id='submit' value='PUBLIER' >
+                    <label>Reclammations</label>
+                    <textarea rows="4" class="form-control form-control-alternative" placeholder="ajouter une reclamation..">...</textarea><br>
+					          <input type="submit" id='submit' value='MODIFIER'>
                   </div>
                 </div>
               </form>
@@ -204,7 +246,7 @@ include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6 m-auto text-center">
         <div class="copyright">
-          <p>THE GOBLE-PROFILE ALLIANCE</p>
+          <p>E- BEAUTY</p>
         </div>
       </div>
     </div>
