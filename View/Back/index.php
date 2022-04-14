@@ -1,6 +1,5 @@
 <?php 
-require('../Controller/serviceC.php'); 
-//include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+require('C:/xampp/htdocs/AtelierPHP//Controller/serviceC.php'); 
 
 $servicedb = new ServiceC();    
 $result = $servicedb->afficherservices();    
@@ -75,7 +74,7 @@ $result = $servicedb->afficherservices();
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Christian NEBOT</h5>
+                  <h5 class="mb-0 font-weight-normal">Bellalouna Iheb</h5>
                   <span>ADMINS</span>
                 </div>
               </div>
@@ -278,7 +277,7 @@ $result = $servicedb->afficherservices();
                       alt=""
                     />
                     <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      Christian NEBOT
+                      Bellalouna Iheb
                     </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>

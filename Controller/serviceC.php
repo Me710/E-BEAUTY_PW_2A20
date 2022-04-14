@@ -1,6 +1,6 @@
 <?php
-	include '../config.php';
-	include_once '../Model/service.php';
+	include 'C:/xampp/htdocs/AtelierPHP/config.php';
+	include_once 'C:/xampp/htdocs/AtelierPHP/Model/service.php';
 	class ServiceC {
 		function afficherservices(){
 			$sql="SELECT * FROM services";

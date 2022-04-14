@@ -1,38 +1,37 @@
 <?php
-    include('../Controller/serviceC.php'); 
+    include('C:/xampp/htdocs/AtelierPHP//Controller/serviceC.php'); 
 
     $error = "";
 
+    // create User
     $service = null;
 
+    // create an instance of the controller
     $serviceC = new ServiceC();
     if (
-        isset($_POST["libelle"]) &&
-		isset($_POST["description"]) &&		
-        isset($_POST["prix"])
+          isset($_POST["libelle"]) &&
+          isset($_POST["description"]) &&
+		      isset($_POST["prix"])
     ) {
-        if (
-            !empty($_POST["libelle"]) && 
-			!empty($_POST['description']) &&
-            !empty($_POST["prix"])
+    if (  !empty($_POST["libelle"]) &&
+          !empty($_POST["description"]) && 
+			    !empty($_POST['prix'])
         ) {
             $service = new Service(
                 $_POST['libelle'],
-				$_POST['description'],
+				        $_POST['description'],
                 $_POST['prix']
             );
-            $serviceC->ajouterservice($service);
-            header('Location:basic_elements.php');
-        }
-        else
+          $serviceC->modifierservice($service,$_POST['ids']);
+          header('Location:index.php');
+          }
+          else
             $error = "Missing information";
     }
-
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -575,7 +574,7 @@
                       alt=""
                     />
                     <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      Henry Klein
+                      Bellalouna Iheb
                     </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
@@ -641,21 +640,36 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Formulaire d'Ajout </h4>
-                    <p class="card-description">Formulaire d'Ajout</p>
+                    <h4 class="card-title">Formulaire de Modification </h4>
+                    <p class="card-description">Formulaire de Modification</p>
                         <div id="error">
                           <?php echo $error; ?>
                         </div>
-                    <form class="forms-sample" action="" method="POST">
-                      <div class="form-group">
+                        <?php
+                            if (isset($_POST['id'])){
+                                $ID =  $_POST['id'];
+                                $service = $serviceC->recupererservice($_POST['id']);	
+                        ?>
+                    <form name="formUpdate" class="forms-sample" action="" method="POST" onsubmit="return verif()">
+                    <div class="form-group">
+                        <input
+                          type="hidden"
+                          class="form-control"
+                          id="ids"
+                          name="ids"
+                          value="<?php echo $service['id']; ?> "/>
+                        
+                      </div>  
+                    <div class="form-group">
                         <label for="libelle">Libelle</label>
                         <input
                           type="text"
                           class="form-control"
                           id="libelle"
                           name="libelle"
-                          placeholder="Libelle du service"
-                        />
+                          value="<?php echo $service['libelle']; ?>"
+                          /> 
+                          <p id="errorLib" class="error"></p> 
                       </div>
                       <div class="form-group">
                         <label for="description">Description</label>
@@ -664,9 +678,11 @@
                           class="form-control"
                           id="description"
                           name="description"
-                          placeholder="Description du service"
-                        />
+                          value="<?php echo $service['description']; ?>"
+                          />
+                          <p id="errorDesc" class="error"></p> 
                       </div>
+
                       <div class="form-group">
                         <label for="prix">Prix</label>
                         <input
@@ -674,14 +690,21 @@
                           class="form-control"
                           id="prix"
                           name="prix"
-                          placeholder="Prix du service"
-                        />
+                          value="<?php echo $service['prix']; ?>"
+                          />
+                          <p id="errorPrix" class="error"></p> 
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2">
-                        Submit
+                      <button type="submit" onSub class="btn btn-primary mr-2">
+                        Modifier
                       </button>
-                      <button class="btn btn-dark">Cancel</button>
+                      <!--<td>
+                        <input type="submit" value="Modifier"> 
+                      </td>-->
+                      <button><a href="index.php">Retour à la liste des services</a></button>
                     </form>
+                  <?php
+                  }
+                  ?>
                   </div>
                 </div>
               </div>
@@ -744,5 +767,6 @@
     <script src="assets/js/typeahead.js"></script>
     <script src="assets/js/select2.js"></script>
     <!-- End custom js for this page -->
+    
   </body>
 </html>
