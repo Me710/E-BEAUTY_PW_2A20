@@ -109,7 +109,7 @@ else{
                     >
                   </p>
                   <div><a
-                      href="http://localhost/E_Beauty/View/Back/index.php"
+                      href="http://localhost/E_Beauty/View/Back/login_admin.php"
                     >
                       Admins</a
                     ></div>

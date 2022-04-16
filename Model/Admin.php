@@ -2,19 +2,19 @@
 
 include_once 'User.php';
 
-class Administrator extends User{
-    private int $adminNumber;
+class Admin extends User{
+    private int $adminId;
 
     //getters
 
     public function getAdminNumber():int{
-        return $this->adminNumber;
+        return $this->adminId;
     }
 
     //setters
 
     public function setAdminNumber($adminNumber):int{
-        $this->adminNumber = $adminNumber;
+        $this->adminNumber = $adminId;
     }
 }
 

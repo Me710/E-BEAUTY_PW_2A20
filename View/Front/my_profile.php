@@ -35,11 +35,19 @@ session_start();
                 $_POST['Ville']
             );
             $ClientC->updateUserBDD($Client,$_POST['USER']);
-            header('Location:form_modifier.php');
+            $_SESSION['USERID']=$_POST['USER'];
+                 $_SESSION['EMAIL']=$_POST['Email'];
+                 $_SESSION['USERNAME']=$_POST['UserName'];
+                 $_SESSION['FIRSTNAME']=$_POST['FirstName'];
+                 $_SESSION['LASTNAME']=$_POST['LastName'];
+                 $_SESSION['PASSWORD']=$_POST['Password'];
+                 $_SESSION['VILLE']=$_POST['Ville'];
+            header('Location:my_profile.php');
         }
-        else
+        else{
             $error = "Missing information";
-    }   
+        }  
+  } 
 ?>
 <link href="style_profile.css" rel="stylesheet">
 
@@ -176,6 +184,14 @@ session_start();
                       </div>
                     </div>
                   </div>
+                  <div><input
+                          type="hidden"
+                          class="form-control"
+                          id="USER"
+                          name="USER"
+                          placeholder="First Name"
+                          value="<?php echo  $_SESSION['USERID']; ?> "/></div>
+                  </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group focused">
@@ -187,6 +203,7 @@ session_start();
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Last name</label>
                         <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" name="LastName"value=<?php echo $_SESSION['LASTNAME'];?>>
+                        <input type="hidden" id="input-last-name" class="form-control form-control-alternative" type="hidden" name="Password" value=<?php echo $_SESSION['PASSWORD'];?>>
                       </div>
                     </div>
                   </div>

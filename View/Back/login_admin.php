@@ -1,0 +1,127 @@
+<?php
+session_start();
+
+include('C:/xampp/htdocs/E_Beauty/Controller/adminC.php');
+$mesage="";
+
+$userC= new AdminC();
+
+if(isset($_POST["AdminId"]) &&  
+   isset($_POST["password"])) {
+     $message=$userC->connexionAdmin($_POST["AdminId"],$_POST["password"]);
+
+     $_SESSION['e'] = $_POST["email"]; //on stcoke dans le tableau une colonne ayant comme nom e 
+     // avec l'email à l'interieur
+
+     if($message!='pseudo ou mot de passe est incorrect'){
+       header('Location:http://localhost/E_Beauty/View/Back/index.php');
+     }
+     else{
+       $message='pseudo ou le mot de passe est incorrect';
+       header('Location:login_admin.php');
+     }
+}
+else{
+  $message='Missing information';
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>E - Beauty Login Admin</title>
+    <!-- plugins:css -->
+    <link
+      rel="stylesheet"
+      href="assets/vendors/mdi/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/vendors/css/vendor.bundle.base.css"
+    />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div
+            class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg"
+          >
+            <div class="card col-lg-4 mx-auto">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">Login</h3>
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <label>ID ADMIN*</label>
+                    <input type="text" name="AdminId" class="form-control p_input" />
+                  </div>
+                  <div class="form-group">
+                    <label>MOT DE PASSE*</label>
+                    <input type="text" name="password" class="form-control p_input" />
+                  </div>
+                  <div
+                    class="form-group d-flex align-items-center justify-content-between"
+                  >
+                  </div>
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-block enter-btn"
+                    >
+                      Login en Admin
+                    </button>
+                  </div>
+                  <div class="d-flex">
+                    <button class="btn btn-facebook mr-2 col">
+                      <i class="mdi mdi-facebook"></i> Facebook
+                    </button>
+                    <button class="btn btn-google col">
+                      <i class="mdi mdi-google-plus"></i> Google plus
+                    </button>
+                  </div>
+                  
+                  <div><a
+                      href="http://localhost/E_Beauty/View/Back/login.php"
+                    >
+                      Clients</a
+                    ></div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

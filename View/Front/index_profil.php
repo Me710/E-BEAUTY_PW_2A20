@@ -1,975 +1,1060 @@
-<?php require("C:/xampp/htdocs/E_Beauty/Controller/userC.php"); 
-    $userdb = new UserC();    
-    $resultat = $userdb->afficherUserBDD();
-    //var_dump($resultat);
-?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="E - Beauty Template" />
-    <meta name="keywords" content="E - Beauty, unica, creative, html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>E - Beauty | Template</title>
+    <title>E-Beauty</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <!-- Google Font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cookie&display=swap"
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css?family=Vidaloka"
       rel="stylesheet"
     />
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+
+    <link rel="stylesheet" href="css/aos.css" />
+
+    <link rel="stylesheet" href="css/ionicons.min.css" />
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="css/jquery.timepicker.css" />
+
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/icomoon.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-
   <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-      <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-      <div class="offcanvas__close">+</div>
-      <ul class="offcanvas__widget">
-        <li><span class="icon_search search-switch"></span></li>
-        <li>
-          <a href="#"
-            ><span class="icon_heart_alt"></span>
-            <div class="tip">2</div>
-          </a>
-        </li>
-        <li>
-          <a href="#"
-            ><span class="icon_bag_alt"></span>
-            <div class="tip">2</div>
-          </a>
-        </li>
-      </ul>
-      <div class="offcanvas__logo">
-        <a href="./index.php"><img src="img/logo.png" alt="" /></a>
-      </div>
-      <div id="mobile-menu-wrap"></div>
-      <div class="offcanvas__auth">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
-      </div>
-    </div>
-    <!-- Offcanvas Menu End -->
-
-    <!-- Header Section Begin -->
-    <header class="header">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xl-3 col-lg-2">
-            <div class="header__logo">
-              <a href="./index.php"><img src="img/logo.png" alt="" /></a>
+    <div class="page">
+      <nav id="colorlib-main-nav" role="navigation">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle active"
+          ><i></i
+        ></a>
+        <div class="js-fullheight colorlib-table">
+          <div
+            class="img"
+            style="background-image: url(images/image_4.jpg)"
+          ></div>
+          <div class="colorlib-table-cell js-fullheight">
+            <div class="row no-gutters">
+              <div class="col-md-12 text-center">
+                <h1 class="mb-4">
+                  <a href="index.html" class="logo"
+                    >E-Beauty<br /><span>Model Agency</span></a
+                  >
+                </h1>
+                <ul>
+                  <li class="active">
+                    <a href="index.html"><span>Home</span></a>
+                  </li>
+                  <li>
+                    <a href="about.html"><span>About</span></a>
+                  </li>
+                  <li>
+                    <a href="model.html"><span>Models</span></a>
+                  </li>
+                  <li>
+                    <a href="blog.html"><span>Blog</span></a>
+                  </li>
+                  <li>
+                    <a href="contact.html"><span>Contact</span></a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="col-xl-6 col-lg-7">
-            <nav class="header__menu">
-              <ul>
-                <li class="active"><a href="./index.php">Home</a></li>
+        </div>
+      </nav>
 
-                <li><a href="./shop.php">Shop</a></li>
-                <li>
-                  <a href="#">Pages</a>
-                  <ul class="dropdown">
-                    <li>
-                      <a href="./product-details.php">Product Details</a>
-                    </li>
-                    <li><a href="./shop-cart.php">Shop Cart</a></li>
-                    <li><a href="./checkout.php">Checkout</a></li>
-                    <li><a href="./blog-details.php">Blog Details</a></li>
-                  </ul>
-                </li>
-                <li><a href="./blog.php">Blog</a></li>
-                <li><a href="./tutos.php">Tutos</a></li>
-                <li><a href="./contact.php">Contact</a></li>
-              </ul>
-            </nav>
+      <div id="colorlib-page">
+        <header>
+          <div class="container">
+            <div class="colorlib-navbar-brand">
+              <a class="colorlib-logo" href="index.html"
+                >E-Beauty<br /><span>Model Agency</span></a
+              >
+            </div>
+            <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"
+              ><i></i
+            ></a>
           </div>
-          <div class="col-lg-3">
-            <div class="header__right">
-              <ul class="header__right__widget">    
-                      <li><span><a
-                        href="http://localhost/E_Beauty/View/Front/my_profile.php"
-                        ><input type="button" class="site-btn" value="Mon Profile"/></a
-                      ></span>
+        </header>
+
+        <section
+          id="home"
+          class="video-hero js-fullheight"
+          style="
+            height: 700px;
+            background-image: url(images/bg_1.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+          "
+        >
+          <div class="overlay"></div>
+          <a
+            class="player"
+            data-property="{videoURL:'https://www.youtube.com/watch?v=ITUid-bDsl8',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default'}"
+          ></a>
+          <div class="container">
+            <div
+              class="row js-fullheight justify-content-center d-flex align-items-center"
+            >
+              <div class="col-md-8">
+                <div class="text text-center">
+                  <span class="subheading">Welcome to</span>
+                  <h2>E-Beauty</h2>
+                  <h3 class="mb-4">For Your Beautiful Soul</h3>
+                  <p>
+                    <a
+                      href="http://localhost/E_Beauty/View/Front/my_profile.php"
+                      class="btn btn-primary py-3 px-4"
+                      >MON PROFILE</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+          <div class="container-fluid px-4">
+            <div class="row d-flex">
+              <div
+                class="col-md-6 col-lg-3 d-flex align-items-center ftco-animate"
+              >
+                <div class="heading-section text-center">
+                  <h2 class="">Our SERVICES</h2>
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_1.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">PROFILE</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >your<br /><span>profile</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_2.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">products</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >products<br /><span>management</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_3.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">orders</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >make<br /><span>an order</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_5.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">videos</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >tuto<br /><span>videos</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_6.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">blogs</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >visit<br /><span>our blogs</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="model-entry">
+                  <div
+                    class="model-img"
+                    style="background-image: url(images/image_7.jpg)"
+                  >
+                    <div class="name text-center">
+                      <h3><a href="model-single.html">treatements</a></h3>
+                    </div>
+                    <div class="text text-center">
+                      <h3>
+                        <a href="model-single.html"
+                          >get<br /><span>yours</span></a
+                        >
+                      </h3>
+                      <div class="d-flex models-info">
+                        <div class="box">
+                          <p>Height</p>
+                          <span>185</span>
+                        </div>
+                        <div class="box">
+                          <p>Bust</p>
+                          <span>79</span>
+                        </div>
+                        <div class="box">
+                          <p>Waist</p>
+                          <span>40</span>
+                        </div>
+                        <div class="box">
+                          <p>Hips</p>
+                          <span>87</span>
+                        </div>
+                        <div class="box">
+                          <p>Shoe</p>
+                          <span>40</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-md-6 col-lg-3 d-flex justify-content-center align-items-center ftco-animate"
+              >
+                <div class="btn-view">
+                  <p>
+                    <a href="model.html" class="btn btn-white py-3 px-5"
+                      >View more</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ftco-section">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div
+                class="col-md-8 mb-5 heading-section text-center ftco-animate"
+              >
+                <span class="subheading">Blog</span>
+                <h2 class="mb-4">Recent Blog</h2>
+                <p class="mb-5">
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia
+                </p>
+              </div>
+            </div>
+            <div class="row d-flex">
+              <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry bg-dark align-self-stretch">
+                  <a
+                    href="blog-single.html"
+                    class="block-20"
+                    style="background-image: url('images/image_1.jpg')"
+                  >
+                  </a>
+                  <div class="text p-4 d-block">
+                    <div class="meta mb-3">
+                      <div><a href="#">May 17, 2019</a></div>
+                      <div><a href="#">Admin</a></div>
+                      <div>
+                        <a href="#" class="meta-chat"
+                          ><span class="icon-chat"></span> 3</a
+                        >
+                      </div>
+                    </div>
+                    <h3 class="heading mt-3">
+                      <a href="#">Asia's Next Top Model</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry bg-dark align-self-stretch">
+                  <a
+                    href="blog-single.html"
+                    class="block-20"
+                    style="background-image: url('images/image_2.jpg')"
+                  >
+                  </a>
+                  <div class="text p-4 d-block">
+                    <div class="meta mb-3">
+                      <div><a href="#">May 17, 2019</a></div>
+                      <div><a href="#">Admin</a></div>
+                      <div>
+                        <a href="#" class="meta-chat"
+                          ><span class="icon-chat"></span> 3</a
+                        >
+                      </div>
+                    </div>
+                    <h3 class="heading mt-3">
+                      <a href="#">Asia's Next Top Model</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry bg-dark align-self-stretch">
+                  <a
+                    href="blog-single.html"
+                    class="block-20"
+                    style="background-image: url('images/image_3.jpg')"
+                  >
+                  </a>
+                  <div class="text p-4 d-block">
+                    <div class="meta mb-3">
+                      <div><a href="#">May 17, 2019</a></div>
+                      <div><a href="#">Admin</a></div>
+                      <div>
+                        <a href="#" class="meta-chat"
+                          ><span class="icon-chat"></span> 3</a
+                        >
+                      </div>
+                    </div>
+                    <h3 class="heading mt-3">
+                      <a href="#">Asia's Next Top Model</a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="ftco-section testimony-section img"
+          style="background-image: url(images/bg_2.jpg)"
+        >
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row d-md-flex justify-content-center">
+              <div class="col-md-8 ftco-animate">
+                <div class="carousel-testimony owl-carousel">
+                  <div class="item">
+                    <div class="testimony-wrap text-center">
+                      <div
+                        class="user-img mb-5"
+                        style="background-image: url(images/person_1.jpg)"
+                      >
+                        <span
+                          class="quote d-flex align-items-center justify-content-center"
+                        >
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text">
+                        <p class="mb-5">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts. Separated they live in Bookmarksgrove
+                          right at the coast of the Semantics, a large language
+                          ocean.
+                        </p>
+                        <p class="name">Mike Lewis</p>
+                        <span class="position">Architect</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="testimony-wrap text-center">
+                      <div
+                        class="user-img mb-5"
+                        style="background-image: url(images/person_2.jpg)"
+                      >
+                        <span
+                          class="quote d-flex align-items-center justify-content-center"
+                        >
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text">
+                        <p class="mb-5">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts. Separated they live in Bookmarksgrove
+                          right at the coast of the Semantics, a large language
+                          ocean.
+                        </p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Architect</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="testimony-wrap text-center">
+                      <div
+                        class="user-img mb-5"
+                        style="background-image: url(images/person_3.jpg)"
+                      >
+                        <span
+                          class="quote d-flex align-items-center justify-content-center"
+                        >
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text">
+                        <p class="mb-5">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts. Separated they live in Bookmarksgrove
+                          right at the coast of the Semantics, a large language
+                          ocean.
+                        </p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Architect</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="testimony-wrap text-center">
+                      <div
+                        class="user-img mb-5"
+                        style="background-image: url(images/person_3.jpg)"
+                      >
+                        <span
+                          class="quote d-flex align-items-center justify-content-center"
+                        >
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text">
+                        <p class="mb-5">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts. Separated they live in Bookmarksgrove
+                          right at the coast of the Semantics, a large language
+                          ocean.
+                        </p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Customer</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ftco-appointment ftco-section">
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div
+                class="col-md-8 mb-5 heading-section text-center ftco-animate"
+              >
+                <span class="subheading">Stylistic</span>
+                <h2 class="mb-4">Contact Us</h2>
+                <p class="mb-5">
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12 mb-3">
+                    <p>
+                      <span>Address:</span> 198 West 21th Street, Suite 721 New
+                      York NY 10016
+                    </p>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <p>
+                      <span>Phone:</span>
+                      <a href="tel://1234567920">+ 1235 2355 98</a>
+                    </p>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <p>
+                      <span>Email:</span>
+                      <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                    </p>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <p><span>Website:</span> <a href="#">yoursite.com</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 appointment ftco-animate">
+                <form action="#" class="appointment-form">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="d-md-flex">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="First Name"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-me-flex">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Last Name"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-me-flex">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Email Address"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-me-flex">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Your City"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea
+                          name=""
+                          id=""
+                          cols="30"
+                          rows="10"
+                          class="form-control"
+                          placeholder="Message"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          value="Send A Message"
+                          class="btn btn-primary py-3 px-4"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+          <div class="container-fluid px-0">
+            <div class="row no-gutters d-md-flex align-items-center">
+              <div class="col-md-12 d-flex align-self-stretch">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ftco-quote ftco-section ftco-animate">
+          <div class="container">
+            <div class="row d-flex">
+              <div
+                class="col-md-6 req-quote py-5 text-center align-items-center img"
+                style="background-image: url(images/bg_2.jpg)"
+              >
+                <h3 class="ml-md-3">Become A Model?</h3>
+                <span class="ml-md-3"
+                  ><a href="#">Call us now to know how!</a></span
+                >
+              </div>
+              <div
+                class="col-md-6 req-quote py-5 text-center align-items-center img"
+                style="background-image: url(images/bg_1.jpg)"
+              >
+                <h3 class="ml-md-3">Model Courses</h3>
+                <span class="ml-md-3"><a href="#">Know more</a></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="ftco-footer ftco-section img">
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row mb-5">
+              <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2 logo">
+                    <a href="index.html">Stylistic</a>
+                  </h2>
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts.
+                  </p>
+                  <ul
+                    class="ftco-footer-social list-unstyled float-md-left float-lft mt-5"
+                  >
+                    <li class="ftco-animate">
+                      <a href="#"><span class="icon-twitter"></span></a>
+                    </li>
+                    <li class="ftco-animate">
+                      <a href="#"><span class="icon-facebook"></span></a>
+                    </li>
+                    <li class="ftco-animate">
+                      <a href="#"><span class="icon-instagram"></span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2">Recent Blog</h2>
+                  <div class="block-21 mb-4 d-flex">
+                    <a
+                      class="blog-img mr-4"
+                      style="background-image: url(images/image_1.jpg)"
+                    ></a>
+                    <div class="text">
+                      <h3 class="heading">
+                        <a href="#"
+                          >Even the all-powerful Pointing has no control
+                          about</a
+                        >
+                      </h3>
+                      <div class="meta">
+                        <div>
+                          <a href="#"
+                            ><span class="icon-calendar"></span> July 12,
+                            2018</a
+                          >
+                        </div>
+                        <div>
+                          <a href="#"
+                            ><span class="icon-person"></span> Admin</a
+                          >
+                        </div>
+                        <div>
+                          <a href="#"><span class="icon-chat"></span> 19</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block-21 mb-4 d-flex">
+                    <a
+                      class="blog-img mr-4"
+                      style="background-image: url(images/image_2.jpg)"
+                    ></a>
+                    <div class="text">
+                      <h3 class="heading">
+                        <a href="#"
+                          >Even the all-powerful Pointing has no control
+                          about</a
+                        >
+                      </h3>
+                      <div class="meta">
+                        <div>
+                          <a href="#"
+                            ><span class="icon-calendar"></span> July 12,
+                            2018</a
+                          >
+                        </div>
+                        <div>
+                          <a href="#"
+                            ><span class="icon-person"></span> Admin</a
+                          >
+                        </div>
+                        <div>
+                          <a href="#"><span class="icon-chat"></span> 19</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="ftco-footer-widget mb-4 ml-md-4">
+                  <h2 class="ftco-heading-2">Site Links</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block">Home</a></li>
+                    <li><a href="#" class="py-2 d-block">About</a></li>
+                    <li><a href="#" class="py-2 d-block">Model</a></li>
+                    <li><a href="#" class="py-2 d-block">Services</a></li>
+                    <li><a href="#" class="py-2 d-block">Blog</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2">Have a Questions?</h2>
+                  <div class="block-23 mb-3">
+                    <ul>
+                      <li>
+                        <span class="icon icon-map-marker"></span
+                        ><span class="text"
+                          >203 Fake St. Mountain View, San Francisco,
+                          California, USA</span
+                        >
                       </li>
-                      <li><span class="icon_search search-switch"></span></li>
                       <li>
                         <a href="#"
-                          ><span class="icon_heart_alt"></span>
-                          <div class="tip">2</div>
-                        </a>
+                          ><span class="icon icon-phone"></span
+                          ><span class="text">+2 392 3929 210</span></a
+                        >
                       </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="canvas__open">
-          <i class="fa fa-bars"></i>
-        </div>
-      </div>
-    </header>
-    <!-- Header Section End -->
-
-    <!-- Categories Section Begin -->
-    <section class="categories">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6 p-0">
-            <div
-              class="categories__item categories__large__item set-bg"
-              data-setbg="img/categories/category-1.jpg"
-            >
-              <div class="categories__text">
-                <h1>Women’s Fashion</h1>
-                <p>
-                  Sitamet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incidid-unt labore edolore magna aliquapendisse ultrices
-                  gravida.
-                </p>
-                <a href="#">Shop now</a>
+                      <li>
+                        <a href="#"
+                          ><span class="icon icon-envelope"></span
+                          ><span class="text">info@yourdomain.com</span></a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6">
             <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                <div
-                  class="categories__item set-bg"
-                  data-setbg="img/categories/category-2.jpg"
-                >
-                  <div class="categories__text">
-                    <h4>Men’s Fashion</h4>
-                    <p>358 items</p>
-                    <a href="#">Shop now</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                <div
-                  class="categories__item set-bg"
-                  data-setbg="img/categories/category-3.jpg"
-                >
-                  <div class="categories__text">
-                    <h4>Kid’s Fashion</h4>
-                    <p>273 items</p>
-                    <a href="#">Shop now</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                <div
-                  class="categories__item set-bg"
-                  data-setbg="img/categories/category-4.jpg"
-                >
-                  <div class="categories__text">
-                    <h4>Cosmetics</h4>
-                    <p>159 items</p>
-                    <a href="#">Shop now</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                <div
-                  class="categories__item set-bg"
-                  data-setbg="img/categories/category-5.jpg"
-                >
-                  <div class="categories__text">
-                    <h4>Accessories</h4>
-                    <p>792 items</p>
-                    <a href="#">Shop now</a>
-                  </div>
-                </div>
+              <div class="col-md-12 text-center">
+                <p>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  Copyright &copy;
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  All rights reserved | This template is made with
+                  <i class="icon-heart" aria-hidden="true"></i> by
+                  <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
               </div>
             </div>
           </div>
+        </footer>
+
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen">
+          <svg class="circular" width="48px" height="48px">
+            <circle
+              class="path-bg"
+              cx="24"
+              cy="24"
+              r="22"
+              fill="none"
+              stroke-width="4"
+              stroke="#eeeeee"
+            />
+            <circle
+              class="path"
+              cx="24"
+              cy="24"
+              r="22"
+              fill="none"
+              stroke-width="4"
+              stroke-miterlimit="10"
+              stroke="#F96D00"
+            />
+          </svg>
         </div>
       </div>
-    </section>
-    <!-- Categories Section End -->
 
-    <!-- Product Section Begin -->
-    <section class="product spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <div class="section-title">
-              <h4>New product</h4>
-            </div>
-          </div>
-          <div class="col-lg-8 col-md-8">
-            <ul class="filter__controls">
-              <li class="active" data-filter="*">All</li>
-              <li data-filter=".women">Women’s</li>
-              <li data-filter=".men">Men’s</li>
-              <li data-filter=".kid">Kid’s</li>
-              <li data-filter=".accessories">Accessories</li>
-              <li data-filter=".cosmetic">Cosmetics</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row property__gallery">
-          <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-1.jpg"
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="modalRequest"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalRequestLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalRequestLabel">
+                Request a Quote
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
               >
-                <div class="label new">New</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-1.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Buttons tweed blazer</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 mix men">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-2.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-2.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Flowy striped skirt</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 49.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-3.jpg"
-              >
-                <div class="label stockout">out of stock</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-3.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Cotton T-Shirt</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-4.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-4.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Slim striped pocket shirt</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 mix kid">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-5.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-5.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Fit micro corduroy shirt</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"
-          >
-            <div class="product__item sale">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-6.jpg"
-              >
-                <div class="label sale">Sale</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-6.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Tropical Kimono</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"
-          >
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-7.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-7.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Contrasting sunglasses</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"
-          >
-            <div class="product__item sale">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/product-8.jpg"
-              >
-                <div class="label">Sale</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/product-8.jpg" class="image-popup"
-                      ><span class="arrow_expand"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_heart_alt"></span></a>
-                  </li>
-                  <li>
-                    <a href="#"><span class="icon_bag_alt"></span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">Water resistant backpack</a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Product Section End -->
-
-    <!-- Banner Section Begin -->
-    <section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-7 col-lg-8 m-auto">
-            <div class="banner__slider owl-carousel">
-              <div class="banner__item">
-                <div class="banner__text">
-                  <span>The Chloe Collection</span>
-                  <h1>The Project Jacket</h1>
-                  <a href="#">Shop now</a>
-                </div>
-              </div>
-              <div class="banner__item">
-                <div class="banner__text">
-                  <span>The Chloe Collection</span>
-                  <h1>The Project Jacket</h1>
-                  <a href="#">Shop now</a>
-                </div>
-              </div>
-              <div class="banner__item">
-                <div class="banner__text">
-                  <span>The Chloe Collection</span>
-                  <h1>The Project Jacket</h1>
-                  <a href="#">Shop now</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Banner Section End -->
-
-    <!-- Trend Section Begin -->
-    <section class="trend spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="trend__content">
-              <div class="section-title">
-                <h4>Hot Trend</h4>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/ht-1.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Chain bucket bag</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/ht-2.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Pendant earrings</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/ht-3.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Cotton T-Shirt</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="trend__content">
-              <div class="section-title">
-                <h4>Best seller</h4>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/bs-1.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Cotton T-Shirt</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/bs-2.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Zip-pockets pebbled tote <br />briefcase</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/bs-3.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Round leather bag</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="trend__content">
-              <div class="section-title">
-                <h4>Feature</h4>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/f-1.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Bow wrap skirt</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/f-2.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Metallic earrings</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-              <div class="trend__item">
-                <div class="trend__item__pic">
-                  <img src="img/trend/f-3.jpg" alt="" />
-                </div>
-                <div class="trend__item__text">
-                  <h6>Flap cross-body bag</h6>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                  <div class="product__price">$ 59.0</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Trend Section End -->
-
-    <!-- Discount Section Begin -->
-    <section class="discount">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 p-0">
-            <div class="discount__pic">
-              <img src="img/discount.jpg" alt="" />
-            </div>
-          </div>
-          <div class="col-lg-6 p-0">
-            <div class="discount__text">
-              <div class="discount__text__title">
-                <span>Discount</span>
-                <h2>Summer 2019</h2>
-                <h5><span>Sale</span> 50%</h5>
-              </div>
-              <div class="discount__countdown" id="countdown-time">
-                <div class="countdown__item">
-                  <span>22</span>
-                  <p>Days</p>
-                </div>
-                <div class="countdown__item">
-                  <span>18</span>
-                  <p>Hour</p>
-                </div>
-                <div class="countdown__item">
-                  <span>46</span>
-                  <p>Min</p>
-                </div>
-                <div class="countdown__item">
-                  <span>05</span>
-                  <p>Sec</p>
-                </div>
-              </div>
-              <a href="#">Shop now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Discount Section End -->
-
-    <!-- Services Section Begin -->
-    <section class="services spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="services__item">
-              <i class="fa fa-car"></i>
-              <h6>Free Shipping</h6>
-              <p>For all oder over $99</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="services__item">
-              <i class="fa fa-money"></i>
-              <h6>Money Back Guarantee</h6>
-              <p>If good have Problems</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="services__item">
-              <i class="fa fa-support"></i>
-              <h6>Online Support 24/7</h6>
-              <p>Dedicated support</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="services__item">
-              <i class="fa fa-headphones"></i>
-              <h6>Payment Secure</h6>
-              <p>100% secure payment</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Services Section End -->
-
-    <!-- Instagram Begin -->
-    <div class="instagram">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-1.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-2.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-3.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-4.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-5.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-            <div
-              class="instagram__item set-bg"
-              data-setbg="img/instagram/insta-6.jpg"
-            >
-              <div class="instagram__text">
-                <i class="fa fa-instagram"></i>
-                <a href="#">@ E - Beauty_shop</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Instagram End -->
-
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-7">
-            <div class="footer__about">
-              <div class="footer__logo">
-                <a href="./index.php"><img src="img/logo.png" alt="" /></a>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt cilisis.
-              </p>
-              <div class="footer__payment">
-                <a href="#"><img src="img/payment/payment-1.png" alt="" /></a>
-                <a href="#"><img src="img/payment/payment-2.png" alt="" /></a>
-                <a href="#"><img src="img/payment/payment-3.png" alt="" /></a>
-                <a href="#"><img src="img/payment/payment-4.png" alt="" /></a>
-                <a href="#"><img src="img/payment/payment-5.png" alt="" /></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-5">
-            <div class="footer__widget">
-              <h6>Quick links</h6>
-              <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">FAQ</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-4">
-            <div class="footer__widget">
-              <h6>Account</h6>
-              <ul>
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Orders Tracking</a></li>
-                <li><a href="#">Checkout</a></li>
-                <li><a href="#">Wishlist</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 col-sm-8">
-            <div class="footer__newslatter">
-              <h6>NEWSLETTER</h6>
+            <div class="modal-body">
               <form action="#">
-                <input type="text" placeholder="Email" />
-                <button type="submit" class="site-btn">Subscribe</button>
-              </form>
-              <div class="footer__social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-pinterest"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            <div class="footer__copyright__text">
-              <p>
-                Copyright &copy;
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                All rights reserved | This template is made with
-                <i class="fa fa-heart" aria-hidden="true"></i> by
-                <a href="https://colorlib.com" target="_blank">Colorlib</a>
-              </p>
-            </div>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- Footer Section End -->
+                <div class="form-group">
+                  <label for="appointment_name" class="text-black"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="appointment_name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="appointment_email" class="text-black"
+                    >Email</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="appointment_email"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="appointment_date" class="text-black"
+                        >Date</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="appointment_date"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="appointment_time" class="text-black"
+                        >Time</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="appointment_time"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-    <!-- Search Begin -->
-    <div class="search-model">
-      <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-          <input type="text" id="search-input" placeholder="Search here....." />
-        </form>
+                <div class="form-group">
+                  <label for="appointment_message" class="text-black"
+                    >Message</label
+                  >
+                  <textarea
+                    name=""
+                    id="appointment_message"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="submit"
+                    value="Send Message"
+                    class="btn btn-primary"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Search End -->
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

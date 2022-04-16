@@ -71,6 +71,7 @@ class UserC {
                 ':userid' => $userid
               ]);
               echo $query->rowCount() . " records UPDATED successfully <br>";
+              
             } catch(PDOException $e) {
               $e->getMessage();  
             }
@@ -109,6 +110,7 @@ class UserC {
                  $_SESSION['USERNAME']=$x['USERNAME'];
                  $_SESSION['FIRSTNAME']=$x['FIRSTNAME'];
                  $_SESSION['LASTNAME']=$x['LASTNAME'];
+                 $_SESSION['PASSWORD']=$x['PASSWORD'];
                  $_SESSION['VILLE']=$x['VILLE'];
               }
               return $message;
