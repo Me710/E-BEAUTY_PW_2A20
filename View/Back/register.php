@@ -25,12 +25,13 @@
             !empty($_POST["Email"]) && 
             !empty($_POST["Ville"])
         ) {
+           $Password=md5($_POST['Password']);
             $Client = new User(
                 $_POST['FirstName'],
-				$_POST['LastName'],
-                $_POST['Password'], 
-				$_POST['Email'],
-                $_POST['UserName'],
+				        $_POST['LastName'],
+                $_POST['UserName'], 
+				        $_POST['Email'],
+                $Password,
                 $_POST['Ville']
             );
             $ClientC->ajouterUser($Client);

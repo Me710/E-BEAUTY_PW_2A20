@@ -49,34 +49,236 @@ session_start();
         }  
   } 
 ?>
-<link href="style_profile.css" rel="stylesheet">
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>E - BEAUTY Profile</title>
+    <link href="style_profile.css" rel="stylesheet">
+    <!-- plugins:css -->
+    <link
+      rel="stylesheet"
+      href="http://localhost/E_Beauty/View/Back/assets/vendors/mdi/css/materialdesignicons.min.css"
+    />
+    <link rel="stylesheet" href="http://localhost/E_Beauty/View/Back/assets/vendors/css/vendor.bundle.base.css" />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link
+      rel="stylesheet"
+      href="http://localhost/E_Beauty/View/Back/assets/vendors/jvectormap/jquery-jvectormap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://localhost/E_Beauty/View/Back/assets/vendors/flag-icon-css/css/flag-icon.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://localhost/E_Beauty/View/Back/assets/vendors/owl-carousel-2/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://localhost/E_Beauty/View/Back/assets/vendors/owl-carousel-2/owl.theme.default.min.css"
+    />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="http://localhost/E_Beauty/View/Back/assets/css/style.css" />
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="http://localhost/E_Beauty/View/Back/assets/images/favicon.png" />
+  </head>
 <body>
   <div class="main-content">
-    <!-- Top navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
-        <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">User profile</a>
-        <!-- Form -->
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="image.jpg">
-                </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php Echo $_SESSION['LASTNAME']; Echo $_SESSION['FIRSTNAME'];?></span>
-                </div>
-              </div>
-            </a>
-           
-          </li>
-        </ul>
-      </div>
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div
+          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
+        >
+          <a class="sidebar-brand brand-logo" href="index.php">
+            <img src="http://localhost/E_Beauty/View/Back/assets/images/logo.png" alt="logo"
+          /></a>
+          <a class="sidebar-brand brand-logo-mini" href="index.php"
+            ><img src="http://localhost/E_Beauty/View/Back/assets/images/logo-mini.svg" alt="logo"
+          /></a>
+        </div>
     </nav>
+      <!--Partial-->
+    <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div
+            class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
+          >
+            <a class="navbar-brand brand-logo-mini" href="index.php"
+              ><img src="http://localhost/E_Beauty/View/Back/assets/images/logo-mini.svg" alt="logo"
+            /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button
+              class="navbar-toggler navbar-toggler align-self-center"
+              type="button"
+              data-toggle="minimize"
+            >
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search products"
+                  />
+                </form>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown d-none d-lg-block">
+                <a
+                  class="nav-link btn btn-success create-new-button"
+                  id="createbuttonDropdown"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  href="#"
+                  >+ Create New Project</a
+                >
+              </li>
+              <li class="nav-item nav-settings d-none d-lg-block">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-view-grid"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown border-left">
+                <a
+                  class="nav-link count-indicator dropdown-toggle"
+                  id="messageDropdown"
+                  href="#"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="mdi mdi-email"></i>
+                  <span class="count bg-success"></span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                  aria-labelledby="messageDropdown"
+                >
+                  
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img
+                        src="http://localhost/E_Beauty/View/Back/assets/images/faces/face2.jpg"
+                        alt="image"
+                        class="rounded-circle profile-pic"
+                      />
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </li>
+              <li class="nav-item dropdown border-left">
+                
+                <div
+                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                  aria-labelledby="notificationDropdown"
+                >
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <div class="dropdown-divider"></div>
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                      <p class="text-muted ellipsis mb-0">
+                        Update Tableau de Bord
+                      </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-link-variant text-warning"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Launch Admin</p>
+                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  id="profileDropdown"
+                  href="#"
+                  data-toggle="dropdown"
+                >
+                  <div class="navbar-profile">
+                    <img
+                      class="img-xs rounded-circle"
+                      src="http://localhost/E_Beauty/View/Back/assets/images/faces/face15.jpg"
+                      alt=""
+                    />
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                      <?php Echo $_SESSION['LASTNAME']; Echo $_SESSION['FIRSTNAME'];?>
+                    </p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                  aria-labelledby="profileDropdown"
+                >
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                </div>
+              </li>
+            </ul>
+            <button
+              class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+              type="button"
+              data-toggle="offcanvas"
+            >
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+          </nav>
+      <!--/Partial-->
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(spectacle.jpg); background-size: cover; background-position: center top;">
       <!-- Mask -->
@@ -180,7 +382,7 @@ session_start();
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" name="Email" placeholder="mail@example.com" value=<?php echo $_SESSION['EMAIL'];?>>
+                        <input type="email" id="input-email" class="form-control form-control-alternative" name="Email" placeholder="mail@example.com" value=<?php echo $_SESSION['EMAIL'];?> readonly>
                       </div>
                     </div>
                   </div>

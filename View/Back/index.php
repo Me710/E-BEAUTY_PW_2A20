@@ -1,6 +1,6 @@
 <?php 
-include('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
-include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+include_once('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
+include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
 
     $userdb = new UserC();  
     $Livdb = new LivreurC();  
@@ -410,8 +410,6 @@ include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                             <th>EMAIL</th>
                             <th>PASSWORD</th>
                             <th>VILLE</th>
-                            <!--<th>SEXE</th>
-                            <th>DATE_ENREG</th>-->
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -445,23 +443,14 @@ include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                   <td><?php Echo $Client['VILLE'];?></td>
                                   <td>
                                   <div>
-                                    <!--<td>
-                                        <a href="my_profile.php" ><input class="btn-outline-success" Type="button" value="Afficher"></a>
-                                    </td>-->
-                                    <td>
-                                    <form method="POST" action="my_profile.php">
-                                      <input class="btn-outline-success" type="submit" name="Afficher" value="Afficher">
-                                      <input type="hidden" value=<?php echo $Client['USERID']; ?> name="USERID">
-                                    </form>
-                                    </td>
                                     <td>
                                     <form method="POST" action="form_modifier.php">
                                       <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                      <input type="hidden" value=<?php echo $Client['USERID']; ?> name="USERID">
+                                      <input type="hidden" value=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?> name="USERID">
                                     </form>
                                     </td>
                                     <td>
-                                      <a href="supprimerClient.php?USERID=<?php echo $Client['USERID']; ?>" class="btn-outline-danger">Supprimer</a>
+                                      <a href="supprimerClient.php?USERID=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?>" class="btn-outline-danger">Supprimer</a>
                                     </td>
                                   </div> 
                               </tr>
@@ -545,8 +534,6 @@ include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                             <th>EMAIL</th>
                             <th>PASSWORD</th>
                             <th>ZONE LIVRAISON</th>
-                            <!--<th>SEXE</th>
-                            <th>DATE_ENREG</th>-->
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -580,20 +567,13 @@ include('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                   <td><?php Echo $Client['ZONELIV'];?></td>
                                   <td>
                                   <div>
-                                    <<td>
-                                        <input class="btn-outline-success" Type="button" value="Afficher">
+                                    <form method="POST" action="form_modifier_Livreur.php">
+                                      <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
+                                      <input type="hidden" value=<?php echo $Client['LIVID'];?> name="LIVID">
+                                    </form>
                                     </td>
                                     <td>
-                                      <form method="POST" action="form_modifier.php">
-                                        <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                        <input type="hidden" value=<?php echo $Client['USERID']; ?> name="USERID">
-                                      </form>
-                                    </td>
-                                    <td>
-                                        <input class="btn-outline-warning" Type="button" value="Modifier">
-                                    </td>
-                                    <td>
-                                      <input class="btn-outline-danger" Type="button" value="Supprimer">
+                                      <a href="supprimerClient.php?USERID=<?php echo $Client['LIVID'];?>" class="btn-outline-danger">Supprimer</a>
                                     </td>
                                   </div>
                               </tr>

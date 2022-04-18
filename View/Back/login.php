@@ -8,7 +8,8 @@ $userC= new UserC();
 
 if(isset($_POST["email"]) &&  
    isset($_POST["password"])) {
-     $message=$userC->connexionUser($_POST["email"],$_POST["password"]);
+     $Password=md5($_POST['password']);
+     $message=$userC->connexionUser($_POST["email"],$Password);
 
      $_SESSION['e'] = $_POST["email"]; //on stcoke dans le tableau une colonne ayant comme nom e 
      // avec l'email à l'interieur
