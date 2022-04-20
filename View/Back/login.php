@@ -1,29 +1,43 @@
 <?php
 session_start();
 
-include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
-$mesage="";
+include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php");
+include_once("C:/xampp/htdocs/E_Beauty/Controller/adminC.php");
+
+$message="test";
+      
 
 $userC= new UserC();
+$user= new AdminC();
+/*$admin = new admin("nebotchristian6@gmail.com",md5(""));
+$user->ajouterAdmin($admin);*/
 
 if(isset($_POST["email"]) &&  
    isset($_POST["password"])) {
-     $Password=md5($_POST['password']);
-     $message=$userC->connexionUser($_POST["email"],$Password);
-
-     $_SESSION['e'] = $_POST["email"]; //on stcoke dans le tableau une colonne ayant comme nom e 
-     // avec l'email à l'interieur
+     $message=$userC->connexionUser($_POST["email"],md5($_POST['password']));
 
      if($message!='pseudo ou mot de passe est incorrect'){
+       echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
        header('Location:http://localhost/E_Beauty/View/Front/index_profil.php');
-     }
+     } 
      else{
        $message='pseudo ou le mot de passe est incorrect';
-       header('Location:login.php');
+       echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
+       $message2=$user->connexionAdmin($_POST["email"],md5($_POST['password']));
+              if($message2!='pseudo ou mot de passe est incorrect'){
+              header('Location:http://localhost/E_Beauty/View/Back/index.php');   
+              }
+            else{
+              $message2='pseudo ou le mot de passe est incorrect';
+              header('Location:login.php');
+            }
      }
+     
+     
 }
 else{
-  $message='Missing information';
+  //$message='Missing information';
+  //echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
 }
 
 ?>
@@ -67,24 +81,20 @@ else{
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
                 <form action="" method="POST">
+                  <?php if(!empty($_POST)): ?>
+                    <p>Le formulaire a bien été posté</p>
+                  <?php else: ?>
                   <div class="form-group">
-                    <label>Username or email *</label>
+                    <label>Email *</label>
                     <input type="text" name="email" class="form-control p_input" />
                   </div>
                   <div class="form-group">
-                    <label>Password *</label>
+                    <label>Mot de Passe *</label>
                     <input type="text" name="password" class="form-control p_input" />
                   </div>
                   <div
                     class="form-group d-flex align-items-center justify-content-between"
                   >
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" />
-                        Remember me
-                      </label>
-                    </div>
-                    <a href="#" class="forgot-pass">Forgot password</a>
                   </div>
                   <div class="text-center">
                     <button
@@ -103,17 +113,15 @@ else{
                     </button>
                   </div>
                   <p class="sign-up">
-                    Don't have an Account?<a
+                    Avez vous déjà un compte ?<a
                       href="http://localhost/E_Beauty/View/Back/register.php"
                     >
-                      Sign Up</a
+                      S'enregistrer</a
                     >
                   </p>
-                  <div><a
-                      href="http://localhost/E_Beauty/View/Back/login_admin.php"
-                    >
-                      Admins</a
-                    ></div>
+                  <p class="sign-up">
+                  <a href="resetPassword.php" class="forgot-pass">Mot de passe oublié ?</a></p>
+                  <?php endif; ?>
                 </form>
               </div>
             </div>

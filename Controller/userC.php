@@ -91,6 +91,19 @@ class UserC {
               die('Erreur: '.$e->getMessage());
             }
           }  
+          function recupererMail(){
+            $db = config::getConnexion();
+            try{
+              $query= $db->prepare(
+                'select email from user'
+              );
+              $query->execute();
+              $result = $query->fetch();
+              return $result;
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+          }  
           function connexionUser($email,$password){
             $sql="SELECT *FROM user where Email=:email and Password=:password";
             $db = config::getConnexion();
@@ -101,10 +114,10 @@ class UserC {
               $query->execute();
               $count=$query->rowCount();
               if($count==0){
-                $message = "pseudo ou mot de passe est incorrect";
+                $message = 'pseudo ou mot de passe est incorrect';
               }else {
                  $x=$query->fetch();
-                 $message = "pseudo ou mot de passe correct";
+                 $message = 'pseudo ou mot de passe correct';
                  $_SESSION['USERID']=$x['USERID'];
                  $_SESSION['EMAIL']=$x['EMAIL'];
                  $_SESSION['USERNAME']=$x['USERNAME'];
@@ -118,7 +131,8 @@ class UserC {
             catch (Exception $e){
               die('Erreur: '.$e->getMessage());
             }
-          }   
+          }
+            
   }
   
 ?>

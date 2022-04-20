@@ -1,10 +1,10 @@
-<?php require("C:/xampp/htdocs/E_Beauty/Model/Admin.php");
-      require("C:/xampp/htdocs/E_Beauty/config.php");
+<?php require_once("C:/xampp/htdocs/E_Beauty/Model/Admin.php");
+      require_once("C:/xampp/htdocs/E_Beauty/config.php");
 
       //require("../Model/user.php"); //en cas d'erreur, require produit une erreur et arrete le script tandis que include produit l'erreur mais continue l'execution du script
 class AdminC {
           function recupererUser($id){
-            $sql="SELECT * from admin where adminid=:id";
+            $sql="SELECT * from admins where adminid=:id";
             $db = config::getConnexion();
             try{
               $query=$db->prepare($sql);
@@ -18,12 +18,27 @@ class AdminC {
               die('Erreur: '.$e->getMessage());
             }
           }  
-          function connexionUser($adminid,$password){
-            $sql="SELECT *FROM admin where adminid=:adminid and Password=:password";
+          function ajouterAdmin($admin){
+            $sql="INSERT INTO admins (PASSWORD,EMAIL) 
+            VALUES (:PASSWORD,:EMAIL)";
+            $pdo = config::getConnexion();
+            try{
+              $query = $pdo->prepare($sql);
+              $query->execute([
+                'PASSWORD' => $admin->getPassword(),
+                'EMAIL' => $admin->getEmail()
+              ]);			
+            }
+            catch (Exception $e){
+              echo 'Erreur: '.$e->getMessage();
+            }			
+          }
+          function connexionAdmin($email,$password){
+            $sql="SELECT *FROM admins where Email=:email and Password=:password";
             $db = config::getConnexion();
             try{
               $query=$db->prepare($sql);
-              $query->bindValue(':adminid',$adminid);
+              $query->bindValue(':email',$email);
               $query->bindValue(':password',$password);
               $query->execute();
               $count=$query->rowCount();

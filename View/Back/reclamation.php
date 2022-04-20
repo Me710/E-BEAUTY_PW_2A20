@@ -1,10 +1,10 @@
 <?php 
-include_once('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
+include_once('C:/xampp/htdocs/E_Beauty/Controller/reclamationC.php'); 
 include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
 
-    $userdb = new UserC();  
+    $userdb = new ReclamationC();  
     $Livdb = new LivreurC();  
-    $Client = $userdb->afficherUserBDD();      
+    $Reclams = $userdb->afficherReclamationBDD();      
     $livreur = $Livdb->afficherLivBDD();
     //var_dump($resultat);
 ?>
@@ -280,7 +280,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                  <p class="p-3 mb-0 text-center">Voir toutes les notifications</p>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -315,7 +315,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
+                      <p class="preview-subject mb-1">Parametres</p>
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
@@ -326,11 +326,11 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
+                      <p class="preview-subject mb-1">Se Deconnecter</p>
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                  <p class="p-3 mb-0 text-center">Parametres Avancés</p>
                 </div>
               </li>
             </ul>
@@ -370,15 +370,11 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">CLIENTS</h3>
+                          <h3 class="mb-0">RECLAMATIONS</h3>
                         </div>
                       </div>
                       <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -396,7 +392,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">LISTE DES CLIENTS</h4>
+                    <h4 class="card-title">LISTE DES RECLAMATIONS</h4>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
@@ -405,21 +401,18 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                               <div class="form-check form-check-muted m-0"> 
                               </div>
                             </th>
-                            <th>      </th>
-                            <th>USERID</th>
+                            <th>RECID</th>
                             <th>FIRSTNAME</th>
                             <th>LASTNAME</th>
-                            <th>USERNAME</th>
                             <th>EMAIL</th>
-                            <th>PASSWORD</th>
                             <th>VILLE</th>
-                            <th>ACTION</th>
+                            <th>MESSAGE</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                               <?php 
-                              foreach($Client as $Client) { ?>
+                              foreach($Reclams as $Reclams) { ?>
                               <tr>
                                 <td>
                                   <div class="form-check form-check-muted m-0">
@@ -431,31 +424,12 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                     </label>
                                   </div>
                                 </td>
-                                <td>
-                                  <img
-                                    src="assets/images/faces/face1.jpg"
-                                    alt="image"
-                                  />
-                                </td>
-                                  <td><?php Echo $Client['USERID'];?></td>
-                                  <td><?php Echo $Client['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Client['LASTNAME'];?></td>
-                                  <td><?php Echo $Client['USERNAME'];?></td>
-                                  <td><?php Echo $Client['EMAIL'];?></td>
-                                  <td><?php Echo $Client['PASSWORD'];?></td>
-                                  <td><?php Echo $Client['VILLE'];?></td>
-                                  <td>
-                                  <div>
-                                    <td>
-                                    <form method="POST" action="form_modifier.php">
-                                      <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                      <input type="hidden" value=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?> name="USERID">
-                                    </form>
-                                    </td>
-                                    <td>
-                                      <a href="supprimerClient.php?USERID=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?>" class="btn-outline-danger">Supprimer</a>
-                                    </td>
-                                  </div> 
+                                  <td><?php Echo $Reclams['TEMID'];?></td>
+                                  <td><?php Echo $Reclams['FIRSTNAME'];?></td>
+                                  <td><?php Echo $Reclams['LASTNAME'];?></td>
+                                  <td><?php Echo $Reclams['EMAIL'];?></td>
+                                  <td><?php Echo $Reclams['VILLE'];?></td>
+                                  <td><?php Echo $Reclams['MESSAGE'];?></td>
                               </tr>
                             <!--</td>-->
                               <?php }?>
@@ -475,14 +449,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">LIVREURS</h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
+                          <h3 class="mb-0">TEMOIGNAGES</h3>
                         </div>
                       </div>
                     </div>
@@ -490,24 +457,6 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                 </div>
               </div>
               <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="basic_elements.php">AJOUTER</a></h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="row">
@@ -520,7 +469,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">LISTE DES LIVREUR</h4>
+                    <h4 class="card-title">LISTE DES TEMOIGNAGES</h4>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
@@ -535,15 +484,12 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                             <th>LASTNAME</th>
                             <th>USERNAME</th>
                             <th>EMAIL</th>
-                            <th>PASSWORD</th>
-                            <th>ZONE LIVRAISON</th>
-                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                               <?php 
-                              foreach($livreur as $Client) { ?>
+                              foreach($livreur as $Reclams) { ?>
                               <tr>
                                 <td>
                                   <div class="form-check form-check-muted m-0">
@@ -555,30 +501,13 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                     </label>
                                   </div>
                                 </td>
-                                <td>
-                                  <img
-                                    src="assets/images/faces/face1.jpg"
-                                    alt="image"
-                                  />
-                                </td>
-                                  <td><?php Echo $Client['LIVID'];?></td>
-                                  <td><?php Echo $Client['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Client['LASTNAME'];?></td>
-                                  <td><?php Echo $Client['USERNAME'];?></td>
-                                  <td><?php Echo $Client['EMAIL'];?></td>
-                                  <td><?php Echo $Client['PASSWORD'];?></td>
-                                  <td><?php Echo $Client['ZONELIV'];?></td>
-                                  <td>
-                                  <div>
-                                    <form method="POST" action="form_modifier_Livreur.php">
-                                      <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                      <input type="hidden" value=<?php echo $Client['LIVID'];?> name="LIVID">
-                                    </form>
-                                    </td>
-                                    <td>
-                                      <a href="supprimerLivreur.php?LIVID=<?php echo $Client['LIVID'];?>" class="btn-outline-danger">Supprimer</a>
-                                    </td>
-                                  </div>
+                                  <td><?php Echo $Reclams['LIVID'];?></td>
+                                  <td><?php Echo $Reclams['FIRSTNAME'];?></td>
+                                  <td><?php Echo $Reclams['LASTNAME'];?></td>
+                                  <td><?php Echo $Reclams['USERNAME'];?></td>
+                                  <td><?php Echo $Reclams['EMAIL'];?></td>
+                                  <td><?php Echo $Reclams['PASSWORD'];?></td>
+                                  <td><?php Echo $Reclams['ZONELIV'];?></td>
                               </tr>
                             <!--</td>-->
                               <?php }?>

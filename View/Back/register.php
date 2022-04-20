@@ -1,12 +1,14 @@
 <?php
-    //include('C:/xampp/htdocs/E_Beauty/Model/User.php'); 
-    include('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
-
+    include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php");
+    include_once("C:/xampp/htdocs/E_Beauty/Controller/villeC.php"); 
+    
+    
     $error = "";
 
     // create User
     $Client = null;
-
+    $Villedb = new VilleC();
+    $Ville = $Villedb->afficherVilleBDD();
     // create an instance of the controller
     $ClientC = new UserC();
     if (
@@ -90,13 +92,12 @@
                 <form class="forms-sample" action="" method="POST" name="FormAjout" onsubmit="return Verif()">
                       <div class="form-group">
                         <label for="TypeUtilisateur">Type  d'Utilisateur</label>
-                        <select class="form-control" id="exampleSelectGender">
+                        <select class="form-control" id="exampleSelectGender" readonly>
                           <option>Client</option>
-                          <option>Livreur</option>
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="FirstName">First Name</label>
+                        <label for="FirstName">Prenom</label>
                         <input
                           type="text"
                           class="form-control"
@@ -107,7 +108,7 @@
                         <p id="errorNR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="LastName">Last Name</label>
+                        <label for="LastName">Nom</label>
                         <input
                           type="text"
                           class="form-control"
@@ -118,7 +119,7 @@
                         <p id="errorPR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="UserName">User Name</label>
+                        <label for="UserName">Nom Utilisateur</label>
                         <input
                           type="text"
                           class="form-control"
@@ -129,7 +130,7 @@
                         <p id="errorNU" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Email">EmaiL address</label>
+                        <label for="Email">Address Email</label>
                         <input
                           type="email"
                           class="form-control"
@@ -140,7 +141,7 @@
                         <p id="errorMR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Password">Password</label>
+                        <label for="Password">Mot de Passe</label>
                         <input
                           type="password"
                           class="form-control"
@@ -151,7 +152,7 @@
                         <p id="errorPass" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="PasswordConf">Confirm Password</label>
+                        <label for="PasswordConf">Mot de passe confirmation</label>
                         <input
                           type="password"
                           class="form-control"
@@ -162,23 +163,14 @@
                         <p id="errorPassC" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Ville">Ville/Zone de Livraison</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="Ville"
-                          name="Ville"
-                          placeholder="Location"
-                        />
+                        <label for="Ville">Zone de Livraison</label>
+                        <select class="form-control" id="Ville" name="Ville" placeholder="Liste Vide">
+                          <?php foreach($Ville as $row) { ?>
+                          <option><?php Echo $row['IDVILLE'];?></option>
+                          <?php }?>
+                        </select>
                         <p id="errorV" class="error"></p>
                       </div>
-                      <!--<div class="form-group">
-                        <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Male</option>
-                          <option>Female</option>
-                        </select>
-                      </div>-->
                       <div class="form-group">
                         <label>Image upload</label>
                         <input
@@ -204,7 +196,7 @@
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary mr-2">
-                        Register
+                        Créer un compte
                       </button>
                       <button class="btn btn-dark">Cancel</button>
                   </div>
@@ -217,14 +209,14 @@
                     </button>
                   </div>
                   <p class="sign-up text-center">
-                    Already have an Account?<a
+                    Vous avez deja un compte?<a
                       href="../View/Back/pages/samples/login.php"
                     >
-                      Sign In</a
+                      Se Connecter</a
                     >
                   </p>
                   <p class="terms">
-                    By creating an account you are accepting our<a href="#">
+                    En créa ce compte vous accepetr nos conditions d'utilisation<a href="#">
                       Terms & Conditions</a
                     >
                   </p>

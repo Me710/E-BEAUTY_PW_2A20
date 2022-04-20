@@ -1,14 +1,16 @@
 <?php
-    //include('C:/xampp/htdocs/E_Beauty/Model/User.php'); 
-    include('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
-
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/villeC.php'); 
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+    
     $error = "";
 
     // create User
-    $Client = null;
+    $Livreur = null;
+    $Villedb = new VilleC();
+    $Ville = $Villedb->afficherVilleBDD();
 
     // create an instance of the controller
-    $ClientC = new UserC();
+    $LivreurC = new LivreurC();
     if (
         isset($_POST["FirstName"]) &&
 		isset($_POST["LastName"]) &&		
@@ -24,16 +26,16 @@
 			!empty($_POST["Password"]) && 
             !empty($_POST["Email"]) && 
             !empty($_POST["Ville"])
-        ) {
-            $Client = new User(
+        ){
+            $Livreur = new Livreur(
                 $_POST['FirstName'],
 				$_POST['LastName'],
                 $_POST['UserName'], 
 				$_POST['Email'],
-                $_POST['Password'],
+                md5($_POST['Password']),
                 $_POST['Ville']
             );
-            $ClientC->ajouterUser($Client);
+            $LivreurC->ajouterLiv($Livreur);
             header('Location:index.php');
         }
         else
@@ -88,7 +90,7 @@
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
@@ -167,7 +169,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
-              <span class="menu-title">AFFICHAGE</span>
+              <span class="menu-title">UTILISATEURS</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -175,7 +177,23 @@
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">AJOUT</span>
+              <span class="menu-title">AJOUT LIVREUR</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="mail.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">MAILING</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="reclamation.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">RECLAMATIONS</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -188,179 +206,6 @@
           </li>
         </ul>
       </nav>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.php -->
-        <nav class="navbar p-0 fixed-top d-flex flex-row">
-          <div
-            class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
-          >
-            <a class="navbar-brand brand-logo-mini" href="index.php"
-              ><img src="assets/images/logo-mini.svg" alt="logo"
-            /></a>
-          </div>
-          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-            <button
-              class="navbar-toggler navbar-toggler align-self-center"
-              type="button"
-              data-toggle="minimize"
-            >
-              <span class="mdi mdi-menu"></span>
-            </button>
-            <ul class="navbar-nav w-100">
-              <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search products"
-                  />
-                </form>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
-              </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a
-                  class="nav-link count-indicator dropdown-toggle"
-                  id="messageDropdown"
-                  href="#"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
-                >
-                  
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                </div>
-              </li>
-              <li class="nav-item dropdown border-left">
-                
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="notificationDropdown"
-                >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Update Tableau de Bord
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link"
-                  id="profileDropdown"
-                  href="#"
-                  data-toggle="dropdown"
-                >
-                  <div class="navbar-profile">
-                    <img
-                      class="img-xs rounded-circle"
-                      src="assets/images/faces/face15.jpg"
-                      alt=""
-                    />
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      Christian NEBOT
-                    </p>
-                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                  </div>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="profileDropdown"
-                >
-                  <h6 class="p-3 mb-0">Profile</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
-                </div>
-              </li>
-            </ul>
-            <button
-              class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-              type="button"
-              data-toggle="offcanvas"
-            >
-              <span class="mdi mdi-format-line-spacing"></span>
-            </button>
-          </div>
-        </nav>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
@@ -667,13 +512,12 @@
                     <form class="forms-sample" action="" method="POST" name="FormAjout" onsubmit="return Verif()">
                       <div class="form-group">
                         <label for="TypeUtilisateur">Type  d'Utilisateur</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Client</option>
+                        <select class="form-control" id="type">
                           <option>Livreur</option>
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="FirstName">First Name</label>
+                        <label for="FirstName">Prenom</label>
                         <input
                           type="text"
                           class="form-control"
@@ -684,7 +528,7 @@
                         <p id="errorNR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="LastName">Last Name</label>
+                        <label for="LastName">Nom</label>
                         <input
                           type="text"
                           class="form-control"
@@ -695,7 +539,7 @@
                         <p id="errorPR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="UserName">User Name</label>
+                        <label for="UserName">Nom d'utilisateur</label>
                         <input
                           type="text"
                           class="form-control"
@@ -706,7 +550,7 @@
                         <p id="errorNU" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Email">EmaiL address</label>
+                        <label for="Email">Adresse Email</label>
                         <input
                           type="email"
                           class="form-control"
@@ -717,7 +561,7 @@
                         <p id="errorMR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Password">Password</label>
+                        <label for="Password">Mot de passe</label>
                         <input
                           type="password"
                           class="form-control"
@@ -728,7 +572,7 @@
                         <p id="errorPass" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="PasswordConf">Confirm Password</label>
+                        <label for="PasswordConf">Confirmation de mot de passe</label>
                         <input
                           type="password"
                           class="form-control"
@@ -739,23 +583,14 @@
                         <p id="errorPassC" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Ville">Ville/Zone de Livraison</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="Ville"
-                          name="Ville"
-                          placeholder="Location"
-                        />
+                        <label for="Ville">Zone de Livraison</label>
+                        <select class="form-control" id="Ville" name="Ville" placeholder="Liste Vide">
+                          <?php foreach($Ville as $row) { ?>
+                          <option><?php Echo $row['IDVILLE'];?></option>
+                          <?php }?>
+                        </select>
                         <p id="errorV" class="error"></p>
                       </div>
-                      <!--<div class="form-group">
-                        <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Male</option>
-                          <option>Female</option>
-                        </select>
-                      </div>-->
                       <div class="form-group">
                         <label>Image upload</label>
                         <input
@@ -783,7 +618,7 @@
                       <button type="submit" class="btn btn-primary mr-2">
                         Submit
                       </button>
-                      <button class="btn btn-dark">Cancel</button>
+                      <button class="btn btn-dark">Annuler</button>
                     </form>
                   </div>
                 </div>

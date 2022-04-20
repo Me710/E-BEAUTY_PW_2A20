@@ -125,6 +125,11 @@
                   </p>
                 </div>
               </div>
+            <div id="darkmodemenu" class="ws-grey w3-hide-small" onmouseover="mouseoverdarkicon()" onmouseout="mouseoutofdarkicon()">
+                <input id="radio_darkpage" type="checkbox" name="radio_theme_mode" onclick="click_darkpage()"><label for="radio_darkpage"> Dark mode</label>
+                <br>
+                <input id="radio_darkcode" type="checkbox" name="radio_theme_mode" onclick="click_darkcode()"><label for="radio_darkcode"> Dark code</label>
+            </div>
             </div>
           </div>
         </section>
@@ -622,8 +627,8 @@
                 <span class="subheading">Stylistic</span>
                 <h2 class="mb-4">Contact Us</h2>
                 <p class="mb-5">
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia
+                  Loin de là, derrière le mot montagnes, loin de la
+                  pays Vokalia
                 </p>
               </div>
             </div>
@@ -632,29 +637,28 @@
                 <div class="row">
                   <div class="col-md-12 mb-3">
                     <p>
-                      <span>Address:</span> 198 West 21th Street, Suite 721 New
-                      York NY 10016
+                      <span>Address:</span> 18, rue de l'Usine - ZI Aéroport Charguia II 2035 Ariana
                     </p>
                   </div>
                   <div class="col-md-12 mb-3">
                     <p>
-                      <span>Phone:</span>
-                      <a href="tel://1234567920">+ 1235 2355 98</a>
+                      <span>Tél. :</span>
+                      <a href="tel://1234567920">(+216) 71 94 15 41 (LG) Fax : (+216) 71 94 18 89</a>
                     </p>
                   </div>
                   <div class="col-md-12 mb-3">
                     <p>
                       <span>Email:</span>
-                      <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                      <a href="mailto:info@yoursite.com">ebeautycontact01@gmail.com</a>
                     </p>
                   </div>
                   <div class="col-md-12 mb-3">
-                    <p><span>Website:</span> <a href="#">yoursite.com</a></p>
+                    <p><span>Site Web:</span> <a href="#">E-Beauty_Shop.com</a></p>
                   </div>
                 </div>
               </div>
               <div class="col-md-8 appointment ftco-animate">
-                <form action="#" class="appointment-form">
+                <form action="" class="appointment-form" method="POST">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="d-md-flex">
@@ -716,7 +720,7 @@
                       <div class="form-group">
                         <input
                           type="submit"
-                          value="Send A Message"
+                          value="Envoyer une reclammation"
                           class="btn btn-primary py-3 px-4"
                         />
                       </div>
@@ -744,17 +748,17 @@
                 class="col-md-6 req-quote py-5 text-center align-items-center img"
                 style="background-image: url(images/bg_2.jpg)"
               >
-                <h3 class="ml-md-3">Become A Model?</h3>
+                <h3 class="ml-md-3">Besoin d'un job de livreur?</h3>
                 <span class="ml-md-3"
-                  ><a href="#">Call us now to know how!</a></span
+                  ><a href="#">Contactez nous pour plus d'informations!</a></span
                 >
               </div>
               <div
                 class="col-md-6 req-quote py-5 text-center align-items-center img"
                 style="background-image: url(images/bg_1.jpg)"
               >
-                <h3 class="ml-md-3">Model Courses</h3>
-                <span class="ml-md-3"><a href="#">Know more</a></span>
+                <h3 class="ml-md-3">Devenir Livreur</h3>
+                <span class="ml-md-3"><a href="#">En savoir plus</a></span>
               </div>
             </div>
           </div>
@@ -770,9 +774,9 @@
                     <a href="index.html">Stylistic</a>
                   </h2>
                   <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts.
+                    Loin de là, derrière le mot montagnes, loin de la
+                    pays Vokalia et Consonantia, là vivent les aveugles
+                    Textes.
                   </p>
                   <ul
                     class="ftco-footer-social list-unstyled float-md-left float-lft mt-5"
@@ -791,7 +795,7 @@
               </div>
               <div class="col-md-4">
                 <div class="ftco-footer-widget mb-4">
-                  <h2 class="ftco-heading-2">Recent Blog</h2>
+                  <h2 class="ftco-heading-2">Blog Recent</h2>
                   <div class="block-21 mb-4 d-flex">
                     <a
                       class="blog-img mr-4"
@@ -800,15 +804,15 @@
                     <div class="text">
                       <h3 class="heading">
                         <a href="#"
-                          >Even the all-powerful Pointing has no control
-                          about</a
+                          >Même le tout-puissant Pointing n’a aucun contrôle
+                          environ</a
                         >
                       </h3>
                       <div class="meta">
                         <div>
                           <a href="#"
-                            ><span class="icon-calendar"></span> July 12,
-                            2018</a
+                            ><span class="icon-calendar"></span> Avril 12,
+                            2022</a
                           >
                         </div>
                         <div>
@@ -830,15 +834,15 @@
                     <div class="text">
                       <h3 class="heading">
                         <a href="#"
-                          >Even the all-powerful Pointing has no control
-                          about</a
+                          >Même le tout-puissant Pointing n’a aucun contrôle
+                          environ</a
                         >
                       </h3>
                       <div class="meta">
                         <div>
                           <a href="#"
-                            ><span class="icon-calendar"></span> July 12,
-                            2018</a
+                            ><span class="icon-calendar"></span>12 Avril,
+                            2022</a
                           >
                         </div>
                         <div>
@@ -858,9 +862,9 @@
                 <div class="ftco-footer-widget mb-4 ml-md-4">
                   <h2 class="ftco-heading-2">Site Links</h2>
                   <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">Home</a></li>
-                    <li><a href="#" class="py-2 d-block">About</a></li>
-                    <li><a href="#" class="py-2 d-block">Model</a></li>
+                    <li><a href="#" class="py-2 d-block">Accueil</a></li>
+                    <li><a href="#" class="py-2 d-block">A propos</a></li>
+                    <li><a href="#" class="py-2 d-block">Nos Produits</a></li>
                     <li><a href="#" class="py-2 d-block">Services</a></li>
                     <li><a href="#" class="py-2 d-block">Blog</a></li>
                   </ul>
@@ -868,7 +872,7 @@
               </div>
               <div class="col-md-3">
                 <div class="ftco-footer-widget mb-4">
-                  <h2 class="ftco-heading-2">Have a Questions?</h2>
+                  <h2 class="ftco-heading-2">Avez vous des questions?</h2>
                   <div class="block-23 mb-3">
                     <ul>
                       <li>
@@ -887,7 +891,7 @@
                       <li>
                         <a href="#"
                           ><span class="icon icon-envelope"></span
-                          ><span class="text">info@yourdomain.com</span></a
+                          ><span class="text">ebeautycontact01@gmail.com</span></a
                         >
                       </li>
                     </ul>
@@ -1056,5 +1060,38 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
+    <script>
+    function mouseoutofdarkicon() {
+      var a = document.getElementById("darkmodemenu");
+      a.style.top = "5px";
+    }
+    function click_darkpage() {
+      var b = document.getElementById("radio_darkpage");
+      if (b.checked) {
+        document.body.className += " darkpagetheme";
+        document.body.className = document.body.className.replace("  ", " ");    
+        localStorage.setItem("preferredpagemode", "dark");
+        document.getElementById("wavepath").style.fill = "rgb(13,23,33)";
+        
+      } else {
+        document.body.className = document.body.className.replace("darkpagetheme", "");
+        document.body.className = document.body.className.replace("  ", " ");    
+        localStorage.setItem("preferredpagemode", "light");
+        document.getElementById("wavepath").style.fill = "#282A35";    
+      }
+    }
+    function click_darkcode() {
+      var a = document.getElementById("radio_darkcode");
+      if (a.checked) {
+        document.body.className += " darktheme";
+        document.body.className = document.body.className.replace("  ", " ");    
+        localStorage.setItem("preferredmode", "dark");
+      } else {
+        document.body.className = document.body.className.replace("darktheme", "");
+        document.body.className = document.body.className.replace("  ", " ");
+        localStorage.setItem("preferredmode", "light");
+      }
+    }
+    </script>
   </body>
 </html>

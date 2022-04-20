@@ -15,6 +15,25 @@
               $e->getMessage();  
             }
           }
+          function ajouterLiv($Livreur){
+            $sql="INSERT INTO livreur (FIRSTNAME,LASTNAME,USERNAME,PASSWORD,EMAIL,ZONELIV) 
+            VALUES (:FIRSTNAME,:LASTNAME,:USERNAME,:PASSWORD,:EMAIL, :ZONELIV)";
+            $pdo = config::getConnexion();
+            try{
+              $query = $pdo->prepare($sql);
+              $query->execute([
+                'FIRSTNAME' => $Livreur->getFirstName(),
+                'LASTNAME' => $Livreur->getLastName(),
+                'USERNAME' => $Livreur->getUserName(),
+                'PASSWORD' => $Livreur->getPassword(),
+                'EMAIL' => $Livreur->getEmail(),
+                'ZONELIV' => $Livreur->getVille()
+              ]);			
+            }
+            catch (Exception $e){
+              echo 'Erreur: '.$e->getMessage();
+            }			
+          }
           function deleteLivreurBDD($id) {
             $pdo = Config::getConnexion();
             try{
@@ -39,7 +58,7 @@
               $e->getMessage();  
             }
           }
-          function updateLivBDD($User,$livid) {
+          function updateLivBDD($Livreur,$livid) {
             $pdo = Config::getConnexion();
             try{
               $query= $pdo->prepare(
@@ -53,12 +72,12 @@
                 where livid=:livid'
               );
               $query->execute([
-                'FIRSTNAME' => $User->getFirstName(),
-                'LASTNAME' => $User->getLastName(),
-                'USERNAME' => $User->getUserName(),
-                'PASSWORD' => $User->getPassword(),
-                'EMAIL' => $User->getEmail(),
-                'ZONELIV' => $User->getVille(),
+                'FIRSTNAME' => $Livreur->getFirstName(),
+                'LASTNAME' => $Livreur->getLastName(),
+                'USERNAME' => $Livreur->getUserName(),
+                'PASSWORD' => $Livreur->getPassword(),
+                'EMAIL' => $Livreur->getEmail(),
+                'ZONELIV' => $Livreur->getVille(),
                 ':livid' => $livid
               ]);
               echo $query->rowCount() . " records UPDATED successfully <br>";

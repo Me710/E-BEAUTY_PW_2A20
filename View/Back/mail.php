@@ -1,49 +1,52 @@
 <?php
-    //include('C:/xampp/htdocs/E_Beauty/Model/User.php'); 
-    include('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
-
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/userC.php');  
+    
     $error = "";
 
     // create User
-    $Client = null;
-
-    // create an instance of the controller
-    $ClientC = new UserC();
-    if (
-      isset($_POST["USER"]) &&
-        isset($_POST["FirstName"]) &&
-		isset($_POST["LastName"]) &&		
-        isset($_POST["UserName"]) &&
-		isset($_POST["Password"]) && 
-        isset($_POST["Email"]) && 
-        isset($_POST["Ville"])
+    $Maildb = new UserC();
+    $Mail = $Maildb->afficherUserBDD();
+         if (
+        isset($_POST["Email"]) &&
+        isset($_POST["Sujet"]) &&
+		isset($_POST["Message"]) 
     ) {
-        if ( !empty($_POST["USER"]) &&
-            !empty($_POST["FirstName"]) && 
-			!empty($_POST['LastName']) &&
-            !empty($_POST["UserName"]) && 
-			!empty($_POST["Password"]) && 
-            !empty($_POST["Email"]) && 
-            !empty($_POST["Ville"])
+        if ( !empty($_POST["Email"]) &&
+            !empty($_POST["Sujet"]) && 
+			!empty($_POST['Message']) 
         ) {
-            $Client = new User(
-                $_POST['FirstName'],
-				$_POST['LastName'],
-                $_POST['UserName'], 
-				$_POST['Email'],
-                $_POST['Password'],
-                $_POST['Ville']
-            );
-            $ClientC->updateUserBDD($Client,$_POST['USER']);
-            header('Location:form_modifier.php');
+                $destinataire = $_POST["Email"];
+                $sujet = $_POST["Sujet"];
+                $message = $_POST['Message'];
+                $headers = "From:ebeautycontact01@gmail.com";
+
+                if(mail($destinataire,$sujet,$message,$headers))
+                {
+                    echo 'Le mail a été envoyé';
+                    header('Location:index.php');
+                }
+                else
+                {
+                    echo 'Le mail n\'a pu être envoyé';
+                    header('Location:mail.php');
+                }
+                
         }
         else
             $error = "Missing information";
-    }   
+    }
+      
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+<script type="text/javascript" src="controle_saisie.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -81,7 +84,7 @@
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
@@ -160,7 +163,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
-              <span class="menu-title">AFFICHAGE</span>
+              <span class="menu-title">UTILISATEURS</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -168,7 +171,23 @@
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">AJOUT</span>
+              <span class="menu-title">AJOUT LIVREUR</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="mail.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">MAILING</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="reclamation.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">RECLAMATIONS</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -181,179 +200,6 @@
           </li>
         </ul>
       </nav>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.php -->
-        <nav class="navbar p-0 fixed-top d-flex flex-row">
-          <div
-            class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
-          >
-            <a class="navbar-brand brand-logo-mini" href="index.php"
-              ><img src="assets/images/logo-mini.svg" alt="logo"
-            /></a>
-          </div>
-          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-            <button
-              class="navbar-toggler navbar-toggler align-self-center"
-              type="button"
-              data-toggle="minimize"
-            >
-              <span class="mdi mdi-menu"></span>
-            </button>
-            <ul class="navbar-nav w-100">
-              <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search products"
-                  />
-                </form>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
-              </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a
-                  class="nav-link count-indicator dropdown-toggle"
-                  id="messageDropdown"
-                  href="#"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
-                >
-                  
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                </div>
-              </li>
-              <li class="nav-item dropdown border-left">
-                
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="notificationDropdown"
-                >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Update Tableau de Bord
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link"
-                  id="profileDropdown"
-                  href="#"
-                  data-toggle="dropdown"
-                >
-                  <div class="navbar-profile">
-                    <img
-                      class="img-xs rounded-circle"
-                      src="assets/images/faces/face15.jpg"
-                      alt=""
-                    />
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      Christian NEBOT
-                    </p>
-                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                  </div>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="profileDropdown"
-                >
-                  <h6 class="p-3 mb-0">Profile</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
-                </div>
-              </li>
-            </ul>
-            <button
-              class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-              type="button"
-              data-toggle="offcanvas"
-            >
-              <span class="mdi mdi-format-line-spacing"></span>
-            </button>
-          </div>
-        </nav>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
@@ -636,12 +482,12 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title">MODIFICATION</h3>
+              <h3 class="page-title">MAILING</h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Formulaire</a></li>
+                  <li class="breadcrumb-item"><a href="#">MAILING</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    MODIFICATION
+                    MAILING
                   </li>
                 </ol>
               </nav>
@@ -652,111 +498,44 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Formulaire de Modification </h4>
-                    <p class="card-description">Veuillez modifier les champs</p>
+                    <h4 class="card-title">Mailing</h4>
+                    <p class="card-description">Envoyer un mail a un ou plusieurs clients/livreurs</p>
                         <div id="error">
                           <?php echo $error; ?>
                         </div>
-                        <?php
-                            if (isset($_POST['USERID'])){
-                                $Client = $ClientC->recupererUser($_POST['USERID']);	
-                        ?>
-                    <form class="forms-sample" action="" method="POST">
+                    <form class="forms-sample" action="" method="POST" name="FormMail">
                       <div class="form-group">
-                        <!--<label for="USER">User Id</label>-->
-                        <input
-                          type="hidden"
-                          class="form-control"
-                          id="USER"
-                          name="USER"
-                          placeholder="First Name"
-                          value="<?php echo $Client['USERID'
-                        ]; ?> "/>
-                        
+                        <label for="Mail">Choisir un mail dans la liste</label>
+                        <select class="form-control" id="Email" name="Email" placeholder="Liste Vide">
+                          <?php foreach($Mail as $row) { ?>
+                          <option><?php Echo $row['EMAIL'];?></option>
+                          <?php }?>
+                        </select>
+                        <p id="errorV" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="FirstName">First Name</label>
+                        <label for="Sujet">Sujet</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="FirstName"
-                          name="FirstName"
-                          placeholder="First Name"
-                          value="<?php echo $Client['FIRSTNAME'
-                        ]; ?> "/>
-                        
-                      </div>
-
-                      <div class="form-group">
-                        <label for="LastName">Last Name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="LastName"
-                          name="LastName"
-                          placeholder="Last Name"
-                          value="<?php echo $Client['LASTNAME'
-                        ]; ?> "/>
-                        
-                      </div>
-                      <div class="form-group">
-                        <label for="UserName">User Name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="UserName"
-                          name="UserName"
-                          placeholder="User Name"
-                          value="<?php echo $Client['USERNAME'
-                        ]; ?> "
+                          id="Sujet"
+                          name="Sujet"
+                          placeholder="Sujet"
                         />
+                        <p id="errorNR" class="error"></p>
                       </div>
                       <div class="form-group">
-                        <label for="Email">EmaiL address</label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="Email"
-                          name="Email"
-                          placeholder="Email"
-                          value="<?php echo $Client['EMAIL'
-                        ]; ?> "
-                        />
+                        <label for="Sujet">Message</label>
+                        <textarea 
+                            class="form-control" 
+                            id="Message" 
+                            name="Message" 
+                            rows="15" 
+                            cols="100"
+                            placeholder="Message">
+                        </textarea>
+                        <p id="errorNR" class="error"></p>
                       </div>
-                      <div class="form-group">
-                        <label for="Password">Password</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="Password"
-                          name="Password"
-                          placeholder="Password"
-                          value="<?php echo $Client['PASSWORD'
-                        ]; ?> "
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="PasswordConf">Confirm Password</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="PasswordConf"
-                          name="PasswordConf"
-                          placeholder="Confirm Password"
-                        />
-                      </div>
-                      <div class="form-group">
-                            <label for="Ville">Ville/Zone de Livraison</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="Ville"
-                              name="Ville"
-                              placeholder="Location"
-                              value="<?php echo $Client['VILLE'
-                            ]; ?>"
-                        />
-                      </div>  
                       <div class="form-group">
                         <label>Image upload</label>
                         <input
@@ -782,17 +561,10 @@
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary mr-2">
-                        Modifier
+                       Envoyer
                       </button>
-                      <!--<td>
-                        <input type="submit" value="Modifier"> 
-                      </td>-->
-                      <button class="btn btn-dark">Cancel</button>
-                      <button><a href="index.php">Retour à la liste des Clients</a></button>
+                      <button class="btn btn-dark">Annuler</button>
                     </form>
-                  <?php
-                  }
-                  ?>
                   </div>
                 </div>
               </div>
@@ -855,6 +627,5 @@
     <script src="assets/js/typeahead.js"></script>
     <script src="assets/js/select2.js"></script>
     <!-- End custom js for this page -->
-    
   </body>
 </html>
