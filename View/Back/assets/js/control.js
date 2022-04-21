@@ -5,11 +5,18 @@ function Verif() {
     var Aut = document.forms["FormAjout"]["Auteur"].value;
     var date = document.forms["FormAjout"]["Date"].value;
     var titre = document.forms["FormAjout"]["Titre"].value;
+    var nom = document.forms["FormAjout"]["Nom"].value;
   
     var errorN = document.getElementById("errorNR");
     var errorP = document.getElementById("errorPR");
     var errorDate = document.getElementById("errorMR");
     var errorTitre = document.getElementById("errorV");
+    var errorType = document.getElementById("errorPP");
+
+    var jour=dateGlobale.getDay();
+    var annee=dateGlobale.getyear();
+    var mois=dateGlobale.getMonth();
+    var numeroJour = dateGlobale.getDate();
   
   /*  var letters = /^[A-Za-z]+$/;
     var dateNow = new Date();
@@ -39,6 +46,15 @@ function Verif() {
         errorTitre.innerHTML = "";
         count++;
       }
+
+      if (nom == "") {
+        errorType.innerHTML = "Veuillez entrer un nom !";
+      } else if (!(nom.match(letters) && nom.charAt(0).match(/^[A-Z]+$/))) {
+        errorType.innerHTML = "Veuillez entrer un nom valid !";
+      } else {
+        errorType.innerHTML = "";
+        count++;
+      }
    /*
     if (date == "") {
       errorDate.innerHTML = "Veuillez entrer votre Date!";
@@ -49,31 +65,9 @@ function Verif() {
       count++;
     }*/
   
-    if (VerifPassword()) {
-      count++;
-    }
+    
   
-    if (count === 6) {
-      return true;
-    }
-    return false;
-  }
-  
-  function VerifPassword() {
-    var password = document.forms["FormAjout"]["Password"].value;
-    var passwordC = document.forms["FormAjout"]["PasswordConf"].value;
-    var errorPassC = document.getElementById("errorPassC");
-  
-    if (passwordC == "") {
-      errorPassC.innerHTML = "Veuillez confirmer votre Date!";
-    }
-    if (!(password == passwordC)) {
-      errorPassC.innerHTML = "Les deux mot de passes ne sont pas identiques!";
-    } else {
-      errorPassC.innerHTML = "";
-      return true;
-    }
-  }
+ 
   
   function validateForm() {
     alert(Verif());
