@@ -1,9 +1,14 @@
 <?php 
-require('C:/xampp/htdocs/AtelierPHP//Controller/serviceC.php'); 
+require('C:/xampp/htdocs/AtelierPHP/Controller/serviceC.php'); 
+require_once('C:/xampp/htdocs/AtelierPHP/Controller/packC.php');
 
 $servicedb = new ServiceC();    
 $result = $servicedb->afficherservices();    
     //var_dump($resultat);
+    
+
+$servicedb2 = new PackC();    
+$result2 = $servicedb2->afficherpacks(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,6 +143,14 @@ $result = $servicedb->afficherservices();
                 <i class="mdi mdi-playlist-play"></i>
               </span>
               <span class="menu-title">AJOUT</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="ajout_service_pack.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">AJOUT S/P</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -328,8 +341,7 @@ $result = $servicedb->afficherservices();
           <div class="content-wrapper">
             <div class="row">
               <div class="col-12 grid-margin stretch-card">
-                <div class="card E - BEAUTY-gradient-card">
-                  <div class="card-body py-0 px-0 px-sm-3">
+
                     <div class="row align-items-center">
                       <div class="col-4 col-sm-3 col-xl-2">
                         <img
@@ -339,8 +351,7 @@ $result = $servicedb->afficherservices();
                         />
                       </div>
                     </div>
-                  </div>
-                </div>
+
               </div>
             </div>
             <div class="row">
@@ -400,9 +411,10 @@ $result = $servicedb->afficherservices();
                             </th>
                             <th>      </th>
                             <th>ID</th>
-                            <th>Libelle</th>
-                            <th>Description</th>
-                            <th>Prix</th>
+                            <th>LIBELLE</th>
+                            <th>DESCRIPTION</th>
+                            <th>PRIX</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -434,7 +446,7 @@ $result = $servicedb->afficherservices();
                                   <div>
                                     <td>
                                     <form method="POST" action="form_modifier.php">
-                                      <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
+                                      <input class="btn-outline-warning" type="image" name="Modifier" src="assets/images/buttons/icons8-edit-32.png">
                                       <input type="hidden" value=<?php echo $row['id']; ?> name="id">
                                     </form>
                                     </td>
@@ -442,7 +454,11 @@ $result = $servicedb->afficherservices();
                                         <input class="btn-outline-warning" Type="submit" value="Modifier">
                                     </td>-->
                                     <td>
-                                      <a href="supprimerservice.php?id=<?php echo $row['id']; ?>" class="btn-outline-danger">Supprimer</a>
+                                      <!--<a href="supprimerservice.php?id= echo $row['id']; " class="btn-outline-danger">Supprimer</a>-->
+                                      <a href="supprimerservice.php?id=<?php echo $row['id']; ?>">
+                                      <img src="assets/images/buttons/icons8-delete-48.png" 
+                                      width=150" height="70">
+                                      </a>
                                     </td>
                                   </div> 
                               </tr>
@@ -484,7 +500,7 @@ $result = $servicedb->afficherservices();
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="pages/forms/basic_elements.php">AJOUTER PACK</a></h3>
+                          <h3 class="mb-0"><a href="addPacks.php">AJOUTER PACK</a></h3>
                         </div>
                       </div>
                       <div class="col-3">
@@ -509,7 +525,7 @@ $result = $servicedb->afficherservices();
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">LISTE DES LIVREUR</h4>
+                    <h4 class="card-title">LISTE DES PACKS</h4>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
@@ -519,13 +535,9 @@ $result = $servicedb->afficherservices();
                               </div>
                             </th>
                             <th>      </th>
-                            <th>LIVID</th>
-                            <th>FIRSTNAME</th>
-                            <th>LASTNAME</th>
-                            <th>USERNAME</th>
-                            <th>EMAIL</th>
-                            <th>PASSWORD</th>
-                            <th>ZONE LIVRAISON</th>
+                            <th>ID</th>
+                            <th>NOM</th>
+                            <th>DESCRIPTION</th>
                             <!--<th>SEXE</th>
                             <th>DATE_ENREG</th>-->
                             <th>ACTION</th>
@@ -534,7 +546,7 @@ $result = $servicedb->afficherservices();
                         <tbody>
                           <tr>
                               <?php 
-                              foreach($livreur as $Client) { ?>
+                              foreach($result2 as $pack) { ?>
                               <tr>
                                 <td>
                                   <div class="form-check form-check-muted m-0">
@@ -552,23 +564,21 @@ $result = $servicedb->afficherservices();
                                     alt="image"
                                   />
                                 </td>
-                                  <td><?php Echo $Client['LIVID'];?></td>
-                                  <td><?php Echo $Client['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Client['LASTNAME'];?></td>
-                                  <td><?php Echo $Client['USERNAME'];?></td>
-                                  <td><?php Echo $Client['EMAIL'];?></td>
-                                  <td><?php Echo $Client['PASSWORD'];?></td>
-                                  <td><?php Echo $Client['ZONELIV'];?></td>
-                                  <td>
+                                  <td><?php Echo $pack['id'];?></td>
+                                  <td><?php Echo $pack['nom'];?></td>
+                                  <td><?php Echo $pack['description'];?></td>
                                   <div>
                                     <td>
-                                        <input class="btn-outline-success" Type="button" value="Afficher">
+                                    <a href="modifierpack.php?id=<?php echo $pack['id']; ?>">
+                                      <img src="assets/images/buttons/icons8-edit-32.png"
+                                      width=150" height="70">
+                                      </a>
                                     </td>
                                     <td>
-                                        <input class="btn-outline-warning" Type="button" value="Modifier">
-                                    </td>
-                                    <td>
-                                      <input class="btn-outline-danger" Type="button" value="Supprimer">
+                                      <a href="supprimerpack.php?id=<?php echo $pack['id']; ?>">
+                                      <img src="assets/images/buttons/icons8-delete-48.png"
+                                      width=150" height="70">
+                                      </a>
                                     </td>
                                   </div>
                               </tr>

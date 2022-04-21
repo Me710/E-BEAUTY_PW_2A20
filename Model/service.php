@@ -29,7 +29,6 @@ class Service{
         echo "</tr>";
         echo "</table>";
     }
-
     function getLibelle() {
         return $this->libelle;
     }

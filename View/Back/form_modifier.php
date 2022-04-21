@@ -31,6 +31,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript" src="cs.js"></script>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -650,7 +651,7 @@
                                 $ID =  $_POST['id'];
                                 $service = $serviceC->recupererservice($_POST['id']);	
                         ?>
-                    <form name="formUpdate" class="forms-sample" action="" method="POST" onsubmit="return verif()">
+                    <form name="formUpdate" class="forms-sample" action="" method="POST" onsubmit="return verifU()">
                     <div class="form-group">
                         <input
                           type="hidden"

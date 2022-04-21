@@ -22,7 +22,7 @@
                 $_POST['prix']
             );
             $serviceC->ajouterservice($service);
-            header('Location:basic_elements.php');
+            header('Location:index.php');
         }
         else
             $error = "Missing information";
