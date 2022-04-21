@@ -1,11 +1,17 @@
 <?php
 session_start();
-
+require_once("config_google.php");
 include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php");
 include_once("C:/xampp/htdocs/E_Beauty/Controller/adminC.php");
 
+if (isset($_SESSION['access_token'])) {
+		header('Location: login.php');
+		exit();
+	}
+	$loginURL = $gClient->createAuthUrl();
+
+
 $message="test";
-      
 
 $userC= new UserC();
 $user= new AdminC();
@@ -33,13 +39,11 @@ if(isset($_POST["email"]) &&
             }
      }
      
-     
 }
 else{
   //$message='Missing information';
   //echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +73,7 @@ else{
     <link rel="stylesheet" href="assets/css/style.css" />
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
     <div class="container-scroller">
@@ -81,9 +86,7 @@ else{
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
                 <form action="" method="POST">
-                  <?php if(!empty($_POST)): ?>
-                    <p>Le formulaire a bien été posté</p>
-                  <?php else: ?>
+                  
                   <div class="form-group">
                     <label>Email *</label>
                     <input type="text" name="email" class="form-control p_input" />
@@ -108,9 +111,11 @@ else{
                     <button class="btn btn-facebook mr-2 col">
                       <i class="mdi mdi-facebook"></i> Facebook
                     </button>
-                    <button class="btn btn-google col">
+                    <!--<button class="btn btn-google col" onclick="window.location = '<?php echo $loginURL ?>';">
                       <i class="mdi mdi-google-plus"></i> Google plus
-                    </button>
+                    </button>-->
+                    <input type="button" onclick="window.location = '<?php echo $loginURL ?>';" 
+                    value="Log In With Google" class="btn btn-danger">
                   </div>
                   <p class="sign-up">
                     Avez vous déjà un compte ?<a
@@ -121,7 +126,7 @@ else{
                   </p>
                   <p class="sign-up">
                   <a href="resetPassword.php" class="forgot-pass">Mot de passe oublié ?</a></p>
-                  <?php endif; ?>
+                  
                 </form>
               </div>
             </div>

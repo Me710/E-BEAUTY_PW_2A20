@@ -58,7 +58,8 @@ class UserC {
                 USERNAME=:USERNAME,
                 PASSWORD=:PASSWORD,
                 EMAIL=:EMAIL,
-                VILLE=:VILLE
+                VILLE=:VILLE,
+                TEMOIGNAGE=:TEMOIGNAGE
                 where userid=:userid'
               );
               $query->execute([
@@ -68,6 +69,7 @@ class UserC {
                 'PASSWORD' => $User->getPassword(),
                 'EMAIL' => $User->getEmail(),
                 'VILLE' => $User->getVille(),
+                'TEMOIGNAGE' => $User->getTemoignage(),
                 ':userid' => $userid
               ]);
               echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -125,6 +127,7 @@ class UserC {
                  $_SESSION['LASTNAME']=$x['LASTNAME'];
                  $_SESSION['PASSWORD']=$x['PASSWORD'];
                  $_SESSION['VILLE']=$x['VILLE'];
+                 $_SESSION['TEMOIGNAGE']=$x['TEMOIGNAGE'];
               }
               return $message;
             }

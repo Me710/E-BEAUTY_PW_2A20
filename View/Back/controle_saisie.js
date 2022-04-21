@@ -1,51 +1,4 @@
-//document.getElementById("nom").value;
-/*
-function verif() {
-  var errors = "<ul>";
-  var nom = document.querySelector("#FirstName").value;
-  var prenom = document.querySelector("#LastName").value;
-  var username = document.querySelector("#UserName").value;
-  var ville = document.querySelectorAll("#Ville").value;
-  var email = document.querySelectorAll("#Email").value;
-  (nb = 0), (p = "");
-  var pass = document.querySelector("#Password").value;
-  var pass1 = document.querySelector("#PasswordConf").value;
 
-  if (nom.charAt(0) < "A" || nom.charAt(0) > "Z") {
-    errors += "<li>Le nom doit commencer par une lettre Majuscule </li>";
-  }
-  if (prenom.charAt(0) < "A" || prenom.charAt(0) > "Z") {
-    errors += "<li>Le prenom doit commencer par une lettre Majuscule </li>";
-  }
-  if (
-    ville === "" ||
-    nom === "" ||
-    prenom === "" ||
-    email === "" ||
-    pass === "" ||
-    username === "" ||
-    pass1 === ""
-  ) {
-    errors += "<li>Ce Champs est obligatoire </li>";
-  }
-
-  if (pass !== pass1 || pass === "" || pass1 === "") {
-    errors += "<li> Veuillez vérifier le mot de passe saisi </li>";
-    document.querySelector("#Password").value = "";
-    document.querySelector("#PasswordConf").value = "";
-    document.querySelector("#Password").focus();
-  }
-
-  if (errors !== "<ul>") {
-    document.querySelector("#erreur").style.color = "red";
-    errors += "</ul>";
-    document.getElementById("erreur").innerHTML = errors;
-    return false;
-  } else {
-    var msg = "Bienvenue " + nom + " " + prenom + ".\n Vos préférences: " + p;
-    alert(msg);
-  }
-}*/
 function Verif() {
   var test = false;
   let count = 0;
@@ -96,7 +49,7 @@ function Verif() {
   }
   if (mail == "") {
     errorEmail.innerHTML = "Veuillez entrer votre email!";
-  } else if (!mail.match("@gmail.com")) {
+  } else if (!mail.match("@esprit.tn")) {
     errorEmail.innerHTML = "Veuillez entrer un email valid!";
   } else {
     errorEmail.innerHTML = "";

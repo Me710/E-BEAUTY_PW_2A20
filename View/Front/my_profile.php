@@ -1,6 +1,6 @@
 <?php
-include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
 session_start();
+include('C:/xampp/htdocs/E_Beauty/Controller/userC.php');
 
     $error = "";
 
@@ -34,6 +34,8 @@ session_start();
                 $_POST['Password'],
                 $_POST['Ville']
             );
+            $Client->setTemoignage($_POST['Temoignage']);
+
             $ClientC->updateUserBDD($Client,$_POST['USER']);
             $_SESSION['USERID']=$_POST['USER'];
                  $_SESSION['EMAIL']=$_POST['Email'];
@@ -42,6 +44,7 @@ session_start();
                  $_SESSION['LASTNAME']=$_POST['LastName'];
                  $_SESSION['PASSWORD']=$_POST['Password'];
                  $_SESSION['VILLE']=$_POST['Ville'];
+                 $_SESSION['TEMOIGNAGE']=$_POST['Temoignage'];
             header('Location:my_profile.php');
         }
         else{
@@ -170,7 +173,8 @@ session_start();
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
                       <img
-                        src="http://localhost/E_Beauty/View/Back/assets/images/faces/face2.jpg"
+                        style="width: 80%;" 
+                        src="<?php echo $_SESSION['PICTURE'] ?>"
                         alt="image"
                         class="rounded-circle profile-pic"
                       />
@@ -350,8 +354,7 @@ session_start();
       
                 
                 <hr class="my-4">
-                <p>La mode et la beauté ont bien évoluées depuis les temps qu’elles sont apparues dans le quotidien de la société. À présent, chacun peut faire de ce qu’il veut de son corps, de son visage, de son apparence grâce à nombreuse inventions dans le monde de l’esthétique comme la chirurgie et le maquillage. La beauté et ses artifices.</p>
-     
+                <p><?php echo  $_SESSION['TEMOIGNAGE']; ?></p>
               </div>
             </div>
           </div>
@@ -446,11 +449,11 @@ session_start();
                
                 <hr class="my-4">
                 <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Reclammations</h6>
+                <h6 class="heading-small text-muted mb-4">Modification de Temoignage</h6>
                 <div class="pl-lg-4">
                   <div class="form-group focused">
-                    <label>Reclammations</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="ajouter une reclamation..">...</textarea><br>
+                    <label>Temoignage</label>
+                    <textarea rows="4" cols="20" class="form-control form-control-alternative" placeholder="modifier son temoignage..." name="Temoignage" value="<?php echo  $_SESSION['TEMOIGNAGE']; ?>"></textarea><br>
 					          <input type="submit" id='submit' value='MODIFIER'>
                   </div>
                 </div>

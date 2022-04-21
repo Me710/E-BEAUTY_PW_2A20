@@ -9,6 +9,7 @@ class User{
     private string $email;
     private string $password;
     private string $ville;
+    private string $temoignage;
     
     public function __construct(string $firstName,string $lastName,string $userName,string $email,string $password,string $ville){
         $this->firstName = $firstName;
@@ -17,9 +18,7 @@ class User{
         $this->email = $email;
         $this->password = $password;
         $this->ville = $ville;
-        //$this->registrationDate = date('y-m-d');
-        //$this->userId = generateUserId($userType);
-        //$this->sexe = $sexe;
+        $this->temoignage = "";
         
     }
 
@@ -45,6 +44,9 @@ class User{
     public function getVille():string{
         return $this->ville;
     }
+    public function getTemoignage():string{
+        return $this->temoignage;
+    }
 
     
 
@@ -69,6 +71,9 @@ class User{
 
     public function setVille(string $ville):void{
         $this->ville = $ville;
+    }
+    public function setTemoignage(string $temoignage):void{
+        $this->temoignage = $temoignage;
     }
     
 }
