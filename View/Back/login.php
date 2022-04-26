@@ -74,6 +74,67 @@ else{
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+        <link
+      href="assets2/js/plugins/bootsnav_files/skins/color.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/bootsnav_files/css/animate.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/bootsnav_files/css/bootsnav.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/bootsnav_files/css/overwrite.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/owl-carousel/owl.carousel.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/owl-carousel/owl.theme.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/owl-carousel/owl.transitions.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="assets2/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/magnific-popup.css"
+      rel="stylesheet"
+    />
+
+    <!--// ICONS //-->
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!--// BOOTSTRAP & Main //-->
+
+    <link
+      href="assets2/bootstrap-3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="assets2/css/main.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container-scroller">
@@ -86,14 +147,13 @@ else{
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
                 <form action="" method="POST">
-                  
                   <div class="form-group">
                     <label>Email *</label>
                     <input type="text" name="email" class="form-control p_input" />
                   </div>
                   <div class="form-group">
                     <label>Mot de Passe *</label>
-                    <input type="text" name="password" class="form-control p_input" />
+                    <input name="password" type="password" class="form-control p_input" />
                   </div>
                   <div
                     class="form-group d-flex align-items-center justify-content-between"
@@ -150,5 +210,92 @@ else{
     <script src="assets/js/settings.js"></script>
     <script src="assets/js/todolist.js"></script>
     <!-- endinject -->
+
+    <!--======================================== 
+
+           Modal
+
+    ========================================-->
+
+    <!-- Modal -->
+
+    <div
+      class="modal fade"
+      id="SignIn"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <h4 class="modal-title text-center" id="myModalLabel">Sign In</h4>
+          </div>
+
+          <div class="modal-body">
+            <form class="signup-form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="User Name"
+                  required="required"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Password"
+                  required="required"
+                />
+              </div>
+
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-blue btn-block">
+                  Log In
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer text-center">
+            <a href="#">Forgot your password /</a>
+
+            <a href="#">Signup</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="assets2/bootstrap-3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script src="assets2/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+
+    <script src="assets2/js/plugins/bootsnav_files/js/bootsnav.js"></script>
+
+    <script src="assets2/js/plugins/typed.js-master/typed.js-master/dist/typed.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <script src="assets2/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+
+    <script src="assets2/js/main.js"></script>
   </body>
 </html>

@@ -158,6 +158,14 @@
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" href="chartjs.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">TABLEAU DE BORD</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
             <a class="nav-link" href="index.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
@@ -187,14 +195,6 @@
                 <i class="mdi mdi-speedometer"></i>
               </span>
               <span class="menu-title">RECLAMATIONS</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="chartjs.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">STATISTIQUES</span>
             </a>
           </li>
         </ul>

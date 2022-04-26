@@ -31,6 +31,12 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+    <script type="text/javascript" src="controle_de_saisie.js"></script>
     <title>E-Beauty</title>
     <meta charset="utf-8" />
     <meta
@@ -683,7 +689,7 @@ session_start();
                 </div>
               </div>
               <div class="col-md-8 appointment ftco-animate">
-                <form action="" class="appointment-form" method="POST">
+                <form name="FormReclams" action="" class="appointment-form" method="POST" onsubmit="return VerifReclams()">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="d-md-flex">
@@ -752,6 +758,7 @@ session_start();
                           name="Message"
                         ></textarea>
                       </div>
+                      <p id="errorMessage" class="error"></p>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
