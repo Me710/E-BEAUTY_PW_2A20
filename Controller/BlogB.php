@@ -27,13 +27,13 @@
 			}
 		}
 		function ajouter_blog($blog){
-			$sql="INSERT INTO blog (id_blog, Auteur, Date, Titre, Image, texte, type) 
-			VALUES (:id_blog, :Auteur, :Date, :Titre, :Image, :texte, :type)";
+			$sql="INSERT INTO blog (Auteur, Date, Titre, Image, texte, type) 
+			VALUES (:Auteur, :Date, :Titre, :Image, :texte, :type)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
 				$query->execute([
-					'id_blog' => $blog->getId(),
+					//'id_blog' => $blog->getId(),
 					'Auteur' => $blog->getAuteur(),
 					'Date' => $blog->getDate(),
 					'Titre' => $blog->getTitre(),
@@ -45,7 +45,10 @@
 			}
 			catch (Exception $e){
 				echo 'Erreur: '.$e->getMessage();
-			}			
+			}
+			$tempPort=$_FILES['image']['tmp_name'];
+    $imgportrait="assets/images/faces".$_FILES['image']['name'];
+    move_uploaded_file($tempPort,"../../View/back/".$imgportrait);			
 		}
         
 		function recuperer_blog($id_blog){
@@ -63,7 +66,7 @@
 			}
 		}
 		
-		function modifier_blog($blog, $id){
+		function modifier_blog($blog, $id_blog){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
@@ -83,7 +86,7 @@
 					'Image' => $blog->getIm(),
 					'texte' => $blog->getText(),
 					'type' => $blog->getType(),
-					'id_blog' => $id
+					'id_blog' => $id_blog
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {

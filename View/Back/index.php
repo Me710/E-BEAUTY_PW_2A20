@@ -422,7 +422,6 @@ $listeTypes=$typeB->afficher_type();
                             <th>Auteur</th>
                             <th>Date</th>
                             <th>TITRE</th>
-                            <th>Image</th>
                             <th>Description</th>
                             <th>Type</th>
                             
@@ -459,7 +458,7 @@ $listeTypes=$typeB->afficher_type();
                                   <td><?php Echo $Blog['Auteur'];?></td>
                                   <td><?php Echo $Blog['Date'];?></td>
                                   <td><?php Echo $Blog['Titre'];?></td>
-                                  <td><?php Echo $Blog['Image'];?></td>
+                               <!-- div>   <td><?php// Echo $Blog['Image'];?></td></div --> 
                                   <td><?php Echo $Blog['texte'];?></td>
                                   <td><?php Echo $Blog['type'];?></td>
                                   

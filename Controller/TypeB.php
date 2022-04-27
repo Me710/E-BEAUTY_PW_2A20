@@ -12,7 +12,7 @@
 					'SELECT * from blog where type=$id'
 				);
 				$query->execute([
-					'id' => $id_type
+					'id' => $Nom
 				]);		
 				return $query->fetch();
 			} catch (PDOExeption $e) {

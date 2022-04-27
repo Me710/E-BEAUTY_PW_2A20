@@ -10,18 +10,18 @@
     // create an instance of the controller
     $TypeB = new TypeB();
     if (
-      isset($_POST["id_Type"]) &&
+      isset($_POST["id_type"])&&
       isset($_POST["Nom"])
       ) {
-          if (
-              !empty($_POST["id_type"]) && 
+          if ( 
+              !empty($_POST['id_type'])&&
               !empty($_POST['Nom'])
           ) {
               $Type = new Type(
-                  $_POST['id_Type'],
+                  $_POST['id_type'],
                   $_POST['Nom']
               );
-            $TypeB->modifier_type($Type,$_POST['id']);
+            $TypeB->modifier_type($_POST['Nom'],$_POST['id_type']);
             header('Location:modifier_type.php');
         }
         else
@@ -151,13 +151,21 @@
               </span>
               <span class="menu-title">AFFICHAGE</span>
             </a>
+            <li class="nav-item menu-items">
+            <a class="nav-link" href="table_type.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">AJOUT DE TYPE</span>
+            </a>
           </li>
+
           <li class="nav-item menu-items">
             <a class="nav-link" href="basic_elements.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">AJOUT</span>
+              <span class="menu-title">AJOUT DE BLOG</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -655,10 +663,12 @@
                       <div class="form-group">
                         <label for="Type">Id du Type</label>
                         <input
+
                           type="text"
                           class="form-control"
-                          id="id"
-                          name="id"
+                          id="id_type"
+                          name="id_type"
+                          readonly
                           placeholder="identifiant"
                           value="<?php echo $Type['id_type'
                         ]; ?> "/>

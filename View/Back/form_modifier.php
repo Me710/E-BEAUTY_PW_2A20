@@ -168,11 +168,20 @@
             </a>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" href="table_type.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">AJOUT DE TYPE</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
             <a class="nav-link" href="basic_elements.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">AJOUT</span>
+              <span class="menu-title">AJOUT DE BLOG</span>
             </a>
           </li>
           <li class="nav-item menu-items">

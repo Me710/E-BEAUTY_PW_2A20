@@ -16,29 +16,27 @@
     // create an instance of the controller
     $BlogB = new BlogB();
     if (
-    isset($_POST["id_blog"]) &&
 		isset($_POST["Auteur"]) &&		
     isset($_POST["Date"]) &&
 		isset($_POST["Titre"]) &&
-		isset($_POST["Image"]) &&		
+		isset($_FILES["Image"]["name"]) &&		
     isset($_POST["texte"]) &&
 		isset($_POST["type"])
     ) {
-        if (
-            !empty($_POST["id_blog"]) && 
+        if ( 
 			      !empty($_POST['Auteur']) &&
             !empty($_POST["Date"]) && 
 		      	!empty($_POST["Titre"])&& 
-			      !empty($_POST['Image']) &&
+			      !empty($_FILES["Image"]["name"]) &&
             !empty($_POST["texte"]) && 
 		      	!empty($_POST["type"])
         ) {
             $Blog = new Blog(
-                $_POST['id_blog'],
+            //    $_POST['id_blog'],
 				        $_POST['Auteur'],
                 $_POST['Titre'],
                 $_POST['Date'],
-				        $_POST['Image'],
+				        $_FILES['Image']['name'],
                 $_POST['texte'],
                 $_POST['type']
             );
@@ -70,6 +68,7 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
+    <script type="text/javascript" scr="control.js"></script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -619,7 +618,7 @@
                       alt=""
                     />
                     <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      Henry Klein
+                      Franck Fongang
                     </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
@@ -690,7 +689,7 @@
                         <div id="error">
                           <?php echo $error; ?>
                         </div>
-                    <form class="forms-sample" action="" method="POST">
+                    <form name="FormAjout" class="forms-sample" action="" method="POST" onsubmit="return Verif()">
                       
                       <div class="form-group">
                         <label for="id_blog">id du blog</label>
@@ -723,7 +722,7 @@
                           name="Date"
                           placeholder="date de publication"
                         />
-                        <p id="errorMR" class="error"></p>
+                        <p id="errorDT" class="error"></p>
                       </div>
                      
                       <div class="form-group">
@@ -737,12 +736,12 @@
                         />
                         <p id="errorV" class="error"></p>
                       </div>
- <!-- 
-                      <div class="form-group">
-                        <label>Image upload</label>
+ 
+                 <!--     <div class="form-group">
+                        <label for="Image">Image upload</label>
                         <input
                           type="file"
-                          name="img[]"
+                          name="Image"
                           class="file-upload-default"
                         />
                         <div class="input-group col-xs-12">
@@ -763,26 +762,34 @@
                         </div>
                       </div>
  <!-- -->
+                      <div class="control-group">
+                        <label for="control-label">image</label>
+                        <div class="controls">
+                          <input type="file" class="span8" name="image" accept="image/">
+
+                        </div>
+                      </div>                     
+
                       <div class="form-group">
-                        <label for="Titre">Description</label>
+                        <label for="texte">Description</label>
                         <input
                           type="test"
                           class="form-control"
-                          id="Titre"
-                          name="Titre"
+                          id="texte"
+                          name="texte"
                           placeholder="Description du blog"
                         />
-                        <p id="errorT" class="error"></p>
+                        <p id="errorDE" class="error"></p>
                       </div>
 
                       <div class="form-group">
-                        <label for="Titre">type</label>
-                        <select class="form-control" id="Ville" name="Ville" placeholder="Liste Vide">
+                        <label for="type">type</label>
+                        <select class="form-control" id="type" name="type" placeholder="Liste Vide">
                           <?php foreach($Type as $row) { ?>
                           <option><?php Echo $row['Nom'];?></option>
                           <?php }?>
                         </select>
-                        <p id="errorT" class="error"></p>
+                        <p id="errorX" class="error"></p>
                       </div>
                      
                       
