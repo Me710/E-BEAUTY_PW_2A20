@@ -3,6 +3,23 @@
 	include_once 'C:/xampp/htdocs/E_Beauty/Model/Blog.php';
 	//include_once 'C:/xampp/htdocs/E_Beauty/Model/Type.php';
 	class BlogB {
+		function rechercher_blog($rechercher) {
+            $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'SELECT * from blog where Auteur like "%'.$rechercher.'%" 
+                or type like "%'.$rechercher.'%" 
+                or Date like "%'.$rechercher.'%"
+                or Titre like "%'.$rechercher.'%"
+                order by id_blog DESC'
+              );
+              $query->execute();
+              $result = $query->fetchALL();
+              return $result;
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+          }
 		function afficher_blog(){
 			$sql="SELECT * FROM blog";
 			$db = config::getConnexion();

@@ -8,6 +8,13 @@ $listeBlogs=$blogB->afficher_blog();
 $typeB=new TypeB();
 $listeTypes=$typeB->afficher_type(); 
     //var_dump($resultat);
+
+    if(isset($_GET['rechercher'])) {
+      if(!empty($_GET['rechercher'])){
+      $rechercher = htmlspecialchars($_GET['rechercher']);
+      $listeBlogs = $blogB->rechercher_blog($rechercher);
+      }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -187,26 +194,23 @@ $listeTypes=$typeB->afficher_type();
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="" method="GET" name="FormRechercher">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Search products"
+                    placeholder="Rechercher"
+                    name="rechercher"
+                    id="rechercher"
                   />
+                  <button type="submit" class="btn btn-primary mr-2">
+                        Rechercher
+                      </button>
                 </form>
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
-              </li>
+             
               <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="#">
                   <i class="mdi mdi-view-grid"></i>
@@ -465,7 +469,7 @@ $listeTypes=$typeB->afficher_type();
                                   <td>
                                   <div>
                                     <td>
-                                    <form method="POST" action="form_modifier.php">
+                                    <form method="POST" action="form_modifier.php" onsubmit="return validateForm(event)">
                                       <input class="btn-outline-primary" type="submit" name="Modifier" value="Modifier">
                                       <input type="hidden" value=<?php echo $Blog['id_blog']; ?> name="id_blog">
                                     </form>

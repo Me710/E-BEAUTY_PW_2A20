@@ -68,7 +68,12 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <script type="text/javascript" scr="control.js"></script>
+    <style>
+  .error{
+    color: red;
+}
+</style>
+    
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -418,14 +423,7 @@
             </ul>
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
+                
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                   aria-labelledby="createbuttonDropdown"
@@ -689,7 +687,7 @@
                         <div id="error">
                           <?php echo $error; ?>
                         </div>
-                    <form name="FormAjout" class="forms-sample" action="" method="POST" onsubmit="return Verif()">
+                    <form name="FormAjout" class="forms-sample" action="" method="POST" onkeyup="return Verif()">
                       
                       <div class="form-group">
                         <label for="id_blog">id du blog</label>
@@ -861,7 +859,7 @@
     <script src="assets/js/file-upload.js"></script>
     <script src="assets/js/typeahead.js"></script>
     <script src="assets/js/select2.js"></script>
-    <script src="assets/js/control.js"></script>
+    <script src="control.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>
