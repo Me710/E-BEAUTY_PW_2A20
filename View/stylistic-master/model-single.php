@@ -24,13 +24,13 @@
 	//			  !empty($_POST['id_blog'])				
 	  ) {
                 $commentaire = new Commentaire(
-    //          		  $_POST['id_com'],
+              		  $_POST['id_com'],
 			          $_POST['pseudo'],
 					  $_POST['commentaire']
 					 // $_POST['id_blog']
 					  
             );
-            $commentaireB->ajouter_com($comment);
+            $commentaireB->ajouter_com($com);
             header('Location:model-single.php');
         }
         else

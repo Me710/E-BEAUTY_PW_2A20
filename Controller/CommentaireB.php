@@ -5,7 +5,7 @@
 
 	class CommentaireB
      {
-        function ajouter_com($comment)
+        function ajouter_com($com)
          {
 			$sql="INSERT INTO commentaire (id_com, pseudo, commentaire/*,id_blog*/) 
 			VALUES (:id_com, :pseudo, :commentaire)";
@@ -13,13 +13,13 @@
 			try{
 				$query = $db->prepare($sql);
 				$query->execute([
-					'id_com' => $comment->getId(),
-					'pseudo' => $comment->getPs(),
-                    'commentaire' => $comment->getcom()
-				//	'id_blog' => $com->getIdb()
+					'id_com' => $com->getIdc(),
+					'pseudo' => $com->getPs(),
+                    'commentaire' => $com->getcom()
 				]);			
 			}
-			catch (Exception $e){
+			catch (Exception $e)
+			{
 				echo 'Erreur: '.$e->getMessage();
 			}			
 		}
