@@ -7,6 +7,9 @@ $blogB=new BlogB();
 $listeBlogs=$blogB->afficher_blog(); 
 $typeB=new TypeB();
 $listeTypes=$typeB->afficher_type(); 
+$typeC=new TypeB();
+$listeType=$typeC->afficher_com();
+
     //var_dump($resultat);
 
     if(isset($_GET['rechercher'])) {
@@ -67,7 +70,7 @@ $listeTypes=$typeB->afficher_type();
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
           <a class="sidebar-brand brand-logo" href="index.php">
-            <img src="assets/images/logo3.png" alt="logo2"
+          <img src="assets/images/logo.png" alt="logo"
           /></a>
           <a class="sidebar-brand brand-logo-mini" href="index.php"
             ><img src="assets/images/logo-mini.svg" alt="logo2"
@@ -611,6 +614,59 @@ $listeTypes=$typeB->afficher_type();
                       </table>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">COMMENTAIRES</h4>
+            <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <TH></TH>
+                            <th>PSEUDO</th>
+                            <th>COMMENTAIRE</th>
+                            <!--<th>SEXE</th>
+                            <th>DATE_ENREG</th>-->
+                            <th>ACTION</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <?php 
+                              foreach($listeType as $Type) { ?>
+                              <tr>
+                              <td>
+                                  <div class="form-check form-check-muted m-0">
+                                    <label class="form-check-label">
+                                      <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                      />
+                                    </label>
+                                  </div>
+                                </td>
+                                
+                                  <td><?php Echo $Type['Nom'];?></td>
+                                  <td><?php Echo $Type['com'];?></td>
+                                
+                                    <td>
+                                      <a href="supprimer_com.php?id_type=<?php echo $Type['id_type']; ?>" class="btn-outline-danger">Supprimer</a>
+                                    </td>
+                                  </div> 
+                              </tr>
+                            <!--</td>-->
+                              <?php }?>
+                            <!--</td>-->
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
                 </div>
               </div>
             </div>

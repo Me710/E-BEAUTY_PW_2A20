@@ -45,8 +45,32 @@
 				die('Erreur:'. $e->getMeesage());
 			}
 		}
+		function afficher_com(){
+			$sql="SELECT * FROM commentaire";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
 		function supprimer_type($id_type){
 			$sql="DELETE FROM type WHERE id_type=:id_type";
+			$db = config::getConnexion();
+			$req=$db->prepare($sql);
+			$req->bindValue(':id_type', $id_type);
+			try{
+				$req->execute();
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
+
+		function supprimer_com($id_type){
+			$sql="DELETE FROM commentaire WHERE id_type=:id_type";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
 			$req->bindValue(':id_type', $id_type);
@@ -66,6 +90,23 @@
 				$query->execute([
 					'id_type' => $type->getId(),
 					'Nom' => $type->getNom()
+					
+				]);			
+			}
+			catch (Exception $e){
+				echo 'Erreur: '.$e->getMessage();
+			}			
+		}
+		function ajouter_com($type) {
+			$sql="INSERT INTO commentaire (id_type, Nom, com) 
+			VALUES (:id_type, :Nom, :com)";
+			$db = config::getConnexion();
+			try{
+				$query = $db->prepare($sql);
+				$query->execute([
+					'id_type' => $type->getId(),
+					'Nom' => $type->getNom(),
+					'com' => $type->getCom()
 					
 				]);			
 			}

@@ -2,12 +2,14 @@
 	class Type{
 		private $id_type=null;
 		private $Nom=null;
+		private $com=null;
 
 		//j
 		private $password=null;
-		function __construct($id_type, $Nom){
+		function __construct($id_type, $Nom, $com){
 			$this->id_type=$id_type;
 			$this->Nom=$Nom;
+			$this->com=$com;
 
 		}
 		function getId(){
@@ -15,6 +17,9 @@
 		}
 		function getNom(){
 			return $this->Nom;
+		}
+		function getCom(){
+			return $this->com;
 		}
 	
         function setId(string $id_type){

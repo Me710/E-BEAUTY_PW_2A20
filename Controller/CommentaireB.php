@@ -7,13 +7,13 @@
      {
         function ajouter_com($com)
          {
-			$sql="INSERT INTO commentaire (id_com, pseudo, commentaire/*,id_blog*/) 
-			VALUES (:id_com, :pseudo, :commentaire)";
+			$sql="INSERT INTO commentaire (/*id_com, */pseudo, commentaire/*,id_blog*/) 
+			VALUES (/*:id_com, */:pseudo, :commentaire)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
 				$query->execute([
-					'id_com' => $com->getIdc(),
+				//	'id_com' => $com->getIdc(),
 					'pseudo' => $com->getPs(),
                     'commentaire' => $com->getcom()
 				]);			
