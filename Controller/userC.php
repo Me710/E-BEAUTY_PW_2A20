@@ -1,5 +1,5 @@
-<?php require("C:/xampp/htdocs/E_Beauty/Model/user.php");
-      require("C:/xampp/htdocs/E_Beauty/config.php");
+<?php require_once("C:/xampp/htdocs/E_Beauty/Model/user.php");
+      require_once("C:/xampp/htdocs/E_Beauty/config.php");
 
       //require("../Model/user.php"); //en cas d'erreur, require produit une erreur et arrete le script tandis que include produit l'erreur mais continue l'execution du script
 class UserC {
@@ -10,6 +10,22 @@ class UserC {
                 'select * from user'
               );
               $query->execute();
+              $result = $query->fetchALL();
+              return $result;
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+           
+          }
+          function afficherUserTem() {
+          $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'select * from user where statut_tem=:statut'
+              );
+              $query->execute([
+                'statut' => "Retirer"
+              ]);
               $result = $query->fetchALL();
               return $result;
             } catch(PDOException $e) {
@@ -128,11 +144,67 @@ class UserC {
                  $_SESSION['PASSWORD']=$x['PASSWORD'];
                  $_SESSION['VILLE']=$x['VILLE'];
                  $_SESSION['TEMOIGNAGE']=$x['TEMOIGNAGE'];
+                 $_SESSION['STATUT_TEM']=$x['STATUT_TEM'];
               }
               return $message;
             }
             catch (Exception $e){
               die('Erreur: '.$e->getMessage());
+            }
+          }
+          function rechercherUserBDD($rechercher) {
+            $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'select * from user where firstname like "%'.$rechercher.'%" 
+                or lastname like "%'.$rechercher.'%" 
+                or username like "%'.$rechercher.'%"
+                or email like "%'.$rechercher.'%"
+                or ville like "%'.$rechercher.'%"
+                order by userid DESC'
+              );
+              $query->execute();
+              $result = $query->fetchALL();
+              return $result;
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+          }
+          function updateUserPWD($userid,$newpassword)
+          {
+             $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'update user set 
+                password=:newpassword
+                where userid=:userid'
+              );
+              $query->execute([
+                'newpassword' => $newpassword,
+                ':userid' => $userid
+              ]);
+              echo $query->rowCount() . " records UPDATED successfully <br>";
+              
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+          }
+          function updateStatutTem($userid,$newstatut) {
+            $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'update user set 
+                statut_tem=:newstatut
+                where userid=:userid'
+              );
+              $query->execute([
+                'newstatut' => $newstatut,
+                ':userid' => $userid
+              ]);
+              echo $query->rowCount() . " records UPDATED successfully <br>";
+              
+            } catch(PDOException $e) {
+              $e->getMessage();  
             }
           }
             

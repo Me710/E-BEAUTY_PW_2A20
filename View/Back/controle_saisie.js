@@ -1,4 +1,3 @@
-
 function Verif() {
   var test = false;
   let count = 0;
@@ -49,7 +48,7 @@ function Verif() {
   }
   if (mail == "") {
     errorEmail.innerHTML = "Veuillez entrer votre email!";
-  } else if (!mail.match("@esprit.tn")) {
+  } else if (!mail.match("@gmail.com")) {
     errorEmail.innerHTML = "Veuillez entrer un email valid!";
   } else {
     errorEmail.innerHTML = "";

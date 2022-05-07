@@ -1,10 +1,51 @@
+<?php 
+  include_once('C:/xampp/htdocs/E_Beauty/Controller/notificationC.php');
+  
+  $query1 = "SELECT * from `user`";
+  $nbUser = count(fetchAll($query1));
+
+  $query2 = "SELECT * from `livreur`";
+  $nbLiv = count(fetchAll($query2));
+
+  $query3 = "SELECT * from `ville`";
+  $nbVille = count(fetchAll($query3));
+
+  $query4 = "SELECT * from `reclamation`";
+  $nbRec = count(fetchAll($query4));
+
+  $query5 = "SELECT * from `user` where upper(`ville`) = 'TUNIS'";
+  $tunis = count(fetchAll($query5));
+
+  $query6 = "SELECT * from `user` where upper(`ville`) = 'ARIANA'";
+  $ariana = count(fetchAll($query6));
+
+  $query7 = "SELECT * from `user` where upper(`ville`) = 'SFAX'";
+  $sfax = count(fetchAll($query7));
+
+  $query8 = "SELECT * from `user` where upper(`ville`) = 'BIZERTE'";
+  $bizerte = count(fetchAll($query8));
+
+  $query9 = "SELECT * from `user` where upper(`ville`) = 'DJERBA'";
+  $djerba = count(fetchAll($query9));
+
+  $query10 = "SELECT * from `user` where upper(`ville`) = 'HAMMAMET'";
+  $hammamet = count(fetchAll($query10));
+
+  $query11 = "SELECT * from `user` where upper(`connecter`) = 'OUI'";
+  $connecter = count(fetchAll($query11));
+
+  $query12 = "SELECT * from `user` where upper(`connecter`) = 'NON'";
+  $nonconnecter = count(fetchAll($query12));
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head>  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>E- Beauty DashBoard</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -95,6 +136,15 @@
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
+                    <li class="nav-item menu-items">
+            <a class="nav-link" href="chartjs.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">TABLEAU DE BORD</span>
+            </a>
+            
+          </li>
           <li class="nav-item menu-items">
             <a class="nav-link" href="index.php">
               <span class="menu-icon">
@@ -127,81 +177,202 @@
               <span class="menu-title">RECLAMATIONS</span>
             </a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="chartjs.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">STATISTIQUES</span>
-            </a>
-          </li>
         </ul>
       </nav>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Chart-js </h3>
+              <h3 class="page-title"> Tableau de Bord </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Charts</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Chart-js</li>
+                  <li class="breadcrumb-item"><a href="#">Tableau de Bord</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Tableau de Bord</li>
                 </ol>
               </nav>
             </div>
             <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Line chart</h4>
-                    <canvas id="lineChart" style="height:250px"></canvas>
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbUser ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Utilisateurs Inscrits
+                    </h6>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 grid-margin stretch-card">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Bar chart</h4>
-                    <canvas id="barChart" style="height:230px"></canvas>
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbLiv ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Livreurs Disponibles
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbVille ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Nombre de Ville</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbRec ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Nombre de Reclamation
+                    </h6>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Area chart</h4>
-                    <canvas id="areaChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Doughnut chart</h4>
-                    <canvas id="doughnutChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
+            <div>
+            <div id="container2" style="height: 400%"></div>
+            <input type="hidden" id="tunis" value="<?php echo $tunis ?>">
+            <input type="hidden" id="ariana" value="<?php echo $ariana ?>">
+            <input type="hidden" id="sfax" value="<?php echo $sfax ?>">
+            <input type="hidden" id="bizerte" value="<?php echo $bizerte ?>">
+            <input type="hidden" id="hammamet" value="<?php echo $hammamet ?>">
+            <input type="hidden" id="djerba" value="<?php echo $djerba ?>">
+             <script type="text/javascript">
+                var dom2 = document.getElementById('container2');
+                var tunis = document.getElementById('tunis');
+                var ariana = document.getElementById('ariana');
+                var sfax = document.getElementById('sfax');
+                var bizerte = document.getElementById('bizerte');
+                var hammamet = document.getElementById('hammamet');
+                var djerba = document.getElementById('djerba');
+                var myChart2 = echarts.init(dom2, 'dark', {
+                  renderer: 'canvas',
+                  useDirtyRect: false
+                });
+                var app2 = {};
+                
+                var option2;
+
+                option2 = {
+              xAxis: {
+                type: 'category',
+                data: ['Tunis', 'Ariana', 'Sfax', 'Bizerte', 'Hammamet', 'Djerba', 'Autres']
+              },
+              yAxis: {
+                type: 'value'
+              },
+              series: [
+                {
+                  data: [tunis,ariana,sfax,bizerte,hammamet,djerba, 0],
+                  type: 'line'
+                }
+              ]
+            };
+
+                if (option2 && typeof option2 === 'object') {
+                  myChart2.setOption(option2);
+                }
+
+                window.addEventListener('resize', myChart2.resize);
+              </script>
             </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Pie chart</h4>
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Scatter chart</h4>
-                    <canvas id="scatterChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <div id="container" style="height: 400%"></div>
+              <input type="hidden" id="connecter" value="<?php echo $connecter ?>">
+              <input type="hidden" id="nonconnecter" value="<?php echo $nonconnecter ?>">
+                <script type="text/javascript">
+                  var dom = document.getElementById('container');
+                  var con = document.getElementById('connecter');
+                  var ncon = document.getElementById('nonconnecter');
+                  var myChart = echarts.init(dom, 'dark', {
+                    renderer: 'canvas',
+                    useDirtyRect: false
+                  });
+                  var app = {};
+                  
+                  var option;
+
+                  option = {
+                tooltip: {
+                  trigger: 'item'
+                },
+                legend: {
+                  top: '5%',
+                  left: 'center'
+                },
+                series: [
+                  {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                      borderRadius: 10,
+                      borderColor: '#fff',
+                      borderWidth: 2
+                    },
+                    label: {
+                      show: false,
+                      position: 'center'
+                    },
+                    emphasis: {
+                      label: {
+                        show: true,
+                        fontSize: '40',
+                        fontWeight: 'bold'
+                      }
+                    },
+                    labelLine: {
+                      show: false
+                    },
+                    data: [
+                      { value: 13, name: 'Non Connecter' },
+                      { value: 1, name: 'Connecter' }
+                    ]
+                  }
+                ]
+              };
+
+                  if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                  }
+
+                  window.addEventListener('resize', myChart.resize);
+              </script>
             </div>
           </div>
           <!-- content-wrapper ends -->
@@ -237,3 +408,7 @@
     <!-- End custom js for this page -->
   </body>
 </html>
+
+
+
+  

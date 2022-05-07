@@ -1,12 +1,21 @@
 <?php 
 include_once('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
 include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+include_once('C:/xampp/htdocs/E_Beauty/Controller/notificationC.php'); 
 
     $userdb = new UserC();  
     $Livdb = new LivreurC();  
     $Client = $userdb->afficherUserBDD();      
     $livreur = $Livdb->afficherLivBDD();
     //var_dump($resultat);
+    if(isset($_GET['rechercher'])) {
+      if(!empty($_GET['rechercher'])){
+      $rechercher = htmlspecialchars($_GET['rechercher']);
+      $Client = $userdb->rechercherUserBDD($rechercher);
+      $livreur = $Livdb->rechercherLivBDD($rechercher);
+      //header("location:index.php");
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -135,6 +144,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
               </span>
               <span class="menu-title">TABLEAU DE BORD</span>
             </a>
+            
           </li>
           <li class="nav-item menu-items">
             <a class="nav-link" href="index.php">
@@ -191,26 +201,21 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="" method="GET" name="FormRechercher">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Search products"
+                    placeholder="Rechercher"
+                    name="rechercher"
+                    id="rechercher"
                   />
+                  <button type="submit" class="btn btn-primary mr-2">
+                        Rechercher
+                      </button>
                 </form>
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
-              </li>
               <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="#">
                   <i class="mdi mdi-view-grid"></i>
@@ -227,59 +232,61 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
                 </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
-                >
-                  
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                </div>
               </li>
               <li class="nav-item dropdown border-left">
-                
+                <a
+                  class="nav-link count-indicator dropdown-toggle"
+                  id="notificationDropdown"
+                  href="#"
+                  data-toggle="dropdown"
+                >
+                  <i class="mdi mdi-bell"></i>
+                  <?php
+                    $query = "SELECT * from `notifications` where `status` = 'unread' order by `date` DESC";
+                    if(count(fetchAll($query))>0){
+                    ?>
+                    <span class="badge badge-danger"><?php echo count(fetchAll($query)); ?></span>
+                  <?php
+                    }
+                  ?>
+                </a>
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                   aria-labelledby="notificationDropdown"
                 >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Update Tableau de Bord
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0">Notifications</h6>
+                 <div class="dropdown-divider"></div>
+                  <?php
+                  $query = "SELECT * from `notifications` order by `date` DESC";
+                  if(count(fetchAll($query))>0){
+                      foreach(fetchAll($query) as $i){
+                  ?>
+                    <a style ="
+                         <?php
+                            if($i['status']=='unread'){
+                                echo "font-weight:bold; color:blue;";
+                            }
+                         ?>
+                         " 
+                         class="dropdown-item preview-item"
+                         href="viewNotif.php?id=<?php echo $i['id'] ?>">
+                         <small><i><p class="preview-subject ellipsis mb-1"><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></p></i></small><br/>
+                        <?php 
+                        if($i['type']=='reclamation'){ ?> 
+                          <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a fais une nouvelle reclamation."; ?></p>
+                        <?php }else if($i['type']=='inscription'){ ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a créer un compte."; ?></p>
+                       <?php }
+                        ?>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <?php
+                      } ?>
+                      <?php }  
+                      else { ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo "No Records yet."; ?></p>
+                      <?php }
+                          ?>
                   <p class="p-3 mb-0 text-center">See all notifications</p>
                 </div>
               </li>
@@ -326,7 +333,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
+                      <p class="preview-subject mb-1"><a href="http://localhost/E_Beauty/View/Back/deconnexion.php">Se deconnecter</a></p>
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
@@ -418,8 +425,8 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                         </thead>
                         <tbody>
                           <tr>
-                              <?php 
-                              foreach($Client as $Client) { ?>
+                            <?php 
+                              foreach($Client as $Cl) { ?>
                               <tr>
                                 <td>
                                   <div class="form-check form-check-muted m-0">
@@ -437,23 +444,23 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                     alt="image"
                                   />
                                 </td>
-                                  <td><?php Echo $Client['USERID'];?></td>
-                                  <td><?php Echo $Client['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Client['LASTNAME'];?></td>
-                                  <td><?php Echo $Client['USERNAME'];?></td>
-                                  <td><?php Echo $Client['EMAIL'];?></td>
-                                  <td><?php Echo $Client['PASSWORD'];?></td>
-                                  <td><?php Echo $Client['VILLE'];?></td>
+                                  <td><?php Echo $Cl['USERID'];?></td>
+                                  <td><?php Echo $Cl['FIRSTNAME'];?></td>
+                                  <td><?php Echo $Cl['LASTNAME'];?></td>
+                                  <td><?php Echo $Cl['USERNAME'];?></td>
+                                  <td><?php Echo $Cl['EMAIL'];?></td>
+                                  <td><?php Echo $Cl['PASSWORD'];?></td>
+                                  <td><?php Echo $Cl['VILLE'];?></td>
                                   <td>
                                   <div>
                                     <td>
                                     <form method="POST" action="form_modifier.php">
                                       <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                      <input type="hidden" value=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?> name="USERID">
+                                      <input type="hidden" value=<?php echo $Cl['USERID']; $_SESSION["Type"]="Client";?> name="USERID">
                                     </form>
                                     </td>
                                     <td>
-                                      <a href="supprimerClient.php?USERID=<?php echo $Client['USERID']; $_SESSION["Type"]="Client";?>" class="btn-outline-danger">Supprimer</a>
+                                      <a href="supprimerClient.php?USERID=<?php echo $Cl['USERID']; $_SESSION["Type"]="Client";?>" class="btn-outline-danger">Supprimer</a>
                                     </td>
                                   </div> 
                               </tr>
@@ -543,7 +550,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                         <tbody>
                           <tr>
                               <?php 
-                              foreach($livreur as $Client) { ?>
+                              foreach($livreur as $Liv) { ?>
                               <tr>
                                 <td>
                                   <div class="form-check form-check-muted m-0">
@@ -561,22 +568,22 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                     alt="image"
                                   />
                                 </td>
-                                  <td><?php Echo $Client['LIVID'];?></td>
-                                  <td><?php Echo $Client['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Client['LASTNAME'];?></td>
-                                  <td><?php Echo $Client['USERNAME'];?></td>
-                                  <td><?php Echo $Client['EMAIL'];?></td>
-                                  <td><?php Echo $Client['PASSWORD'];?></td>
-                                  <td><?php Echo $Client['ZONELIV'];?></td>
+                                  <td><?php Echo $Liv['LIVID'];?></td>
+                                  <td><?php Echo $Liv['FIRSTNAME'];?></td>
+                                  <td><?php Echo $Liv['LASTNAME'];?></td>
+                                  <td><?php Echo $Liv['USERNAME'];?></td>
+                                  <td><?php Echo $Liv['EMAIL'];?></td>
+                                  <td><?php Echo $Liv['PASSWORD'];?></td>
+                                  <td><?php Echo $Liv['ZONELIV'];?></td>
                                   <td>
                                   <div>
                                     <form method="POST" action="form_modifier_Livreur.php">
                                       <input class="btn-outline-warning" type="submit" name="Modifier" value="Modifier">
-                                      <input type="hidden" value=<?php echo $Client['LIVID'];?> name="LIVID">
+                                      <input type="hidden" value=<?php echo $Liv['LIVID'];?> name="LIVID">
                                     </form>
                                     </td>
                                     <td>
-                                      <a href="supprimerLivreur.php?LIVID=<?php echo $Client['LIVID'];?>" class="btn-outline-danger">Supprimer</a>
+                                      <a href="supprimerLivreur.php?LIVID=<?php echo $Liv['LIVID'];?>" class="btn-outline-danger">Supprimer</a>
                                     </td>
                                   </div>
                               </tr>

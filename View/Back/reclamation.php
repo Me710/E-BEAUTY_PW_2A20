@@ -1,12 +1,23 @@
 <?php 
 include_once('C:/xampp/htdocs/E_Beauty/Controller/reclamationC.php'); 
-include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php"); 
+include_once('C:/xampp/htdocs/E_Beauty/Controller/notificationC.php'); 
 
+    $user = null;
     $userdb = new ReclamationC();  
-    $Livdb = new LivreurC();  
+    $Clientdb = new UserC();  
     $Reclams = $userdb->afficherReclamationBDD();      
-    $livreur = $Livdb->afficherLivBDD();
+    $client = $Clientdb->afficherUserBDD();
+    $newstatut="Retirer";
     //var_dump($resultat);
+    if(isset($_POST['useridtem']) && !empty($_POST['useridtem'])){
+      $user=$Clientdb->recupererUser($_POST['useridtem']);
+      if($user['STATUT_TEM']=="Retirer"){
+        $newstatut="Publier";
+      }
+      $Clientdb->updateStatutTem($_POST['useridtem'],$newstatut);
+      header('location:reclamation.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -128,6 +139,15 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
+                    <li class="nav-item menu-items">
+            <a class="nav-link" href="chartjs.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">TABLEAU DE BORD</span>
+            </a>
+            
+          </li>
           <li class="nav-item menu-items">
             <a class="nav-link" href="index.php">
               <span class="menu-icon">
@@ -158,14 +178,6 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                 <i class="mdi mdi-speedometer"></i>
               </span>
               <span class="menu-title">RECLAMATIONS</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="chartjs.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">STATISTIQUES</span>
             </a>
           </li>
         </ul>
@@ -227,60 +239,63 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
                 </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
-                >
-                  
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                </div>
               </li>
               <li class="nav-item dropdown border-left">
-                
+                <a
+                  class="nav-link count-indicator dropdown-toggle"
+                  id="notificationDropdown"
+                  href="#"
+                  data-toggle="dropdown"
+                >
+                  <i class="mdi mdi-bell"></i>
+                  <?php
+                    $query = "SELECT * from `notifications` where `status` = 'unread' order by `date` DESC";
+                    if(count(fetchAll($query))>0){
+                    ?>
+                    <span class="badge badge-danger"><?php echo count(fetchAll($query)); ?></span>
+                  <?php
+                    }
+                  ?>
+                </a>
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                   aria-labelledby="notificationDropdown"
                 >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Update Tableau de Bord
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Voir toutes les notifications</p>
+                <h6 class="p-3 mb-0">Notifications</h6>
+                 <div class="dropdown-divider"></div>
+                  <?php
+                  $query = "SELECT * from `notifications` order by `date` DESC";
+                  if(count(fetchAll($query))>0){
+                      foreach(fetchAll($query) as $i){
+                  ?>
+                    <a style ="
+                         <?php
+                            if($i['status']=='unread'){
+                                echo "font-weight:bold; color:blue;";
+                            }
+                         ?>
+                         " 
+                         class="dropdown-item preview-item"
+                         href="viewNotif.php?id=<?php echo $i['id'] ?>">
+                         <small><i><p class="preview-subject ellipsis mb-1"><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></p></i></small><br/>
+                        <?php 
+                        if($i['type']=='reclamation'){ ?> 
+                            <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a fais une nouvelle reclamation."; ?></p>
+                        <?php }else if($i['type']=='inscription'){ ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a créer un compte."; ?></p>
+ 
+                       <?php }
+                        ?>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <?php
+                      } ?>
+                      <?php }  
+                      else { ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo "No Records yet."; ?></p>
+                      <?php }
+                          ?>
+                  <p class="p-3 mb-0 text-center">See all notifications</p>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -326,7 +341,7 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Se Deconnecter</p>
+                      <p class="preview-subject mb-1"><a href="http://localhost/E_Beauty/View/Back/deconnexion.php">Se deconnecter</a></p>
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
@@ -397,16 +412,14 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>
-                              <div class="form-check form-check-muted m-0"> 
-                              </div>
-                            </th>
+                            <th> </th>
                             <th>RECID</th>
-                            <th>FIRSTNAME</th>
+                            <th>DATE</th>
                             <th>LASTNAME</th>
-                            <th>EMAIL</th>
-                            <th>VILLE</th>
                             <th>MESSAGE</th>
+                            <th>EMAIL</th>
+                            <th>STATUT</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -425,15 +438,18 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                                   </div>
                                 </td>
                                   <td><?php Echo $Reclams['TEMID'];?></td>
-                                  <td><?php Echo $Reclams['FIRSTNAME'];?></td>
+                                  <td><?php Echo $Reclams['DATE_R'];?></td>
                                   <td><?php Echo $Reclams['LASTNAME'];?></td>
                                   <td><?php Echo $Reclams['EMAIL'];?></td>
-                                  <td><?php Echo $Reclams['VILLE'];?></td>
                                   <td><?php Echo $Reclams['MESSAGE'];?></td>
+                                  <td><?php Echo $Reclams['EMAIL'];?></td>
+                                  <td><input class="btn-outline-danger" name="statut" value="<?php Echo $Reclams['STATUT'];?>"/></td>
+                                  <td><form method="POST" action="mail.php">
+                                      <input class="btn-outline-warning" type="submit" name="Traiter" value="Traitement">
+                                      <input type="hidden" value=<?php echo $Reclams['USERID'];?> name="USERID">
+                                  </form></td>                                  
                               </tr>
-                            <!--</td>-->
-                              <?php }?>
-                            <!--</td>-->
+                              <?php } ?>
                           </tr>
                         </tbody>
                       </table>
@@ -474,44 +490,27 @@ include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php');
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>
-                              <div class="form-check form-check-muted m-0"> 
-                              </div>
-                            </th>
-                            <th>      </th>
-                            <th>LIVID</th>
-                            <th>FIRSTNAME</th>
-                            <th>LASTNAME</th>
+                            <th>USERID</th>
                             <th>USERNAME</th>
-                            <th>EMAIL</th>
+                            <th>TEMOIGNAGE</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                               <?php 
-                              foreach($livreur as $Reclams) { ?>
+                              foreach($client as $Tems) { ?>
                               <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                      />
-                                    </label>
-                                  </div>
-                                </td>
-                                  <td><?php Echo $Reclams['LIVID'];?></td>
-                                  <td><?php Echo $Reclams['FIRSTNAME'];?></td>
-                                  <td><?php Echo $Reclams['LASTNAME'];?></td>
-                                  <td><?php Echo $Reclams['USERNAME'];?></td>
-                                  <td><?php Echo $Reclams['EMAIL'];?></td>
-                                  <td><?php Echo $Reclams['PASSWORD'];?></td>
-                                  <td><?php Echo $Reclams['ZONELIV'];?></td>
+                                  <td><?php Echo $Tems['USERID'];?></td>
+                                  <td><?php Echo $Tems['USERNAME'];?></td>
+                                  <td><?php Echo $Tems['TEMOIGNAGE'];?></td>
+                                  <td><form method="POST" action="">
+                                      <input type="hidden" name="useridtem" value="<?php echo $Tems['USERID']?>">
+                                      <input class="btn-outline-success" type="submit" name="PublierTemoignage" value="<?php echo $Tems['STATUT_TEM'] ?>">
+                                      </form></td>
                               </tr>
-                            <!--</td>-->
+
                               <?php }?>
-                            <!--</td>-->
                           </tr>
                         </tbody>
                       </table>

@@ -2,8 +2,13 @@
 session_start();
 
     include_once('C:/xampp/htdocs/E_Beauty/Controller/reclamationC.php'); 
-    
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/userC.php'); 
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/notificationC.php');
+
+    $userdb = new UserC();    
+    $Client = $userdb->afficherUserTem();
     $error = "";
+
 
     // create User
     $Reclams = null;
@@ -20,9 +25,13 @@ session_start();
                 $_SESSION['VILLE'],
                 $_POST['Message']
             );
-            
-            $ReclamC->ajouterReclamation($Reclams);
-            header('Location:index.php');
+              $message = $_POST['Message'];
+              $name= $_SESSION['LASTNAME'];
+              $ReclamC->ajouterReclamation($Reclams);
+              $query ="INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', 'reclamation', '$message', 'unread', CURRENT_TIMESTAMP)";
+              if(performQuery($query)){
+                  header("location:index_profil.php");
+              }
         }
         else
             $error = "Missing information";
@@ -542,6 +551,8 @@ session_start();
             <div class="row d-md-flex justify-content-center">
               <div class="col-md-8 ftco-animate">
                 <div class="carousel-testimony owl-carousel">
+                  <?php 
+                  foreach($Client as $Cl) { ?>
                   <div class="item">
                     <div class="testimony-wrap text-center">
                       <div
@@ -556,92 +567,17 @@ session_start();
                       </div>
                       <div class="text">
                         <p class="mb-5">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts. Separated they live in Bookmarksgrove
-                          right at the coast of the Semantics, a large language
-                          ocean.
+                          <?php echo $Cl['TEMOIGNAGE'] ?>
                         </p>
-                        <p class="name">Mike Lewis</p>
-                        <span class="position">Architect</span>
+                        <p class="name"><?php echo $Cl['FIRSTNAME']; echo "  " ;echo $Cl['LASTNAME'] ?></p>
+                        <span class="position"><?php echo $Cl['USERNAME'] ?></span>
                       </div>
                     </div>
                   </div>
-                  <div class="item">
-                    <div class="testimony-wrap text-center">
-                      <div
-                        class="user-img mb-5"
-                        style="background-image: url(images/person_2.jpg)"
-                      >
-                        <span
-                          class="quote d-flex align-items-center justify-content-center"
-                        >
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text">
-                        <p class="mb-5">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts. Separated they live in Bookmarksgrove
-                          right at the coast of the Semantics, a large language
-                          ocean.
-                        </p>
-                        <p class="name">Dennis Green</p>
-                        <span class="position">Architect</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="testimony-wrap text-center">
-                      <div
-                        class="user-img mb-5"
-                        style="background-image: url(images/person_3.jpg)"
-                      >
-                        <span
-                          class="quote d-flex align-items-center justify-content-center"
-                        >
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text">
-                        <p class="mb-5">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts. Separated they live in Bookmarksgrove
-                          right at the coast of the Semantics, a large language
-                          ocean.
-                        </p>
-                        <p class="name">Dennis Green</p>
-                        <span class="position">Architect</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="testimony-wrap text-center">
-                      <div
-                        class="user-img mb-5"
-                        style="background-image: url(images/person_3.jpg)"
-                      >
-                        <span
-                          class="quote d-flex align-items-center justify-content-center"
-                        >
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text">
-                        <p class="mb-5">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts. Separated they live in Bookmarksgrove
-                          right at the coast of the Semantics, a large language
-                          ocean.
-                        </p>
-                        <p class="name">Dennis Green</p>
-                        <span class="position">Customer</span>
-                      </div>
-                    </div>
-                  </div>
+
+                  <?php } ?> 
+                  
+                
                 </div>
               </div>
             </div>

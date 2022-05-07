@@ -130,6 +130,21 @@
               die('Erreur: '.$e->getMessage());
             }
           }
+          function rechercherLivBDD($rechercher) {
+            $pdo = Config::getConnexion();
+            try{
+              $query= $pdo->prepare(
+                'select * from livreur where firstname like "%'.$rechercher.'%" order by livid DESC'
+              );
+              $query->execute();
+              $result = $query->fetchALL();
+              return $result;
+            } catch(PDOException $e) {
+              $e->getMessage();  
+            }
+          }
+
+          
           
   }
 

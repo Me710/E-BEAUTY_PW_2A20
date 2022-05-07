@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once("config_google.php");
+require_once ('autoload.php');
 include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php");
 include_once("C:/xampp/htdocs/E_Beauty/Controller/adminC.php");
+
 
 if (isset($_SESSION['access_token'])) {
 		header('Location: login.php');
@@ -10,44 +12,156 @@ if (isset($_SESSION['access_token'])) {
 	}
 	$loginURL = $gClient->createAuthUrl();
 
-
-$message="test";
+$error="";
 
 $userC= new UserC();
 $user= new AdminC();
 /*$admin = new admin("nebotchristian6@gmail.com",md5(""));
-$user->ajouterAdmin($admin);*/
+$user->ajouterAdmin($admin);
+type
+0 -> email ou mot de passe incorrecte
+1 -> 
+*/
 
 if(isset($_POST["email"]) &&  
    isset($_POST["password"])) {
-     $message=$userC->connexionUser($_POST["email"],md5($_POST['password']));
+     if(!empty($_POST["email"]) &&  
+          !empty($_POST["password"])) {
+            if(isset($_POST['g-recaptcha-response'])) {
+                    $recaptcha = new \ReCaptcha\ReCaptcha('6LdxAakfAAAAAF7ciYGhj1Gpv1S8y5V3gVe5NVgO');
+                    $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
+                  if ($resp->isSuccess()) {
+                        //var_dump('Captcha Valide');
+                        $message=$userC->connexionUser($_POST["email"],md5($_POST['password']));
+                      if($message!='pseudo ou mot de passe est incorrect'){
+                        echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
+                        header('Location:http://localhost/E_Beauty/View/Front/index_profil.php');
+                      } 
+                      else{
+                        $message='pseudo ou le mot de passe est incorrect';
+                        $error=$message;
+                        echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
+                        $message2=$user->connexionAdmin($_POST["email"],md5($_POST['password']));
+                          if($message2!='pseudo ou mot de passe est incorrect'){
+                            header('Location:http://localhost/E_Beauty/View/Back/index.php');   
+                          }
+                          else{
+                            $message2='pseudo ou le mot de passe est incorrect';
+                            $error=$message2;
+                             //header('Location:login.php');
+                            }
+                      }
+                      
+        } 
+        else {
+            $errors = $resp->getErrorCodes();
+            var_dump('Captcha Invalide');
+            var_dump($errors);
+            
+        }
+      }
+      else{
+            var_dump('Captcha non rempli');
+        }
+    }
+    else{
+          $message='veuillez remplir les champs pour se connecter';
+          echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
+    }
+                
+  }
+  else{
+          $message='les champs ne sont pas biens definies';
+          echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
+  } 
+    
 
-     if($message!='pseudo ou mot de passe est incorrect'){
-       echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
-       header('Location:http://localhost/E_Beauty/View/Front/index_profil.php');
-     } 
-     else{
-       $message='pseudo ou le mot de passe est incorrect';
-       echo '<script type="text/javascript">window.alert("'.$message.'");</script>'; 
-       $message2=$user->connexionAdmin($_POST["email"],md5($_POST['password']));
-              if($message2!='pseudo ou mot de passe est incorrect'){
-              header('Location:http://localhost/E_Beauty/View/Back/index.php');   
-              }
-            else{
-              $message2='pseudo ou le mot de passe est incorrect';
-              header('Location:login.php');
-            }
-     }
-     
-}
-else{
-  //$message='Missing information';
-  //echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
+?>
+
+<?php
+/* 
+| Developed by: Tauseef Ahmad
+| Last Upate: 13-12-2020 04:46 PM
+| Facebook: www.facebook.com/ahmadlogs
+| Twitter: www.twitter.com/ahmadlogs
+| YouTube: https://www.youtube.com/channel/UCOXYfOHgu-C-UfGyDcu5sYw/
+| Blog: https://ahmadlogs.wordpress.com/
+ */ 
+ 
+require_once 'config_facebook.php';
+
+$permissions = ['email']; //optional
+
+if (isset($accessToken))
+{
+  if (!isset($_SESSION['facebook_access_token'])) 
+  {
+    //get short-lived access token
+    $_SESSION['facebook_access_token'] = (string) $accessToken;
+    
+    //OAuth 2.0 client handler
+    $oAuth2Client = $fb->getOAuth2Client();
+    
+    //Exchanges a short-lived access token for a long-lived one
+    $longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
+    $_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
+    
+    //setting default access token to be used in script
+    $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+  } 
+  else 
+  {
+    $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+  }
+  
+  
+  //redirect the user to the index page if it has $_GET['code']
+  if (isset($_GET['code'])) 
+  {
+    header('Location: ./');
+  }
+  
+  
+  try {
+    $fb_response = $fb->get('/me?fields=name,first_name,last_name,email');
+    $fb_response_picture = $fb->get('/me/picture?redirect=false&height=200');
+    
+    $fb_user = $fb_response->getGraphUser();
+    $picture = $fb_response_picture->getGraphUser();
+    
+    $_SESSION['USERID'] = $fb_user->getProperty('id');
+    $_SESSION['FIRSTNAME'] = $fb_user->getProperty('name');
+    $_SESSION['EMAIL'] = $fb_user->getProperty('email');
+    $_SESSION['fb_user_pic'] = $picture['url'];
+    
+    
+  } catch(Facebook\Exceptions\FacebookResponseException $e) {
+    echo 'Facebook API Error: ' . $e->getMessage();
+    session_destroy();
+    // redirecting user back to app login page
+    header("Location: ./");
+    exit;
+  } catch(Facebook\Exceptions\FacebookSDKException $e) {
+    echo 'Facebook SDK Error: ' . $e->getMessage();
+    exit;
+  }
+} 
+else 
+{ 
+  // replace your website URL same as added in the developers.Facebook.com/apps e.g. if you used http instead of https and you used
+  $fb_login_url = $fb_helper->getLoginUrl('http://localhost/facebook1/', $permissions);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -56,6 +170,13 @@ else{
     />
     <title>E - Beauty Login</title>
     <!-- plugins:css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <link href="<?php echo BASE_URL; ?>css/style.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="assets/vendors/mdi/css/materialdesignicons.min.css"
@@ -159,23 +280,25 @@ else{
                     class="form-group d-flex align-items-center justify-content-between"
                   >
                   </div>
+                  <div class="g-recaptcha" data-sitekey="6LdxAakfAAAAAHU0C03Z9bT6_q1LCqiwpYozMOC2"></div>
+                  <p class="error"><?php echo $error; ?></p>
                   <div class="text-center">
                     <button
                       type="submit"
                       class="btn btn-primary btn-block enter-btn"
                     >
-                      Login
+                      Se Connecter
                     </button>
                   </div>
-                  <div class="d-flex">
-                    <button class="btn btn-facebook mr-2 col">
-                      <i class="mdi mdi-facebook"></i> Facebook
-                    </button>
-                    <!--<button class="btn btn-google col" onclick="window.location = '<?php echo $loginURL ?>';">
-                      <i class="mdi mdi-google-plus"></i> Google plus
-                    </button>-->
+                  <div class="login-form">
+                  <form action="" method="post">   
+                    <div class="text-center social-btn">
+                      <a href="<?php echo $fb_login_url;?>" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Se connecter avec<b>Facebook</b></a>
+                    </div>  
+                  </form>
+                  <div class="text-center">
                     <input type="button" onclick="window.location = '<?php echo $loginURL ?>';" 
-                    value="Log In With Google" class="btn btn-danger">
+                    value="Se Connecter avec Google" class="btn btn-danger">
                   </div>
                   <p class="sign-up">
                     Avez vous déjà un compte ?<a

@@ -1,6 +1,7 @@
 <?php
     include_once("C:/xampp/htdocs/E_Beauty/Controller/userC.php");
-    include_once("C:/xampp/htdocs/E_Beauty/Controller/villeC.php"); 
+    include_once("C:/xampp/htdocs/E_Beauty/Controller/villeC.php");
+    include_once("C:/xampp/htdocs/E_Beauty/Controller/notificationC.php"); 
     
     
     $error = "";
@@ -36,8 +37,13 @@
                 $Password,
                 $_POST['Ville']
             );
-            $ClientC->ajouterUser($Client);
-            header('Location:login.php');
+              $message = $_POST['a créer un compte'];
+              $name= $_POST['LastName'];
+              $ClientC->ajouterUser($Client);
+              $query ="INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', 'inscription', '$message', 'unread', CURRENT_TIMESTAMP)";
+              if(performQuery($query)){
+                  header('Location:login.php');
+              } 
         }
         else
             $error = "Missing information";

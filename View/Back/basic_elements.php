@@ -1,6 +1,8 @@
 <?php
     include_once('C:/xampp/htdocs/E_Beauty/Controller/villeC.php'); 
     include_once('C:/xampp/htdocs/E_Beauty/Controller/LivreurC.php'); 
+    include_once('C:/xampp/htdocs/E_Beauty/Controller/notificationC.php'); 
+
     
     $error = "";
 
@@ -310,62 +312,6 @@
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
                 </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
-                >
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face4.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Mark send you a message
-                      </p>
-                      <p class="text-muted mb-0">1 Minutes ago</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Cregh send you a message
-                      </p>
-                      <p class="text-muted mb-0">15 Minutes ago</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="assets/images/faces/face3.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Profile picture updated
-                      </p>
-                      <p class="text-muted mb-0">18 Minutes ago</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
-                </div>
               </li>
               <li class="nav-item dropdown border-left">
                 <a
@@ -375,52 +321,53 @@
                   data-toggle="dropdown"
                 >
                   <i class="mdi mdi-bell"></i>
-                  <span class="count bg-danger"></span>
+                  <?php
+                    $query = "SELECT * from `notifications` where `status` = 'unread' order by `date` DESC";
+                    if(count(fetchAll($query))>0){
+                    ?>
+                    <span class="badge badge-danger"><?php echo count(fetchAll($query)); ?></span>
+                  <?php
+                    }
+                  ?>
                 </a>
                 <div
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                   aria-labelledby="notificationDropdown"
                 >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Event today</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Just a reminder that you have an event today
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">Update dashboard</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0">Notifications</h6>
+                 <div class="dropdown-divider"></div>
+                  <?php
+                  $query = "SELECT * from `notifications` order by `date` DESC";
+                  if(count(fetchAll($query))>0){
+                      foreach(fetchAll($query) as $i){
+                  ?>
+                    <a style ="
+                         <?php
+                            if($i['status']=='unread'){
+                                echo "font-weight:bold; color:blue;";
+                            }
+                         ?>
+                         " 
+                         class="dropdown-item preview-item"
+                         href="viewNotif.php?id=<?php echo $i['id'] ?>">
+                         <small><i><p class="preview-subject ellipsis mb-1"><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></p></i></small><br/>
+                       <?php 
+                        if($i['type']=='reclamation'){ ?> 
+                            <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a fais une nouvelle reclamation."; ?></p>
+                        <?php }else if($i['type']=='inscription'){ ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo ucfirst($i['name'])." a créer un compte."; ?></p>
+ 
+                       <?php }
+                        ?>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <?php
+                      } ?>
+                      <?php }  
+                      else { ?>
+                          <p class="preview-subject ellipsis mb-1"><?php echo "No Records yet."; ?></p>
+                      <?php }
+                          ?>
                   <p class="p-3 mb-0 text-center">See all notifications</p>
                 </div>
               </li>
@@ -467,7 +414,7 @@
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
+                      <p class="preview-subject mb-1"><a href="http://localhost/E_Beauty/View/Back/deconnexion.php">Se deconnecter</a></p>
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>

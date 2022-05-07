@@ -125,11 +125,6 @@
                   </p>
                 </div>
               </div>
-            <div id="darkmodemenu" class="ws-grey w3-hide-small" onmouseover="mouseoverdarkicon()" onmouseout="mouseoutofdarkicon()">
-                <input id="radio_darkpage" type="checkbox" name="radio_theme_mode" onclick="click_darkpage()"><label for="radio_darkpage"> Dark mode</label>
-                <br>
-                <input id="radio_darkcode" type="checkbox" name="radio_theme_mode" onclick="click_darkcode()"><label for="radio_darkcode"> Dark code</label>
-            </div>
             </div>
           </div>
         </section>
@@ -1060,38 +1055,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-    <script>
-    function mouseoutofdarkicon() {
-      var a = document.getElementById("darkmodemenu");
-      a.style.top = "5px";
-    }
-    function click_darkpage() {
-      var b = document.getElementById("radio_darkpage");
-      if (b.checked) {
-        document.body.className += " darkpagetheme";
-        document.body.className = document.body.className.replace("  ", " ");    
-        localStorage.setItem("preferredpagemode", "dark");
-        document.getElementById("wavepath").style.fill = "rgb(13,23,33)";
-        
-      } else {
-        document.body.className = document.body.className.replace("darkpagetheme", "");
-        document.body.className = document.body.className.replace("  ", " ");    
-        localStorage.setItem("preferredpagemode", "light");
-        document.getElementById("wavepath").style.fill = "#282A35";    
-      }
-    }
-    function click_darkcode() {
-      var a = document.getElementById("radio_darkcode");
-      if (a.checked) {
-        document.body.className += " darktheme";
-        document.body.className = document.body.className.replace("  ", " ");    
-        localStorage.setItem("preferredmode", "dark");
-      } else {
-        document.body.className = document.body.className.replace("darktheme", "");
-        document.body.className = document.body.className.replace("  ", " ");
-        localStorage.setItem("preferredmode", "light");
-      }
-    }
-    </script>
+    
   </body>
 </html>
