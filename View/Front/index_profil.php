@@ -103,15 +103,9 @@ session_start();
                   <li class="active">
                     <a href="index.html"><span>Home</span></a>
                   </li>
-                  <li>
-                    <a href="about.html"><span>About</span></a>
-                  </li>
-                  <li>
-                    <a href="model.html"><span>Models</span></a>
-                  </li>
-                  <li>
-                    <a href="blog.html"><span>Blog</span></a>
-                  </li>
+                   <li><a href="about.php"><span>About</span></a></li>
+                   <li><a href="model.php"><span>Models</span></a></li>
+                   <li><a href="blog.php"><span>Blog</span></a></li>
                   <li>
                     <a href="contact.html"><span>Contact</span></a>
                   </li>
@@ -236,12 +230,12 @@ session_start();
                     style="background-image: url(images/image_2.jpg)"
                   >
                     <div class="name text-center">
-                      <h3><a href="model-single.html">products</a></h3>
+                      <h3><a href="model.php">PRODUITS</a></h3>
                     </div>
                     <div class="text text-center">
                       <h3>
-                        <a href="model-single.html"
-                          >products<br /><span>management</span></a
+                        <a href="model.php"
+                          >NOS<br /><span>PRODUITS</span></a
                         >
                       </h3>
                       <div class="d-flex models-info">
@@ -360,11 +354,11 @@ session_start();
                     style="background-image: url(images/image_6.jpg)"
                   >
                     <div class="name text-center">
-                      <h3><a href="model-single.html">blogs</a></h3>
+                      <h3><a href="blog.php">blogs</a></h3>
                     </div>
                     <div class="text text-center">
                       <h3>
-                        <a href="model-single.html"
+                        <a href="blog.php"
                           >visit<br /><span>our blogs</span></a
                         >
                       </h3>
@@ -517,7 +511,7 @@ session_start();
               <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry bg-dark align-self-stretch">
                   <a
-                    href="blog-single.html"
+                    href="blog.php"
                     class="block-20"
                     style="background-image: url('images/image_3.jpg')"
                   >

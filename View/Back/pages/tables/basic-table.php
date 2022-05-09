@@ -30,15 +30,15 @@
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
-          <a class="sidebar-brand brand-logo" href="../../index.php"
-            ><img src="../../assets/images/logo.svg" alt="logo"
+          <a class="sidebar-brand brand-logo" href="http://localhost/E_Beauty/View/Back/index.php">
+            <img src="assets/images/logo.png" alt="logo"
           /></a>
-          <a class="sidebar-brand brand-logo-mini" href="../../index.php"
-            ><img src="../../assets/images/logo-mini.svg" alt="logo"
+          <a class="sidebar-brand brand-logo-mini" href="http://localhost/E_Beauty/View/Back/index.php"
+            ><img src="assets/images/logo-mini.svg" alt="logo"
           /></a>
         </div>
         <ul class="nav">
@@ -48,14 +48,14 @@
                 <div class="count-indicator">
                   <img
                     class="img-xs rounded-circle"
-                    src="../../assets/images/faces/face15.jpg"
+                    src="assets/images/faces/face15.jpg"
                     alt=""
                   />
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                  <span>Gold Member</span>
+                  <h5 class="mb-0 font-weight-normal">Christian NEBOT</h5>
+                  <span>ADMINS</span>
                 </div>
               </div>
               <a href="#" id="profile-dropdown" data-toggle="dropdown"
@@ -97,11 +97,6 @@
                       <i class="mdi mdi-calendar-today text-success"></i>
                     </div>
                   </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      To-do list
-                    </p>
-                  </div>
                 </a>
               </div>
             </div>
@@ -110,141 +105,68 @@
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../index.php">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/chartjs.php">
               <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
+                <i class="mdi mdi-chart-bar"></i>
               </span>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">TABLEAU DE BORD</span>
             </a>
+            
           </li>
           <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              data-toggle="collapse"
-              href="#ui-basic"
-              aria-expanded="false"
-              aria-controls="ui-basic"
-            >
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
-              <span class="menu-title">Basic UI Elements</span>
+              <span class="menu-title">GESTION TABLES</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="../../pages/ui-features/buttons.php"
-                    >Buttons</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="../../pages/ui-features/dropdowns.php"
-                    >Dropdowns</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="../../pages/ui-features/typography.php"
-                    >Typography</a
-                  >
-                </li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/index.php">UTILISATEURS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_categorie.php">PRODUITS-CAT</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_produit.php">PRODUITS-UNI</a></li>
+                <li class="nav-item"> <a class="nav-link" href="services.php">SERVICES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="commades.php">COMMANDES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="tutos.php">TUTOS VIDEOS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/gestion_blog.php">BLOGS</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/forms/basic_elements.php">
+            <a class="nav-link" data-toggle="collapse" href="#ui-ajout" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">AJOUT</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-ajout">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="basic_elements.php">LIVREURS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_categorie.php">PRODUITS-CATEGORIE</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_produit.php">PRODUITS-UNITAIRE</a></li>
+                <li class="nav-item"> <a class="nav-link" href="services.php">SERVICES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="commades.php">COMMANDES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="tutos.php">TUTOS VIDEOS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/gestion_blog.php">BLOGS</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="mail.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">Form Elements</span>
+              <span class="menu-title">MAILING</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/tables/basic-table.php">
+            <a class="nav-link" href="reclamation.php">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-speedometer"></i>
               </span>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/charts/chartjs.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">Charts</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/icons/mdi.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">Icons</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              data-toggle="collapse"
-              href="#auth"
-              aria-expanded="false"
-              aria-controls="auth"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="../../pages/samples/blank-page.php"
-                  >
-                    Blank Page
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/samples/error-404.php">
-                    404
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/samples/error-500.php">
-                    500
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/samples/login.php">
-                    Login
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/samples/register.php">
-                    Register
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.php"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Documentation</span>
+              <span class="menu-title">RECLAMATIONS</span>
             </a>
           </li>
         </ul>

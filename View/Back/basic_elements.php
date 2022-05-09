@@ -92,7 +92,7 @@
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
@@ -166,32 +166,57 @@
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
-                    <li class="nav-item menu-items">
-            <a class="nav-link" href="chartjs.php">
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/chartjs.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
               <span class="menu-title">TABLEAU DE BORD</span>
             </a>
+            
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
+                <i class="mdi mdi-laptop"></i>
               </span>
-              <span class="menu-title">UTILISATEURS</span>
+              <span class="menu-title">GESTION TABLES</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="index.php">UTILISATEURS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_categorie.php">PRODUITS-CAT</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_produit.php">PRODUITS-UNI</a></li>
+                <li class="nav-item"> <a class="nav-link" href="services.php">SERVICES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="commades.php">COMMANDES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="tutos.php">TUTOS VIDEOS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/gestion_blog.php">BLOGS</a></li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="basic_elements.php">
+            <a class="nav-link" data-toggle="collapse" href="#ui-ajout" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
+                <i class="mdi mdi-laptop"></i>
               </span>
-              <span class="menu-title">AJOUT LIVREUR</span>
+              <span class="menu-title">AJOUT</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-ajout">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/basic_elements.php">LIVREURS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_categorie.php">PRODUITS-CATEGORIE</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_produit.php">PRODUITS-UNITAIRE</a></li>
+                <li class="nav-item"> <a class="nav-link" href="services.php">SERVICES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="commades.php">COMMANDES</a></li>
+                <li class="nav-item"> <a class="nav-link" href="tutos.php">TUTOS VIDEOS</a></li>
+                <li class="nav-item"> <a class="nav-link" href="http://localhost/E_Beauty/View/Back/gestion_blog.php">BLOGS</a></li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="mail.php">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/mail.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -199,7 +224,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="reclamation.php">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/reclamation.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>

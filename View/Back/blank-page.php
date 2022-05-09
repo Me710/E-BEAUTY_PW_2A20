@@ -104,7 +104,7 @@
             </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/forms/basic_elements.php">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/basic_elements.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -120,7 +120,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/charts/chartjs.php">
+            <a class="nav-link" href="../../pages/charts/http://localhost/E_Beauty/View/Back/chartjs.php.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>

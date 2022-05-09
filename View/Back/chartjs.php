@@ -37,6 +37,19 @@
   $query12 = "SELECT * from `user` where upper(`connecter`) = 'NON'";
   $nonconnecter = count(fetchAll($query12));
 
+  $query13 = "SELECT * from `blog`";
+  $nbBlog = count(fetchAll($query13));
+
+  $query14 = "SELECT * from `type`";
+  $nbType = count(fetchAll($query14));
+
+  $query15 = "SELECT * from `commentaire`";
+  $nbComm = count(fetchAll($query15));
+
+  $query16 = "SELECT * from `likes`";
+  $nbLike = count(fetchAll($query16));
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,127 +71,224 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <link rel="import" href="nav.html">
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div
-          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
-        >
-          <a class="sidebar-brand brand-logo" href="index.php">
-            <img src="assets/images/logo.png" alt="logo"
-          /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.php"
-            ><img src="assets/images/logo-mini.svg" alt="logo"
-          /></a>
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <div
+    class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
+  >
+    <a class="sidebar-brand brand-logo" href="index.php">
+      <img src="assets/images/logo.png" alt="logo"
+    /></a>
+    <a class="sidebar-brand brand-logo-mini" href="index.php"
+      ><img src="assets/images/logo-mini.svg" alt="logo"
+    /></a>
+  </div>
+  <ul class="nav">
+    <li class="nav-item profile">
+      <div class="profile-desc">
+        <div class="profile-pic">
+          <div class="count-indicator">
+            <img
+              class="img-xs rounded-circle"
+              src="assets/images/faces/face15.jpg"
+              alt=""
+            />
+            <span class="count bg-success"></span>
+          </div>
+          <div class="profile-name">
+            <h5 class="mb-0 font-weight-normal">Christian NEBOT</h5>
+            <span>ADMINS</span>
+          </div>
         </div>
-        <ul class="nav">
-          <li class="nav-item profile">
-            <div class="profile-desc">
-              <div class="profile-pic">
-                <div class="count-indicator">
-                  <img
-                    class="img-xs rounded-circle"
-                    src="assets/images/faces/face15.jpg"
-                    alt=""
-                  />
-                  <span class="count bg-success"></span>
-                </div>
-                <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Christian NEBOT</h5>
-                  <span>ADMINS</span>
-                </div>
-              </div>
-              <a href="#" id="profile-dropdown" data-toggle="dropdown"
-                ><i class="mdi mdi-dots-vertical"></i
-              ></a>
-              <div
-                class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                aria-labelledby="profile-dropdown"
-              >
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      Account settings
-                    </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-onepassword text-info"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      Change Password
-                    </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-calendar-today text-success"></i>
-                    </div>
-                  </div>
-                </a>
+        <a href="#" id="profile-dropdown" data-toggle="dropdown"
+          ><i class="mdi mdi-dots-vertical"></i
+        ></a>
+        <div
+          class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+          aria-labelledby="profile-dropdown"
+        >
+          <a href="#" class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-settings text-primary"></i>
               </div>
             </div>
+            <div class="preview-item-content">
+              <p class="preview-subject ellipsis mb-1 text-small">
+                Account settings
+              </p>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-onepassword text-info"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject ellipsis mb-1 text-small">
+                Change Password
+              </p>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-calendar-today text-success"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item nav-category">
+      <span class="nav-link">Navigation</span>
+    </li>
+    <li class="nav-item menu-items">
+      <a
+        class="nav-link"
+        href="http://localhost/E_Beauty/View/Back/chartjs.php"
+      >
+        <span class="menu-icon">
+          <i class="mdi mdi-chart-bar"></i>
+        </span>
+        <span class="menu-title">TABLEAU DE BORD</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items">
+      <a
+        class="nav-link"
+        data-toggle="collapse"
+        href="#ui-basic"
+        aria-expanded="false"
+        aria-controls="ui-basic"
+      >
+        <span class="menu-icon">
+          <i class="mdi mdi-laptop"></i>
+        </span>
+        <span class="menu-title">GESTION TABLES</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">UTILISATEURS</a>
           </li>
-          <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_categorie.php"
+              >PRODUITS-CAT</a
+            >
           </li>
-                    <li class="nav-item menu-items">
-            <a class="nav-link" href="chartjs.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">TABLEAU DE BORD</span>
-            </a>
-            
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/pages/tables/gestion_produit.php"
+              >PRODUITS-UNI</a
+            >
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="index.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-              <span class="menu-title">UTILISATEURS</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="services.php">SERVICES</a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="basic_elements.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-              <span class="menu-title">AJOUT LIVREUR</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="commades.php">COMMANDES</a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="mail.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-              <span class="menu-title">MAILING</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="tutos.php">TUTOS VIDEOS</a>
           </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="reclamation.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-              <span class="menu-title">RECLAMATIONS</span>
-            </a>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/gestion_blog.php"
+              >BLOGS</a
+            >
           </li>
         </ul>
-      </nav>
+      </div>
+    </li>
+    <li class="nav-item menu-items">
+      <a
+        class="nav-link"
+        data-toggle="collapse"
+        href="#ui-ajout"
+        aria-expanded="false"
+        aria-controls="ui-basic"
+      >
+        <span class="menu-icon">
+          <i class="mdi mdi-laptop"></i>
+        </span>
+        <span class="menu-title">AJOUT</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-ajout">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/basic_elements.php"
+              >LIVREURS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_categorie.php"
+              >PRODUITS-CATEGORIE</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="http://localhost/E_Beauty/View/Back/pages/tables/Ajout_produit.php"
+              >PRODUITS-UNITAIRE</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">SERVICES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">COMMANDES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">TUTOS VIDEOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/ajout_blog.php">BLOGS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost/E_Beauty/View/Back/table_type.php">BLOGS-TYPE</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="http://localhost/E_Beauty/View/Back/mail.php">
+        <span class="menu-icon">
+          <i class="mdi mdi-playlist-play"></i>
+        </span>
+        <span class="menu-title">MAILING</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items">
+      <a
+        class="nav-link"
+        href="http://localhost/E_Beauty/View/Back/reclamation.php"
+      >
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i>
+        </span>
+        <span class="menu-title">RECLAMATIONS</span>
+      </a>
+    </li>
+  </ul>
+</nav>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -258,6 +368,78 @@
                     </div>
                     <h6 class="text-muted font-weight-normal">
                       Nombre de Reclamation
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbBlog ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Nombre de Blogs
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbType ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Nombres de Types(Blogs)
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbComm ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Nombre de Commentaires</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><?php echo $nbLike ?></h3>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <h6 class="text-muted font-weight-normal">
+                      Nombre de Likes
                     </h6>
                   </div>
                 </div>
