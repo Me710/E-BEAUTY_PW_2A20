@@ -8,7 +8,8 @@
 		$file_size = $_FILES['file']['size'];
 		$file_type = $_FILES['file']['type'];
 		$date_uploaded=date("Y-m-d");
-		$location="upload/".$file_name;
+		$location='../upload/'.$file_name;
+		///$this->load->view('FRONT/tutos.php',$location);
 		if($file_size < 10000000000000000000000){
 			if(move_uploaded_file($file_temp, $location)){
 				try{

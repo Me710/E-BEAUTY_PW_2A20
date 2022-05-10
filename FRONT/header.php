@@ -49,7 +49,7 @@
 			
 		?>
 
-<div class="img" style="background-image :url(<?php echo $aaa; ?>);">
+<div class="img" style="background-image :url('img/bg.jpg');">
 	
 
   	<!-- HETHI TETBADDEL POUR LE THEME BLANC EN ARRIERE PLAN 

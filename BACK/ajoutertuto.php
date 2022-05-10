@@ -1,5 +1,5 @@
 <?php include('Header.php') ?>
-
+	
 
 <div class="col-md-6 well">
 		<h3 class="text-primary">PHP - File Upload Usng PDO</h3>

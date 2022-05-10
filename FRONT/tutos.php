@@ -1,10 +1,66 @@
 
-<?php include('Header.php') ?>
-  
-  <body>
 
-    
-			
+<?php include('Header.php') ?>
+<?php include('connection.php') ?>
+<?php include_once('../Controller/commentaireB.php') ?>
+<?php include_once('../Model/commentaire.php') ?>
+<?php
+   /*
+	$error = "";
+
+	// create User
+	$com = null;
+	
+	// create an instance of the controller
+	
+	//$listecomm=$CommentaireB->afficher_com();
+	if (
+	 //isset($_POST["comId"])&&
+	  isset($_POST["pseudo"])&&
+	  isset($_POST["commentaire"])
+	) {
+
+		
+		if (
+				  
+				  !empty($_POST['pseudo'])&&
+				  !empty($_POST['commentaire'])
+		) {
+		     	$CommentaireB = new CommentaireB();
+				$commentaire = new commentaire(
+					// $_POST['comId'],
+					  $_POST['pseudo'],
+					  $_POST['commentaire']
+			);
+			$CommentaireB->ajouter_com($com);
+			header('Location:tutos.php');
+		}
+		else
+			$error = "Missing information";
+	}  
+	
+	
+	
+	*/
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>		
 	<section class="hero-wrap" style="background-image: url(img/bg_1.jpg);">
       	<div class="overlay"></div>
 	      <div class="container">
@@ -23,9 +79,9 @@
 
 
 
-	  <div class="col-md-9">
-			<div class="table-responsive">	
-				<table class="table table-bordered">
+	  <div class="col-md-12">
+			<div class="row tm-catalog-item-list"">	
+				<table >
 					<thead class="alert-info">
 						
 					</thead>
@@ -36,32 +92,88 @@
 							$sql = "SELECT * FROM `file`";
 							$query = $conn->prepare($sql);
 							$query->execute();
-							
 							while($fetch = $query->fetch()){
+								$id=$fetch['file_id'];
 						?>
-					
-					
+							<div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+								<img src="<?php echo $fetch['location']?>" alt="">
+								<video controls width="450">
 
-						<img src="<?php echo $fetch['location']?>" alt="">
-						<video controls width="500">
-
-							<source src="<?php echo $fetch["C:/Users/wassim/Desktop/kraya/SEM2/WEB/xampp/htdocs/php/BACK/".'location']?>"
+								<source src="<?php echo $fetch['location']?>"
 									type="video/mp4">
-
-
-
-							Sorry, your browser doesn't support embedded videos.
-							</video>
-							<td><?php Echo $fetch['file_name'];?></td>		
-							<td><?php Echo $fetch['date_uploaded'];?></td>		
-									
-
+								Sorry, your browser doesn't support embedded videos.
+								</video>
+							
+								<h3><a> Titre de la video:<?php Echo $fetch['file_name'];?>.</a></h3>
+								<h3><a >Date de publication de la video: 	<?php Echo $fetch['date_uploaded'];?>.</a></h3>
+								<!--<td><?php Echo $fetch['file_name'];?></td>	
+								<td><?php Echo $fetch['date_uploaded'];?></td>	-->
+							</div>						
 						<?php
 							}
 						?>
+						 
+						 
+
+
+
+
 					</tbody>
 				</table>
 			</div>	
+<!--
+			<h1  class="mb-10 bread">Commentaires :</h1>	
+			
+			<div>
+		
+						<div class="card-body">
+                    
+                        <div id="error">
+                          <?php echo $error; ?>
+                        </div>
+                    <form class="forms-sample" action="" method="POST" onsubmit="return Verif()">
+						 <div class="form-group">
+                        <input
+                          type="text"
+                          id="comId"
+                          name="comId"
+                          placeholder="id_com"
+                        
+					
+					<div class="form-group">
+                        <input
+                          type="text"
+                          id="pseudo"
+                          name="pseudo"
+                          placeholder="votre pseudo"
+                        />
+                        <p id="errorNN" class="error"></p>
+                      </div> 
+					  <div class="form-group">
+						<textarea
+						 name="commentaire"
+						  id="commentaire" 
+						  cols="30" rows="1" 
+						  placeholder="commentaire"
+						  ></textarea>
+                        <p id="errorNR" class="error"></p>
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2"> poster </button>
+                    </form>
+                  </div>
+                </div>		
+
+
+/> -->
+
+
+
+			</div>
+
+
+
+
+
 		</div>
 				
 
