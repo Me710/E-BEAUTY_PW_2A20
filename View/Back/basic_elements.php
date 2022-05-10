@@ -9,7 +9,8 @@
     if (
         isset($_POST["libelle"]) &&
 		    isset($_POST["description"]) &&		
-        isset($_POST["prix"])
+        isset($_POST["prix"]) &&
+        isset($_FILES["my_image"])
       ) {
         if (
             !empty($_POST["libelle"]) && 
@@ -21,6 +22,7 @@
 				        $_POST['description'],
                 $_POST['prix']
             );
+            
             $serviceC->ajouterservice($service);
             header('Location:index.php');
         }
@@ -158,7 +160,23 @@
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">AJOUT</span>
+              <span class="menu-title">AJOUT SERVICE</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="addPacks.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">AJOUT PACK</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="ajout_service_pack.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">AJOUT S/P</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -166,7 +184,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
-              <span class="menu-title">STATISTIQUES</span>
+              <span class="menu-title">AUTRES</span>
             </a>
           </li>
         </ul>
@@ -647,7 +665,7 @@
                         <div id="error">
                           <?php echo $error; ?>
                         </div>
-                    <form name="formAddService" class="forms-sample" action="" method="POST"  onsubmit="return verif()">
+                    <form name="formAddService" class="forms-sample" action="" method="POST" enctype="multipart/form-data"  onsubmit="return verif()">
                       <div class="form-group">
                         <label for="libelle">Libelle</label>
                         <input
@@ -657,7 +675,7 @@
                           name="libelle"
                           placeholder="Libelle du service"
                         />
-                        <p id="errorLib" class="error"></p> 
+                        <p style="color:red;" id="errorLib" class="error"></p> 
                       </div>
                       <div class="form-group">
                         <label for="description">Description</label>
@@ -668,7 +686,7 @@
                           name="description"
                           placeholder="Description du service"
                         />
-                        <p id="errorDesc" class="error"></p> 
+                        <p style="color:red;" id="errorDesc" class="error"></p> 
                       </div>
                       <div class="form-group">
                         <label for="prix">Prix</label>
@@ -679,9 +697,19 @@
                           name="prix"
                           placeholder="Prix du service"
                         />
-                        <p id="errorPrix" class="error"></p> 
+                        <p style="color:red;" id="errorPrix" class="error"></p> 
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2">
+                      <div class="form-group">
+                      <label for="image">Image</label>
+                        <input
+                          type="file"
+                          class="form-control"
+                          id="file"
+                          name="my_image"
+                        />
+                        <p style="color:red;" id="errorPrix" class="error"></p> 
+                      </div>
+                      <button type="submit" name ="submit" class="btn btn-primary mr-2">
                         Submit
                       </button>
                       <button class="btn btn-dark">Cancel</button>

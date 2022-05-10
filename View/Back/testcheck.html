@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function getRow(n) {
+            var row = n.parentNode.parentNode;
+            var cols = row.getElementsByTagName("td");
+            var retVal = cols[2].textContent; 
+            return retVal;  
+            } 
+
+    </script>
+    <table>
+        <tr>
+            <td><input type="checkbox" onclick="getRow(this)"  /></td>
+            <td>aaa</td>
+            <td>bbb</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="getRow(this)" /></td>
+            <td>ccc</td>
+            <td>ddd</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="getRow(this)" /></td>
+            <td>eee</td>
+            <td>fff</td>
+        </tr>
+    </table>
+    
+    <input type="text" value=""></input>
+</body>
+</html>

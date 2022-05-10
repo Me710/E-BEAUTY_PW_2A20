@@ -1,48 +1,42 @@
 <?php
-	include 'C:/xampp/htdocs/AtelierPHP/config.php';
-	include_once 'C:/xampp/htdocs/AtelierPHP/Model/service.php';
-	class ServiceC {
-		function rechercher_service($rechercher) {
-            $pdo = Config::getConnexion();
-            try{
-              $query= $pdo->prepare(
-                'SELECT * from services where libelle like "%'.$rechercher.'%" 
-                or description like "%'.$rechercher.'%"
-                or prix like "%'.$rechercher.'%"
-                order by id DESC'
-              );
-              $query->execute();
-              $result = $query->fetchALL();
-              return $result;
-            } catch(PDOException $e) {
-              $e->getMessage();  
-            }
-          }
-		  
-		function afficherservices(){
-			$sql="SELECT * FROM services";
+	include_once 'C:/xampp/htdocs/AtelierPHP/config.php';
+	include_once 'C:/xampp/htdocs/AtelierPHP/Model/pack.php';
+	class PackC {
+		function afficherpacks(){
+			$sql="SELECT * FROM packs";
 			$db = config::getConnexion();
 			try{
 				$liste = $db->query($sql);
 				return $liste;
 			}
 			catch(Exception $e){
-				die('Erreur:'. $e->getMeesage());
+				die('Erreur:'. $e->getMessage());
 			}
 		}
-		function supprimerservice($id){
-			$sql="DELETE FROM services WHERE id=:id";
+		function supprimerpack($id){
+			$sql2="DELETE FROM packservice WHERE idpack=:id";
 			$db = config::getConnexion();
-			$req=$db->prepare($sql);
-			$req->bindValue(':id', $id);
+			$req2=$db->prepare($sql2);
+			$req2->bindValue(':id', $id);
 			try{
-				$req->execute();
+				$req2->execute();
 			}
 			catch(Exception $e){
-				die('Erreur:'. $e->getMeesage());
+				die('Erreur:'. $e->getMessage());
+			}
+
+			$sql2="DELETE FROM packs WHERE id=:id";
+			$db = config::getConnexion();
+			$req2=$db->prepare($sql2);
+			$req2->bindValue(':id', $id);
+			try{
+				$req2->execute();
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMessage());
 			}
 		}
-		function ajouterservice($services){
+		function ajouterpack($packs){
 			$img_name = $_FILES['my_image']['name'];
 			$img_size = $_FILES['my_image']['size'];
 			$tmp_name = $_FILES['my_image']['tmp_name'];
@@ -64,16 +58,15 @@
 						move_uploaded_file($tmp_name, $img_upload_path);
 
 						// Insert into Database
-						$sql="INSERT INTO services (libelle, description, prix, image_url) 
-			VALUES (:libelle, :description, :prix, :new_img_name)";
+						$sql="INSERT INTO packs (nom, description, image_url2) 
+			VALUES (:nom, :description, :image_url2)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
 				$query->execute([
-					'libelle' => $services->getLibelle(),
-					'description' => $services->getDescription(),
-					'prix' => $services->getPrix(),
-					'new_img_name' => $new_img_name
+					'nom' => $packs->getNom(),
+					'description' => $packs->getDescription(),
+					'image_url2' => $new_img_name
 				]);			
 			}
 			catch (Exception $e){
@@ -88,12 +81,15 @@
 			}else {
 				$em = "unknown error occurred!";
 				header("Location: index.php?error=$em");
-			}		
+			}
+		
 		}
 
-		
-		function recupererservice($id){
-			$sql="SELECT * from services where id=$id";
+
+
+
+		function recupererpack($id){
+			$sql="SELECT * from packs where id=$id";
 			$db = config::getConnexion();
 			try{
 				$query=$db->prepare($sql);
@@ -107,20 +103,18 @@
 			}
 		}
 		
-		function modifierservice($services, $id){
+		function modifierpack($packs, $id){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
-					'UPDATE services SET 
-						libelle= :libelle, 
-						description= :description, 
-						prix= :prix
+					'UPDATE packs SET 
+						nom= :nom, 
+						description= :description
 					WHERE id= :id'
 				);
 				$query->execute([
-					'libelle' => $services->getLibelle(),
-					'description' => $services->getDescription(),
-					'prix' => $services->getPrix(),
+					'nom' => $packs->getNom(),
+					'description' => $packs->getDescription(),
 					'id' => $id
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -128,7 +122,6 @@
 				$e->getMessage();
 			}
 		}
-
 
 	}
 ?>

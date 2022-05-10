@@ -1,27 +1,27 @@
 <?php 
 require('C:/xampp/htdocs/AtelierPHP/Controller/serviceC.php'); 
 require_once('C:/xampp/htdocs/AtelierPHP/Controller/packC.php');
-include_once('C:/xampp/htdocs/AtelierPHP/Controller/service-pack-C.php');
+
+include_once('C:/xampp/htdocs/AtelierPHP/Controller/service-pack-C.php'); 
+
+$error = "";
 
 $servicedb = new ServiceC();    
 $result = $servicedb->afficherservices();    
     //var_dump($resultat);
     
+
 $servicedb2 = new PackC();    
 $result2 = $servicedb2->afficherpacks(); 
 
-$servicedb3 = new ServicePackC();    
-$result3 = $servicedb3->afficherservicepack(); 
-if(isset($_GET['rechercher'])){
-  if(!empty($_GET['rechercher'])){
-    $rechercher = htmlspecialchars($_GET['rechercher']);
-    $result = $servicedb->rechercher_service($rechercher);
-  }
-}
+$servicepackc = new ServicePackC();
+$servicepackc->ajout();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+               
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -206,17 +206,21 @@ if(isset($_GET['rechercher'])){
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Rechercher"
-                    name="rechercher"
-                    id="rechercher"
+                    placeholder="Search products"
                   />
-                  <button type="submit" class="btn btn-primary mr-2">Rechercher</button>
-                  <button type="submit" class="btn btn-primary mr-2">Reinitialiser</button>
                 </form>
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown d-none d-lg-block">
+                <a
+                  class="nav-link btn btn-success create-new-button"
+                  id="createbuttonDropdown"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  href="#"
+                  >+ Create New Project</a
+                >
               </li>
               <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="#">
@@ -351,84 +355,58 @@ if(isset($_GET['rechercher'])){
           </div>
         </nav>
         <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
+        <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">Form elements</h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Form elements
+                  </li>
+                </ol>
+              </nav>
+            </div>
             <div class="row">
+              <div class="col-md-6 grid-margin stretch-card"></div>
+              <div class="col-md-6 grid-margin stretch-card"></div>
               <div class="col-12 grid-margin stretch-card">
-
-                    <div class="row align-items-center">
-                      <div class="col-4 col-sm-3 col-xl-2">
-                        <img
-                          src="assets/images/Tableau de Bord/Group126@2x.png"
-                          class="gradient-E - BEAUTY-img img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">SERVICES</h3>
+                    <h4 class="card-title">Formulaire d'ajout </h4>
+                    <p class="card-description">Formulaire d'ajout</p>
+                        <div id="error">
+                          <?php echo $error; ?>
                         </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="basic_elements.php">AJOUTER UN SERVICE</a></h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <form name="formAddServiceInPack" class="forms-sample" action="ajout_service_pack.php" method="POST" onsubmit="return verifIns()">
+                    <div class="form-group">
+                       
+                        <label for="Packs">Packs</label>
+                        <select name ="packSelection" class="form-control">
+                        <option value="choisir" selected>choisir</option>
+                        <?php 
+                          foreach($result2 as $pack) { ?>  
+                        <option value="<?php Echo $pack['id'];?>"><?php Echo $pack['nom'];?></option>
+                  
+                        <?php }?>   
+                        </select>
+                        <p style="color:red;" id="errorCP" class="error"></p> 
+                      </div> 
+                      <div class="form-group">
+            <div class="row"></div>
             <div class="row">
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">LISTE DES SERVICES</h4>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>
-                              <div class="form-check form-check-muted m-0"> 
-                              </div>
-                            </th>
-                            <th>      </th>
-                            <th>ID</th>
+                            <th></th>
+                            <th></th>
+                            <th>CHECK</th>
                             <th>LIBELLE</th>
-                            <th>DESCRIPTION</th>
                             <th>PRIX</th>
-                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -437,14 +415,6 @@ if(isset($_GET['rechercher'])){
                               foreach($result as $row) { ?>
                               <tr>
                                 <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                      />
-                                    </label>
-                                  </div>
                                 </td>
                                 <td>
                                   <img
@@ -452,40 +422,18 @@ if(isset($_GET['rechercher'])){
                                     alt="image"
                                   />
                                       </td>
-                                      <td><?php ECHO $row['id']            ?></td>
-                                      <td><?php ECHO $row['libelle']       ?></td>
-                                      <td><?php ECHO $row['description']   ?></td>
-                                      <td><?php ECHO $row['prix']          ?></td>
-                                      
-                                  <div>
-                                    <td>
-                                    <form method="POST" action="form_modifier.php">
-                                      <input class="btn-outline-warning" type="image" name="Modifier" src="assets/images/buttons/icons8-edit-32.png">
-                                       
-                                    </form>
-                                    </td>
-                                    <!--<td>
-                                        <input class="btn-outline-warning" Type="submit" value="Modifier">
-                                    </td>-->
-                                    <td>
-                                      <!--<a href="supprimerservice.php?id= echo $row['id']; " class="btn-outline-danger">Supprimer</a>-->
-                                      <a href="supprimerservice.php?id=<?php echo $row['id']; ?>">
-                                      <img src="assets/images/buttons/icons8-delete-48.png" 
-                                      width=150" height="70">
-                                      </a>
-                                      <a href="supprimerservice.php?id=<?php echo $row['id']; ?>">
-                                      <img src="assets/images/buttons/icons8-delete-48.png" 
-                                      width=150" height="70">
-                                      </a>
-                                    </td>
-                                  </div> 
+                                      <td><input type="checkbox" name="groupselect[]" value="<?php ECHO $row['id']; ?>"></td>
+                                      <input type="hidden" name="idT[]" value="<?php ECHO $row['id']; ?>">
+                                      <td><input type="hidden" name="libelleT[]" value="<?php ECHO $row['libelle']; ?>"><?php ECHO $row['libelle']; ?></td>
+                                      <td><input type="hidden" name="prixT[]" value="<?php ECHO $row['prix']; ?>"><?php ECHO $row['prix']; ?></td>
+                                      <td><input type="hidden" name="urlT[]" value="<?php ECHO $row['image_url']; ?>"></td>
                               </tr>
                             <!--</td>-->
                               <?php }?>
                             <!--</td>-->
                           </tr>
                         </tbody>
-                      </table>
+                      </table><input type="hidden" name="J_insert" value="group_note">
                     </div>
                   </div>
                 </div>
@@ -493,69 +441,11 @@ if(isset($_GET['rechercher'])){
             </div>
             <div class="row">
               <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">PACKS</h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="addPacks.php">AJOUTER PACK</a></h3>
-                        </div>
-                        </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="updatePrice.php?id=<?php echo $pack['id']; ?>">MAJ PRIX PACKS</a></h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="row">
+ 
+            <div class="row"></div>
+          </div>
+            <!--<div class="row"> 
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
@@ -565,14 +455,14 @@ if(isset($_GET['rechercher'])){
                         <thead>
                           <tr>
                             <th>
-                              <div class="form-check form-check-muted m-0"> 
+                              <div class="form-check"> 
                               </div>
                             </th>
-                            <th>      </th>
+                            <th></th>
+                            <th></th>
                             <th>ID</th>
                             <th>NOM</th>
                             <th>DESCRIPTION</th>
-                            <th>PRIX</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -582,53 +472,33 @@ if(isset($_GET['rechercher'])){
                               foreach($result2 as $pack) { ?>
                               <tr>
                                 <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                      />
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
                                   <img
                                     src="assets/images/faces/face1.jpg"
                                     alt="image"
                                   />
                                 </td>
+                                  <td><td><input type="checkbox" onclick="getRow(this)"  /></td></td>
                                   <td><?php Echo $pack['id'];?></td>
                                   <td><?php Echo $pack['nom'];?></td>
                                   <td><?php Echo $pack['description'];?></td>
-                                  <td><?php ECHO $pack['prixtotal'];?></td>
                                   <div>
-                                  <td>
-                                    <form method="POST" action="modifierpack.php">
-                                      <input class="btn-outline-warning" type="image" name="Modifier" src="assets/images/buttons/icons8-edit-32.png">
-                                      <input type="hidden" value=<?php echo $pack['id']; ?> name="id">
-                                    </form>
-                                    </td>
-                                    <!--<td>
-                                        <input class="btn-outline-warning" Type="submit" value="Modifier">
-                                    </td>-->
                                     <td>
-                                      <!--<a href="supprimerservice.php?id= echo $row['id']; " class="btn-outline-danger">Supprimer</a>-->
+                                    <a href="modifierpack.php?id=<?php echo $pack['id']; ?>">
+                                      <img src="assets/images/buttons/icons8-edit-32.png"
+                                      width=150" height="70">
+                                      </a>
+                                    </td>
+                                    <td>
                                       <a href="supprimerpack.php?id=<?php echo $pack['id']; ?>">
-                                      <img src="assets/images/buttons/icons8-delete-48.png" 
-                                      width=150" height="70">
-                                    </td>  
-                                    <td>
-                                    </a>
-                                      <a href="updatePrice.php?id=<?php echo $pack['id']; ?>">
-                                      <img src="assets/images/buttons/update.png" 
+                                      <img src="assets/images/buttons/icons8-delete-48.png"
                                       width=150" height="70">
                                       </a>
                                     </td>
                                   </div>
                               </tr>
-                            <!--</td>-->
+                            
                               <?php }?>
-                            <!--</td>-->
+                            
                           </tr>
                         </tbody>
                       </table>
@@ -636,148 +506,30 @@ if(isset($_GET['rechercher'])){
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">PACKS/SERVICES</h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="ajout_service_pack.php">AJOUTER SERVICE(S) DANS PACK</a></h3>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span
-                            class="mdi mdi-arrow-top-right icon-item"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">LISTE DES PACKS DETAILLES</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>
-                              <div class="form-check form-check-muted m-0"> 
-                              </div>
-                            </th>
-                            <th>      </th>
-                            <th>NUM</th>
-                            <th>IDPACK</th>
-                            <th>NOMPACK</th>
-                            <th>IDSERVICE</th>
-                            <th>LIBELLE</th>
-                            <th>PRIX</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                              <?php 
-                              foreach($result3 as $row) { ?>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                      />
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img
-                                    src="assets/images/faces/face1.jpg"
-                                    alt="image"
-                                  />
-                                      </td>
-                                      <td><?php ECHO $row['num']           ?></td>
-                                      <td><?php ECHO $row['idpack']        ?></td>
-                                      <td><?php ECHO $row['nompack']        ?></td>
-                                      <td><?php ECHO $row['idservice']        ?></td>
-                                      <td><?php ECHO $row['libelle']       ?></td>
-                                      <td><?php ECHO $row['prix']          ?></td>
-                                      
-                                  <div>
-                                    <td>
-                                      <input type="hidden" value=<?php echo $row['num']; ?> name="num">
-                                      <a href="supprimerservicepack.php?id=<?php echo $row['num']; ?>">
-                                      <img src="assets/images/buttons/icons8-delete-48.png" 
-                                      width=150" height="70">
-                                      </a>
-                                    </td>
-                                  </div> 
-                              </tr>
-                            <!--</td>-->
-                              <?php }?>
-                            <!--</td>-->
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-          </div>
+            </div>-->
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.php -->
-          <footer class="footer">
-            <div
-              class="d-sm-flex justify-content-center justify-content-sm-between"
-            >
-              <span
-                class="text-muted d-block text-center text-sm-left d-sm-inline-block"
-                >Copyright © bootstrapdash.com 2020</span
-              >
-              <span
-                class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
-              >
-                Free
-                <a
-                  href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                  target="_blank"
-                  >Bootstrap admin templates</a
-                >
-                from Bootstrapdash.com</span
-              >
-            </div>
-          </footer>
           <!-- partial -->
         </div>
+                      <input type="submit" value="submit" name="sub">
+                      <button class="btn btn-dark">Cancel</button>
+                    
+                    </form>
+
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 grid-margin stretch-card"></div>
+              <div class="col-md-6 grid-margin stretch-card"></div>
+              <div class="col-md-6 grid-margin stretch-card"></div>
+              <div class="col-md-6 grid-margin stretch-card"></div>
+              <div class="col-12 grid-margin stretch-card"></div>
+              <div class="col-12 grid-margin"></div>
+
+              <div class="col-md-6 grid-margin stretch-card"></div>
+            </div>
+        
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
