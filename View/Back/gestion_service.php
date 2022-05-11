@@ -69,10 +69,10 @@ if(isset($_GET['rechercher'])){
         <div
           class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
         >
-          <a class="sidebar-brand brand-logo" href="index.php">
+          <a class="sidebar-brand brand-logo" href="gestion_service.php">
             <img src="assets/images/logo.png" alt="logo"
           /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.php"
+          <a class="sidebar-brand brand-logo-mini" href="gestion_service.php"
             ><img src="assets/images/logo-mini.svg" alt="logo"
           /></a>
         </div>
@@ -140,7 +140,7 @@ if(isset($_GET['rechercher'])){
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="gestion_service.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -148,7 +148,7 @@ if(isset($_GET['rechercher'])){
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="basic_elements.php">
+            <a class="nav-link" href="addService.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -188,7 +188,7 @@ if(isset($_GET['rechercher'])){
           <div
             class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
           >
-            <a class="navbar-brand brand-logo-mini" href="index.php"
+            <a class="navbar-brand brand-logo-mini" href="gestion_service.php"
               ><img src="assets/images/logo-mini.svg" alt="logo"
             /></a>
           </div>
@@ -395,7 +395,7 @@ if(isset($_GET['rechercher'])){
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0"><a href="basic_elements.php">AJOUTER UN SERVICE</a></h3>
+                          <h3 class="mb-0"><a href="addService.php">AJOUTER UN SERVICE</a></h3>
                         </div>
                       </div>
                       <div class="col-3">

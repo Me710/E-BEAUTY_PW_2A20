@@ -34,7 +34,7 @@
                 $_POST['Ville']
             );
             $ClientC->ajouterUser($Client);
-            header('Location:index.php');
+            header('Location:gestion_service.php');
         }
         else
             $error = "Missing information";

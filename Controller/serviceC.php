@@ -51,7 +51,7 @@
 			if ($error === 0) {
 				if ($img_size > 9000000) {
 					$em = "Sorry, your file is too large.";
-					header("Location: index.php?error=$em");
+					header("Location: gestion_service.php?error=$em");
 				}else {
 					$img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
 					$img_ex_lc = strtolower($img_ex);
@@ -79,15 +79,15 @@
 			catch (Exception $e){
 				echo 'Erreur: '.$e->getMessage();
 			}	
-						header("Location: index.php");
+						header("Location: gestion_service.php");
 					}else {
 						$em = "You can't upload files of this type";
-						header("Location: index.php?error=$em");
+						header("Location: gestion_service.php?error=$em");
 					}
 				}
 			}else {
 				$em = "unknown error occurred!";
-				header("Location: index.php?error=$em");
+				header("Location: gestion_service.php?error=$em");
 			}		
 		}
 

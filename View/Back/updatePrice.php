@@ -8,5 +8,5 @@
         //echo "<script>alert('$nPrix');</script>";
 	}
     $TraitementC->updateTotalPriceDB($nPrix, $_GET['id']);
-	header('Location:index.php');
+	header('Location:gestion_service.php');
 ?>

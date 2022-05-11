@@ -2,5 +2,5 @@
 	include('C:/xampp/htdocs/AtelierPHP/Controller/packC.php');
 	$packC=new PackC();
 	$packC->supprimerpack($_GET["id"]);
-	header('Location:index.php');
+	header('Location:gestion_service.php');
 ?>
